@@ -1,0 +1,282 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "RAG Microservice",
+    "description": "Hybrid RAG microservice for document ingestion and question answering.\n\n## Endpoints\n\n- **POST /ingest** — Add documents to the retrieval index.\n- **POST /query** — Ask a question; returns an LLM answer with source documents.\n- **GET /health** — Service health and configuration snapshot.",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:8000",
+      "description": "Local development"
+    }
+  ],
+  "tags": [
+    {
+      "name": "ingest",
+      "description": "Document ingestion into the hybrid retriever"
+    },
+    {
+      "name": "query",
+      "description": "RAG question answering"
+    },
+    {
+      "name": "health",
+      "description": "Service health"
+    }
+  ],
+  "paths": {
+    "/ingest": {
+      "post": {
+        "tags": ["ingest"],
+        "summary": "Ingest documents",
+        "operationId": "ingestDocuments",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/IngestRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Documents added to the index",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IngestResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/query": {
+      "post": {
+        "tags": ["query"],
+        "summary": "Query the RAG pipeline",
+        "operationId": "queryRag",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/QueryRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Answer with sources and execution trace",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/QueryResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/health": {
+      "get": {
+        "tags": ["health"],
+        "summary": "Health check",
+        "operationId": "healthCheck",
+        "responses": {
+          "200": {
+            "description": "Service is healthy",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HealthResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "DocumentIn": {
+        "type": "object",
+        "required": ["page_content"],
+        "properties": {
+          "page_content": {
+            "type": "string",
+            "title": "Page Content"
+          },
+          "metadata": {
+            "type": "object",
+            "additionalProperties": true,
+            "default": {},
+            "title": "Metadata"
+          }
+        },
+        "title": "DocumentIn"
+      },
+      "IngestRequest": {
+        "type": "object",
+        "required": ["documents"],
+        "properties": {
+          "documents": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DocumentIn"
+            },
+            "title": "Documents"
+          }
+        },
+        "title": "IngestRequest"
+      },
+      "IngestResponse": {
+        "type": "object",
+        "required": ["added"],
+        "properties": {
+          "added": {
+            "type": "integer",
+            "title": "Added"
+          }
+        },
+        "title": "IngestResponse"
+      },
+      "QueryRequest": {
+        "type": "object",
+        "required": ["question"],
+        "properties": {
+          "question": {
+            "type": "string",
+            "title": "Question"
+          }
+        },
+        "title": "QueryRequest"
+      },
+      "SourceDoc": {
+        "type": "object",
+        "required": ["page_content", "metadata"],
+        "properties": {
+          "page_content": {
+            "type": "string",
+            "title": "Page Content"
+          },
+          "metadata": {
+            "type": "object",
+            "additionalProperties": true,
+            "title": "Metadata"
+          }
+        },
+        "title": "SourceDoc"
+      },
+      "QueryResponse": {
+        "type": "object",
+        "required": ["answer", "sources", "trace"],
+        "properties": {
+          "answer": {
+            "type": "string",
+            "title": "Answer"
+          },
+          "sources": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SourceDoc"
+            },
+            "title": "Sources"
+          },
+          "trace": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "title": "Trace"
+          }
+        },
+        "title": "QueryResponse"
+      },
+      "HealthResponse": {
+        "type": "object",
+        "required": ["status", "llm_provider", "rag_mode"],
+        "properties": {
+          "status": {
+            "type": "string",
+            "example": "ok"
+          },
+          "llm_provider": {
+            "type": "string",
+            "example": "ollama"
+          },
+          "rag_mode": {
+            "type": "string",
+            "example": "hybrid"
+          }
+        },
+        "title": "HealthResponse"
+      },
+      "ValidationError": {
+        "type": "object",
+        "required": ["loc", "msg", "type"],
+        "properties": {
+          "loc": {
+            "type": "array",
+            "items": {
+              "anyOf": [
+                { "type": "string" },
+                { "type": "integer" }
+              ]
+            },
+            "title": "Location"
+          },
+          "msg": {
+            "type": "string",
+            "title": "Message"
+          },
+          "type": {
+            "type": "string",
+            "title": "Error Type"
+          }
+        },
+        "title": "ValidationError"
+      },
+      "HTTPValidationError": {
+        "type": "object",
+        "properties": {
+          "detail": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ValidationError"
+            },
+            "title": "Detail"
+          }
+        },
+        "title": "HTTPValidationError"
+      }
+    }
+  }
+}

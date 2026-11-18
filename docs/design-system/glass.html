@@ -1,0 +1,13 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Glass demo</title><link rel="stylesheet" href="tokens.css">
+<style>
+  html,body{height:100%;margin:0;overflow:hidden}
+  #scene{position:fixed;inset:0;background:radial-gradient(circle at 20% 30%,#7A86F0 0,transparent 40%),radial-gradient(circle at 85% 75%,#fff 0,transparent 30%),var(--blue-600)}
+  #scene h1{position:absolute;left:5vw;top:12vh;color:#fff;font-size:clamp(4rem,14vw,12rem);margin:0}
+  #scene .sq{position:absolute;right:12vw;top:18vh;width:180px;height:180px;background:#fff}
+</style></head><body>
+<div id="scene"><h1>Refract</h1><div class="sq"></div></div>
+<liquid-glass background="#scene" width="320" height="200" radius="0" scale="46" chroma="0.1" blur="2" edge="0.5"></liquid-glass>
+<script src="liquid-glass.min.js"></script>
+</body></html>

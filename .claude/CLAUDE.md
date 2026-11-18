@@ -16,73 +16,59 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## TIER 3 — PROJECT FACTS
 
+Three finance microservices that you deploy one at a time. They do not call each other at runtime. The top-level repo holds them as embedded git repos (gitlinks, no `.gitmodules`), so commit inside each service first, then record the new gitlink in the top-level repo. Do not convert them to submodules. Each service needs its own `.env` (copy it from `.env.example`). Never commit `.env` files.
+
+| Service | Stack | Port |
+|---------|-------|------|
+| `risk-management-ms` (FinRisk) | Java 21, Spring Boot 3.3, SQL Server | 8080 when run on the host, 18080 in Docker |
+| `hybrid-rag` | Python 3.11, FastAPI, LangChain/LangGraph, FAISS + BM25 | 8000 |
+| `sector-valuation-ms` | Node 20 (ESM), Express, Redis, zod | 3000 |
+
+Other top-level folders:
+- `landing/`: static marketing site for FinRisk (HTML, CSS and JS, no build step).
+- `docs/design-system/`: design tokens and logo.
+- `docs/openapi/`: copies of the API specs.
+- `README.md`: setup, deploy and usage for all three services.
+
 ### Commands
 
 ```bash
-# Run all tests (from repo root)
-npm test
+# risk-management-ms
+make dev            # SQL Server container only (then: mvn spring-boot:run)
+make up             # SQL Server + API on :18080
+make test           # unit tests (mvn test, excludes *IT.java)
+make verify         # + integration tests (*IT.java via failsafe, needs SQL Server)
+bash db/scripts/apply-migrations.sh FinRiskDB && bash db/scripts/seed.sh FinRiskDB
 
-# Run all tests (from api/)
-cd api && npx vitest run
+# hybrid-rag
+uvicorn src.api.app:app --reload --port 8000
+pytest
 
-# Run a single test file
-cd api && npx vitest run test/loans.spec.ts
-
-# Run a single test by name
-cd api && npx vitest run -t "test name substring"
-
-# Local dev server
-npm run dev          # wrangler dev
-
-# Deploy
-npm run deploy       # builds frontend then wrangler deploy
-
-# Apply DB migrations (remote)
-wrangler d1 migrations apply microloans_db
+# sector-valuation-ms
+npm run dev         # node --watch
+npm test            # jest with --experimental-vm-modules (ESM)
 ```
 
-### Architecture
+### risk-management-ms
+- The package is `com.finrisk`. Code is layered: controller → service → dao (`dao/impl/*Jdbc.java`), plus mapper, dto, model, factory, and `strategy/risk`.
+- It uses **plain JDBC, not JPA**. `config/DatabaseConnection` is a HikariCP singleton configured from the env vars `DB_HOST/DB_PORT/DB_NAME/DB_USER/DB_PASSWORD`, falling back to `SA_PASSWORD`.
+- The schema is in `db/migrations/V1..V5` (schema, indexes, views, procedures, audit triggers). These are applied by script, not Flyway.
+- Market data comes from FMP through the `marketdata/MarketDataProvider` interface (`fmp/` holds the implementation). `FMP_API_KEY` is optional.
+- Integration tests use the database `FinRiskDB_Test` (`support/IntegrationTestSupport`).
+- `target/` is partly tracked in git, so expect diff noise after builds.
 
-**Single Cloudflare Worker** (`api/src/index.ts`) serving a Hono router. No separate services. Frontend is a static SPA built separately (lives in `frontend/`; served via Cloudflare Pages or Workers Assets).
+### hybrid-rag
+- `src/api/app.py` builds the retriever, the LLM and the LangGraph pipeline once at startup and stores them on `app.state`. Routes: `POST /ingest`, `POST /query`, `GET /health`.
+- All config is read from env vars in `src/core/config.py`. `LLM_PROVIDER` is `ollama` or `gemini`. `RAG_MODE` is `hybrid`, `semantic` or `lexical`.
+- Embeddings and the cross-encoder reranker always run locally (sentence-transformers). The FAISS and BM25 indexes are saved to disk in `CACHE_DIR`.
 
-**Bindings** (declared in `wrangler.toml`, typed in `api/src/types.ts`):
-- `DB` — D1 (SQLite). Schema in `api/migrations/0001_initial_schema.sql`. Six tables: `users`, `profiles`, `loans`, `installments`, `transactions`, `audit_logs`.
-- `LOAN_CACHE` — KV. Used for JWT drafts, KYC upload drafts (1h TTL), and rate limiting.
-- `KYC_BUCKET` — R2. Stores raw KYC document images at `kyc/{userId}/{uuid}`.
-- `JWT_SECRET`, `TURNSTILE_SECRET`, `PII_ENCRYPTION_KEY`, `GEMINI_API_KEY` — secrets via `.dev.vars` locally.
-
-**Route layout** (`api/src/routes/`):
-- `POST /api/auth/register` — Turnstile-gated, hashes password (scrypt via `auth/password.ts`), inserts user as `borrower`.
-- `POST /api/auth/login` — Turnstile-gated, returns HS256 JWT (1h expiry).
-- `POST /api/kyc/upload` — Auth-gated. Accepts JPEG/PNG ≤5 MB, writes to R2, calls Gemini OCR, caches draft in KV.
-- `POST /api/kyc/confirm` — Consumes KV draft, encrypts PII fields with AES-GCM, writes to `profiles`.
-- `POST /api/loans/` — Creates a `pending` loan (hardcoded 5% flat rate).
-- `GET /api/loans/:id` — Returns loan + installment schedule.
-- `POST /api/loans/:id/approve` — `officer`/`admin` only. Sets loan `active`, inserts installments + disbursement transaction in a D1 batch.
-- `POST /api/loans/:id/installments/:installmentId/pay` — Records repayment, transitions loan to `fully_paid` when all installments are settled.
-
-**PII encryption** (`api/src/crypto.ts`): AES-GCM with a random 12-byte IV. Stored as `base64(iv):base64(ciphertext)`. All `profiles` columns except `user_id`, `kyc_status`, `kyc_document_r2_key` are encrypted.
-
-**KYC OCR** (`api/src/kyc/ocr.ts`): Calls Gemini `gemini-2.5-flash` (not 2.0-flash — it has quota=0 on this key). Extracts `firstName`, `lastName`, `nationalIdNumber`, `dob` as JSON. Falls back to all-null on parse failure.
-
-**Auth middleware** (`api/src/middleware/`):
-- `requireAuth` — verifies HS256 JWT, sets `c.var.userId/role/jti/exp`.
-- `requireRole(...roles)` — checks `c.var.role` against allowed list.
-- `turnstile.ts` — standalone `verifyTurnstile()` helper, fail-closed on transport error.
-
-**JWT** (`api/src/auth/jwt.ts`): Hand-rolled HS256 using `crypto.subtle`. Constant-time compare on signature to prevent timing attacks.
-
-### Testing
-
-Tests run inside `@cloudflare/vitest-pool-workers` (real miniflare runtime, not mocks). Key seams:
-
-- `fetchMock` from `cloudflare:test` (not `jest.spyOn(globalThis, 'fetch')`) — required for intercepting outbound fetch in the Workers runtime.
-- R2 assertions use `.head(key)` not `.get(key)` — `.get()` returns `null` for empty bodies in some miniflare versions.
-- `TURNSTILE_SECRET` is pinned to `1x0000000000000000000000000000000AA` (Cloudflare always-pass test secret) via `vitest.config.ts` miniflare bindings — tests don't need a real token.
-- `TEST_MIGRATIONS` binding is injected by `vitest.config.ts`; `test/apply-migrations.ts` applies them once as a global setup file.
+### sector-valuation-ms
+- `src/app.js` exports `createApp({ marketData, cache })`. Tests pass in fakes this way (supertest + `ioredis-mock`). `src/server.js` only starts the server.
+- Routes: `POST /api/analyze` (compares one metric to sector peers), `POST /api/dcf`, `POST /api/compare`. Request bodies are validated with zod in `src/validation/schemas.js`.
+- Calculations live in pure functions in `src/services/stats.js` and `src/services/dcf.js`.
+- The Redis cache fails open: if Redis is down, reads return null and writes do nothing.
+- Gotcha: the app reads `REDIS_HOST`/`REDIS_PORT`, but `.env.example` and the README document `REDIS_URL`, which the app ignores.
 
 ### Specs & plans
-
-- `docs/superpowers/specs/` — design specs (e.g. KYC/OCR pipeline).
-- `docs/superpowers/plans/` — implementation plans.
-- `CLOUDFLARE_MICROLOAN_PLAN.md` — original architectural blueprint.
+- `docs/superpowers/specs/`: design specs. `2026-07-04-production-readiness-design.md` is approved but not implemented yet. For example, the deposit/withdraw race in `AccountService` is still open.
+- `docs/superpowers/plans/`: implementation plans. Only the cross-cutting production-readiness plan exists. The three per-service plans it depends on have not been written.

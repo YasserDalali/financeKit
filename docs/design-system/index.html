@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>financeKit Design System</title>
+<link rel="stylesheet" href="tokens.css">
+<style>
+  section{padding:var(--s-16) 0;border-bottom:1px solid var(--border)} .row{display:flex;flex-wrap:wrap;gap:var(--s-4);align-items:center;margin-top:var(--s-6)}
+  .sw{width:132px}.sw i{display:block;height:72px;border-radius:var(--radius);border:1px solid var(--border)}.sw b{display:block;font-size:var(--text-sm);margin-top:6px}.sw span{font-size:var(--text-xs);color:var(--text-muted)}
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:var(--s-6);margin-top:var(--s-6)}
+  .hero{background:linear-gradient(90deg,var(--bg-alt) 40%,var(--blue-50))}
+</style></head><body>
+<header class="container" style="padding-block:var(--s-6)"><img src="logo.svg" alt="financeKit" height="36"></header>
+
+<section class="section-art art-clear-right hero"><div class="container"><div class="copy">
+  <p class="eyebrow">Micro-lending, simplified</p>
+  <h1 class="display" style="margin:var(--s-4) 0">Capital that moves at the speed of trust.</h1>
+  <p style="color:var(--text-muted)">Apply, verify and disburse in minutes. Hero art slots in as the section background.</p>
+  <div class="row"><a class="btn btn-primary">Apply for a loan</a><a class="btn btn-secondary">Talk to us</a></div>
+</div></div></section>
+
+<section><div class="container"><p class="eyebrow">Color</p><h2>Palette</h2><div class="row">
+  <div class="sw"><i style="background:#0014DC"></i><b>Blue 600</b><span>#0014DC primary</span></div>
+  <div class="sw"><i style="background:#0010B0"></i><b>Blue 700</b><span>#0010B0 hover</span></div>
+  <div class="sw"><i style="background:#000A66"></i><b>Blue 900</b><span>#000A66</span></div>
+  <div class="sw"><i style="background:#EBEDFF"></i><b>Blue 50</b><span>#EBEDFF</span></div>
+  <div class="sw"><i style="background:#0A0B1F"></i><b>Ink</b><span>#0A0B1F text</span></div>
+  <div class="sw"><i style="background:#5B6270"></i><b>Gray 600</b><span>#5B6270 muted</span></div>
+  <div class="sw"><i style="background:#E1E4E9"></i><b>Gray 200</b><span>#E1E4E9 border</span></div>
+  <div class="sw"><i style="background:#F6F7F9"></i><b>Gray 50</b><span>#F6F7F9 alt bg</span></div>
+</div></div></section>
+
+<section><div class="container"><p class="eyebrow">Type</p><h2>Martina Plantijn + Phonic</h2>
+  <p class="display" style="margin-top:var(--s-6)">Display 80</p><h1>Heading 1 — 56</h1><h2 style="margin-top:12px">Heading 2 — 36</h2><h3 style="margin-top:12px">Heading 3 — 24</h3>
+  <p style="max-width:60ch">Body — Phonic 16/1.6 (Hanken Grotesk fallback). Serif is for headlines only; all UI, tables and numbers use the sans with tabular figures.</p>
+</div></section>
+
+<section><div class="container"><p class="eyebrow">Components</p><h2>Buttons, fields, badges</h2>
+  <div class="row"><a class="btn btn-primary">Primary</a><a class="btn btn-secondary">Secondary</a><a class="btn btn-ghost">Ghost</a>
+  <span class="badge">Pending</span><span class="badge success">Active</span><span class="badge warning">Due soon</span><span class="badge danger">Overdue</span></div>
+  <div class="grid"><label class="field">Email<input class="input" placeholder="you@company.com"></label><label class="field">Loan amount<input class="input" value="5,000.00"></label></div>
+</div></section>
+
+<section><div class="container"><p class="eyebrow">Surface</p><h2>Glassmorphism</h2>
+  <p style="color:var(--text-muted);max-width:60ch">Two tiers: borderless frosted <code>.glass</code> cards for content, and a real refraction lens (<a href="https://github.com/eamonliu/liquid-glass-js">liquid-glass-js</a>, MIT, vendored) for hero accents. <a href="glass.html">Open the lens demo</a> and drag it.</p>
+  <div style="margin-top:var(--s-6);padding:var(--s-12);background:radial-gradient(circle at 20% 30%,#7A86F0 0,transparent 40%),radial-gradient(circle at 85% 75%,#fff 0,transparent 30%),var(--blue-600)">
+    <div class="glass" style="max-width:280px;color:var(--white)"><span class="badge">Active</span><h3 style="margin-top:var(--s-3)">$5,250.00</h3><p style="margin:0">Frosted card (css.glass)</p></div>
+  </div>
+</div></section>
+
+<section><div class="container"><p class="eyebrow">Patterns</p><h2>Loan card & schedule</h2>
+  <div class="grid"><div class="card"><span class="badge success">Active</span><h3 style="margin-top:var(--s-3)">$5,250.00</h3><p style="color:var(--text-muted)">12 installments · 5% flat</p><a class="btn btn-ghost">View schedule</a></div>
+  <table class="table"><tr><th>#</th><th>Due</th><th>Amount</th><th>Status</th></tr>
+  <tr><td>1</td><td>2026-12-01</td><td>$437.50</td><td><span class="badge success">Paid</span></td></tr>
+  <tr><td>2</td><td>2027-01-01</td><td>$437.50</td><td><span class="badge">Upcoming</span></td></tr></table></div>
+</div></section>
+</body></html>

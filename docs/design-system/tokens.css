@@ -1,0 +1,130 @@
+/* financeKit design system — light mode only. Inspired by slb.com: airy white space,
+   one ultramarine-blue (#0014DC) accent, glass/chrome 3D art, serif display + Phonic UI. */
+@import url("https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600&display=swap");
+
+:root {
+  color-scheme: light;
+
+  /* Brand blue (the single accent) */
+  --blue-50:  #EBEDFF;
+  --blue-100: #D6DAFF;
+  --blue-300: #7A86F0;
+  --blue-500: #2B3BE8;
+  --blue-600: #0014DC; /* primary */
+  --blue-700: #0010B0; /* hover */
+  --blue-900: #000A66; /* deep ink-blue */
+
+  /* Neutrals (cool, slightly blue-tinted greys, as in the hero art) */
+  --white:    #FFFFFF;
+  --gray-50:  #F6F7F9; /* page bg alt */
+  --gray-100: #EEF0F3;
+  --gray-200: #E1E4E9; /* borders */
+  --gray-400: #A3A9B5;
+  --gray-600: #5B6270; /* secondary text */
+  --ink:      #0A0B1F; /* primary text */
+
+  /* Status */
+  --success: #0E8A5F;
+  --warning: #B7791F;
+  --danger:  #C8322F;
+
+  /* Semantic */
+  --bg: var(--white);
+  --bg-alt: var(--gray-50);
+  --surface: var(--white);
+  --border: var(--gray-200);
+  --text: var(--ink);
+  --text-muted: var(--gray-600);
+  --accent: var(--blue-600);
+  --accent-hover: var(--blue-700);
+  --focus: 0 0 0 3px rgba(0, 20, 220, .28);
+
+  /* Type — "Martina Plantijn" is commercial (Klim); self-host it, fallbacks below */
+  --font-serif: "Martina Plantijn", "Source Serif 4", Georgia, serif;
+  /* Phonic is commercial (Groteske); Hanken Grotesk is the free stand-in loaded above */
+  --font-sans: Phonic, "Hanken Grotesk", system-ui, -apple-system, "Segoe UI", sans-serif;
+
+  --text-display: clamp(2.75rem, 6vw, 5rem);   /* hero */
+  --text-h1: clamp(2.25rem, 4vw, 3.5rem);
+  --text-h2: 2.25rem;
+  --text-h3: 1.5rem;
+  --text-body: 1rem;
+  --text-sm: .875rem;
+  --text-xs: .75rem;
+
+  /* Space (4px base) */
+  --s-1: 4px;  --s-2: 8px;  --s-3: 12px; --s-4: 16px;
+  --s-6: 24px; --s-8: 32px; --s-12: 48px; --s-16: 64px; --s-24: 96px;
+
+  /* Shape & depth — sharp-ish corners, very soft shadows */
+  --radius-sm: 0;
+  --radius: 0;
+  --radius-lg: 0;
+  --radius-pill: 0; /* sharp 90° corners everywhere */
+  --shadow-1: 0 1px 2px rgba(10, 11, 31, .06);
+  --shadow-2: 0 8px 24px rgba(10, 11, 31, .08);
+
+  --container: 1200px;
+
+  /* Glassmorphism — frosted panels over blue / art backgrounds (echoes the glass-cube renders) */
+  --glass-bg: rgba(255, 255, 255, .18);              /* from css.glass */
+  --glass-bg-strong: rgba(255, 255, 255, .85);       /* fallback without backdrop-filter */
+  --glass-bg-tint: rgba(0, 20, 220, .18);
+  --glass-blur: 12.6px;
+  --glass-border: 1px solid rgba(255, 255, 255, .23);
+  --glass-shadow: 0 4px 30px rgba(0, 0, 0, .1);
+}
+
+body { margin: 0; background: var(--bg); color: var(--text); font: 400 var(--text-body)/1.6 var(--font-sans); -webkit-font-smoothing: antialiased; }
+h1, h2, h3, .display { font-family: var(--font-serif); font-weight: 400; letter-spacing: -.01em; line-height: 1.1; margin: 0; }
+.display { font-size: var(--text-display); }
+h1 { font-size: var(--text-h1); } h2 { font-size: var(--text-h2); } h3 { font-size: var(--text-h3); line-height: 1.25; }
+.eyebrow { font: 600 var(--text-xs)/1 var(--font-sans); letter-spacing: .12em; text-transform: uppercase; color: var(--accent); }
+a { color: var(--accent); text-decoration: none; } a:hover { text-decoration: underline; }
+:focus-visible { outline: none; box-shadow: var(--focus); }
+
+.container { max-width: var(--container); margin: 0 auto; padding: 0 var(--s-6); }
+
+/* Buttons */
+.btn { display: inline-flex; align-items: center; gap: var(--s-2); padding: 12px 24px; border-radius: var(--radius-pill);
+  font: 500 var(--text-body)/1 var(--font-sans); border: 1px solid transparent; cursor: pointer; transition: background .15s, border-color .15s; }
+.btn-primary { background: var(--accent); color: var(--white); } .btn-primary:hover { background: var(--accent-hover); text-decoration: none; }
+.btn-secondary { background: transparent; color: var(--ink); border-color: var(--ink); } .btn-secondary:hover { background: var(--ink); color: var(--white); text-decoration: none; }
+.btn-ghost { background: transparent; color: var(--accent); padding-inline: 0; } .btn-ghost::after { content: "→"; }
+
+/* Inputs */
+.input { width: 100%; box-sizing: border-box; padding: 12px 14px; font: inherit; color: var(--text); background: var(--white);
+  border: 1px solid var(--border); border-radius: var(--radius); }
+.input:hover { border-color: var(--gray-400); } .input:focus { outline: none; border-color: var(--accent); box-shadow: var(--focus); }
+label.field { display: grid; gap: var(--s-2); font: 500 var(--text-sm)/1 var(--font-sans); }
+
+/* Cards, badges, tables */
+.card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: var(--s-6); }
+.card:hover { box-shadow: var(--shadow-2); }
+.badge { display: inline-block; padding: 4px 10px; border-radius: var(--radius-pill); font: 600 var(--text-xs)/1.2 var(--font-sans); background: var(--blue-50); color: var(--blue-700); }
+.badge.success { background: #E3F5EC; color: var(--success); } .badge.warning { background: #FBF0DC; color: var(--warning); } .badge.danger { background: #FBE6E5; color: var(--danger); }
+table.table { width: 100%; border-collapse: collapse; font-size: var(--text-sm); }
+.table th { text-align: left; font-weight: 600; color: var(--text-muted); padding: var(--s-3) var(--s-4); border-bottom: 1px solid var(--ink); }
+.table td { padding: var(--s-3) var(--s-4); border-bottom: 1px solid var(--border); font-variant-numeric: tabular-nums; }
+
+/* Glass panel (css.glass values; corners stay sharp per system). Place on blue fields or imagery
+   with white text; on white surfaces use .glass-tint. Never stack glass; not for dense tables/forms.
+   Real refraction: liquid-glass.min.js (<liquid-glass>). */
+.glass { background: var(--glass-bg-strong); border: var(--glass-border); border-radius: var(--radius);
+  box-shadow: var(--glass-shadow); padding: var(--s-6); }
+@supports (backdrop-filter: blur(1px)) {
+  .glass { background: var(--glass-bg); -webkit-backdrop-filter: blur(var(--glass-blur)); backdrop-filter: blur(var(--glass-blur)); }
+}
+.glass-tint { background: var(--glass-bg-tint); }
+.glass-nav { position: sticky; top: 0; z-index: 10; border-radius: 0; padding: var(--s-3) var(--s-6); }
+
+/* Dark band reserved for white line-art illustrations (the only dark surface in the app) */
+.section-dark { background: #15130D; color: var(--white); padding: var(--s-24) 0; text-align: center; }
+.section-dark .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: var(--s-16) var(--s-8); }
+.section-dark img { width: 160px; height: 160px; margin: 0 auto var(--s-6); display: block; }
+.section-dark p { font-size: 1.25rem; line-height: 1.4; max-width: 24ch; margin: 0 auto; }
+
+/* Landing section with art background; add .art-left / .art-right to pick which side stays clear */
+.section-art { background: var(--bg-alt) center/cover no-repeat; min-height: 560px; display: flex; align-items: center; }
+.section-art.art-clear-right .copy { max-width: 520px; }                 /* copy sits left, art fills right */
+.section-art.art-clear-left .container { display: flex; justify-content: flex-end; }  /* copy sits right */
