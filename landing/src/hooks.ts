@@ -3,10 +3,10 @@ import Lenis from 'lenis';
 
 export const prefersReducedMotion = () => matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-/** Weighted smooth scroll; in-page anchors scroll through Lenis too. Off for reduced motion. */
-export function useSmoothScroll() {
+/** Weighted smooth scroll; in-page anchors scroll through Lenis too. Off for reduced motion, and until `enabled`. */
+export function useSmoothScroll(enabled: boolean) {
   useEffect(() => {
-    if (prefersReducedMotion()) return;
+    if (!enabled || prefersReducedMotion()) return;
     const lenis = new Lenis({ lerp: 0.1 });
     let id = 0;
     const raf = (t: number) => { lenis.raf(t); id = requestAnimationFrame(raf); };
@@ -18,18 +18,19 @@ export function useSmoothScroll() {
     };
     document.addEventListener('click', onClick);
     return () => { cancelAnimationFrame(id); document.removeEventListener('click', onClick); lenis.destroy(); };
-  }, []);
+  }, [enabled]);
 }
 
-/** One-shot reveals: adds .in to [data-reveal], [data-rule] and [data-split] as they enter the viewport. */
-export function useReveal() {
+/** One-shot reveals: adds .in to [data-reveal], [data-rule] and [data-split] as they enter the viewport. Waits for `enabled`. */
+export function useReveal(enabled: boolean) {
   useEffect(() => {
+    if (!enabled) return;
     const io = new IntersectionObserver((entries) => entries.forEach((e) => {
       if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
     }), { threshold: 0.2, rootMargin: '0px 0px -8% 0px' });
     document.querySelectorAll('[data-reveal], [data-rule], [data-split]').forEach((el) => io.observe(el));
     return () => io.disconnect();
-  }, []);
+  }, [enabled]);
 }
 
 /** Sets the CSS stagger delay for the i-th item of a group. */

@@ -1,7 +1,11 @@
-import { useEffect, useState, type CSSProperties } from 'react';
+import { useEffect, useRef, useState, type CSSProperties } from 'react';
+import { src } from '../assets';
 
 /** Full-screen looping cube (2.5s clip played forward then back), grainy serif title, scroll cue. */
-export default function Hero() {
+export default function Hero({ started }: { started: boolean }) {
+  const video = useRef<HTMLVideoElement>(null);
+  // the clip starts with the rest of the page animations, once the intro is gone
+  useEffect(() => { if (started) video.current?.play().catch(() => {}); }, [started]);
   const [scrolled, setScrolled] = useState(false);
   useEffect(() => {
     const onScroll = () => setScrolled(scrollY > 40);
@@ -12,9 +16,9 @@ export default function Hero() {
   return (
     <section id="hero" className="relative h-svh min-h-[560px] overflow-hidden bg-hero text-white">
       <video
-        className="absolute inset-0 size-full object-cover"
-        src="/assets/hero-loop.mp4" poster="/assets/hero-poster.jpg"
-        autoPlay muted loop playsInline aria-hidden="true"
+        ref={video} className="absolute inset-0 size-full object-cover"
+        src={src('/assets/hero-loop.mp4')} poster="/assets/hero-poster.jpg"
+        muted loop playsInline preload="auto" aria-hidden="true"
       />
       <div className="absolute inset-x-0 bottom-0 flex items-end justify-between gap-8 px-gutter pb-[clamp(28px,5vw,64px)] max-lg:flex-col max-lg:items-start">
         <h1 data-split className="font-serif text-[clamp(3.5rem,11vw,11.5rem)] leading-[.88] font-normal tracking-[-0.03em] italic">

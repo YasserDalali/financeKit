@@ -38,7 +38,7 @@ export default function Nav() {
       }`}
     >
       <a href="#top" aria-label="FinRisk home" className={`group flex items-center font-semibold tracking-[-0.03em] ${solid ? 'gap-2.5 text-[1.0625rem]' : 'gap-3 text-xl'}`}>
-        <LogoMark className={`transition-[rotate,color] duration-700 ease-expo group-hover:-rotate-90 ${solid ? 'size-5 text-blue-600' : ''}`} />
+        <LogoMark className={`transition-[rotate,color] duration-700 ease-expo group-hover:-rotate-90 ${solid ? 'size-5 text-blue-600' : 'size-[26px]'}`} />
         <span>FinRisk</span>
       </a>
       <a

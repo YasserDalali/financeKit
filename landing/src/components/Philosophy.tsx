@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react';
+import { src } from '../assets';
 import { stagger, title, titleSize } from '../hooks';
 
 const principles = [
@@ -20,19 +21,19 @@ export default function Philosophy() {
   useEffect(() => {
     if (matchMedia('(max-width: 767px)').matches) return;
     const el = section.current!, v = video.current!;
-    let url = '';
-    // In-memory copy: seeking is instant and works even on hosts without range requests
-    fetch('/assets/helix-scrub.mp4').then((r) => r.blob()).then((b) => { url = URL.createObjectURL(b); v.preload = 'auto'; v.src = url; }).catch(() => {});
+    v.preload = 'auto';
+    v.src = src('/assets/helix-scrub.mp4'); // preloaded in memory by the intro: seeking is instant
     let cur = 0, id = 0;
     const tick = () => {
       const r = el.getBoundingClientRect();
       const target = Math.min(1, Math.max(0, (innerHeight - r.top) / (innerHeight + r.height))); // 0 entering → 1 leaving
-      cur += (target - cur) * 0.12;
-      if (v.duration && Math.abs(v.currentTime - cur * v.duration) > 0.01) v.currentTime = cur * v.duration;
+      cur += (target - cur) * 0.18;
+      // 60fps clip: update on any change of about half a frame so every frame is reachable
+      if (v.duration && Math.abs(v.currentTime - cur * v.duration) > 1 / 120) v.currentTime = cur * v.duration;
       id = requestAnimationFrame(tick);
     };
     id = requestAnimationFrame(tick);
-    return () => { cancelAnimationFrame(id); if (url) URL.revokeObjectURL(url); };
+    return () => cancelAnimationFrame(id);
   }, []);
 
   return (
