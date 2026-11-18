@@ -1,0 +1,93 @@
+@import "tailwindcss";
+
+/* FinRisk design tokens (from docs/design-system). Light mode only, sharp corners. */
+@theme {
+  --font-sans: Phonic, "Hanken Grotesk", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-serif: "Martina Plantijn", "Instrument Serif", Georgia, serif; /* rare: hero line + footer wordmark */
+
+  --color-blue-50: #ebedff;
+  --color-blue-100: #d6daff;
+  --color-blue-300: #7a86f0;
+  --color-blue-500: #2b3be8;
+  --color-blue-600: #0014dc; /* primary */
+  --color-blue-700: #0010b0;
+  --color-blue-900: #000a66;
+  --color-ink: #0a0b1f;
+  --color-muted: #5b6270;
+  --color-night: #0b0b0d;
+  --color-mist: #eaedf4;
+  --color-haze: #e4e5ee;
+  --color-hero: #2232d6;
+
+  --ease-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-io: cubic-bezier(0.76, 0, 0.24, 1);
+
+  /* breakpoints matched to the layout's real break points */
+  --breakpoint-sm: 561px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 901px;
+
+  --animate-nav-in: nav-in 0.7s var(--ease-expo);
+  --animate-cue: cue 1.8s var(--ease-io) infinite;
+  @keyframes nav-in { from { translate: -50% -150%; } }
+  @keyframes cue { from { transform: translateY(-100%); } to { transform: translateY(250%); } }
+}
+
+/* Touch screens have no hover: reveal hover-only content there */
+@custom-variant touch (@media (hover: none));
+
+:root {
+  --gutter: clamp(16px, 4vw, 56px);
+  --grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.38'/%3E%3C/svg%3E");
+}
+
+@utility px-gutter { padding-inline: var(--gutter); }
+
+@layer base {
+  html { color-scheme: light; }
+  body { @apply overflow-x-hidden bg-white font-sans text-ink antialiased; }
+  ::selection { @apply bg-blue-600 text-white; }
+}
+
+/* ---- Effects that read better as CSS than as utility strings ---- */
+
+/* Grain: white fill speckled with grey noise, clipped to the glyphs */
+.grain-text { color: transparent; background: var(--grain), #fff; background-size: 180px 180px, auto; -webkit-background-clip: text; background-clip: text; }
+
+/* Line-mask reveal (hero title + wordmark): the parent gets .in from useReveal */
+.line { display: block; overflow: hidden; padding-bottom: 0.06em; }
+.line > span { display: block; transform: translateY(105%); transition: transform 1.3s var(--ease-expo); }
+.line:nth-child(2) > span { transition-delay: 0.12s; }
+[data-split].in .line > span { transform: none; }
+
+/* Generic one-shot reveal; --d staggers siblings */
+[data-reveal] { opacity: 0; transform: translateY(28px); transition: opacity 0.9s var(--ease-expo), transform 0.9s var(--ease-expo); transition-delay: var(--d, 0s); }
+[data-reveal].in { opacity: 1; transform: none; }
+
+/* Hairline divider that draws in from the left */
+.rule { border: 0; height: 1px; margin: 0; background: var(--color-ink); transform: scaleX(0); transform-origin: left; transition: transform 1.4s var(--ease-io); }
+.rule.in { transform: scaleX(1); }
+
+/* CTA blueprint grid, fading out from the top-right corner */
+.blueprint {
+  position: absolute; top: 0; right: 0; width: min(70vw, 1100px); height: 100%; pointer-events: none;
+  background-image:
+    linear-gradient(rgba(255,255,255,.34) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.34) 1px, transparent 1px),
+    linear-gradient(rgba(255,255,255,.13) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.13) 1px, transparent 1px);
+  background-size: 120px 120px, 120px 120px, 24px 24px, 24px 24px; background-position: right -1px top -1px;
+  -webkit-mask-image: radial-gradient(ellipse 100% 100% at 100% 0%, #000 0%, transparent 70%);
+          mask-image: radial-gradient(ellipse 100% 100% at 100% 0%, #000 0%, transparent 70%);
+}
+.blueprint::after { content: ""; position: absolute; top: 120px; right: 240px; width: 360px; height: 360px; border: 1px solid rgba(255,255,255,.45); border-radius: 50%; }
+.blueprint::before { content: ""; position: absolute; top: 300px; right: 0; width: 600px; height: 1px; background: rgba(255,255,255,.45); }
+
+/* Carousel edge: cards dissolve into the column gap instead of hitting a hard edge */
+.car-track { -webkit-mask-image: linear-gradient(90deg, transparent, #000 var(--fade)); mask-image: linear-gradient(90deg, transparent, #000 var(--fade)); scrollbar-width: none; }
+.car-track::-webkit-scrollbar { display: none; }
+.car-track.dragging { cursor: grabbing; scroll-snap-type: none; }
+.car-track.dragging > li { pointer-events: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition: none !important; animation: none !important; }
+  [data-reveal], .line > span, .rule { opacity: 1 !important; transform: none !important; }
+}

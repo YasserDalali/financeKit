@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" role="img" aria-label="FinRisk">
+  <!-- solid half = what you own; offset translucent half = what you risk -->
+  <path d="M0 0H32L0 32Z" fill="#0014DC"/>
+  <path d="M32 6V32H6Z" fill="#0014DC" opacity=".45"/>
+</svg>
