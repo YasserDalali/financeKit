@@ -121,3 +121,19 @@ Adapter tests use recorded fixtures through an injected HTTP client; no test hit
 - No changes to the three existing services, the landing page or `openapi` files.
 - No wiring of `risk-management-ms` or `sector-valuation-ms` to `data-ms` yet.
 - No push, no PR.
+
+---
+
+# Plan: Java modular monolith (proposed, waiting for go-ahead)
+
+Full plan with code and commands: `docs/superpowers/plans/2026-11-19-java-modular-monolith.md` (14 tasks).
+
+One Java 21 / Spring Boot app in `backend/` replaces `risk-management-ms`, `sector-valuation-ms` and the planned `data-ms`. Contexts: Data (`MarketData` interface, FMP then Yahoo adapters, failover, cache), Valuation (ported from Node), Portfolio + Risk (moved and moved to PostgreSQL). `hybrid-rag` stays the one extra service. Deploy: `render.yaml` Blueprint (Render cannot run docker-compose) plus a local `docker-compose.yml`.
+
+Decisions to confirm before executing (details in the plan header):
+1. Render cannot run compose files, so there are two artifacts built from the same Dockerfiles.
+2. PostgreSQL replaces SQL Server (confirmed earlier).
+3. In-memory Caffeine cache replaces Redis.
+4. Yahoo is an unofficial fallback, on by default, with a kill switch (`YAHOO_ENABLED=false`).
+5. Shares-outstanding source fixed to the income statement; DCF rejects non-positive free cash flow.
+6. Old service repos move to `~/finrisk-archive/`; `hybrid-rag` is vendored into the main repo so Render can build it.
