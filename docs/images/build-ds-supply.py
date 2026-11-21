@@ -2,7 +2,7 @@
 # Upper case = full supply (filled dot), lower case = partial (ring). Dot colour = the waterfall layer the source
 # holds for that demand (docs/data-sources/waterfall.py): 1st dark blue, 2nd lighter, 3rd lightest, else ink.
 import blueprint as bp
-bp.H = 1330
+bp.H = 1420
 from blueprint import ACC, INK
 import os, sys
 import uml
