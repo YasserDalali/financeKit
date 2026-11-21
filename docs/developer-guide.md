@@ -2,12 +2,11 @@
 
 # FinanceKit
 
-A collection of financial microservices for portfolio risk, sector valuation, and document Q&A.
+A collection of financial microservices for portfolio risk and sector valuation.
 
 | Service | Stack | Default port | OpenAPI |
 |---------|-------|--------------|---------|
 | [risk-management-ms](../risk-management-ms/) | Spring Boot 3, SQL Server | **8080** (host) / **18080** (Docker) | [`openapi.json`](../risk-management-ms/openapi.json) |
-| [hybrid-rag](../hybrid-rag/) | FastAPI, LangChain, FAISS | **8000** | [`openapi.json`](../hybrid-rag/openapi.json) |
 | [sector-valuation-ms](../sector-valuation-ms/) | Node.js, Express, Redis | **3000** | — |
 
 Central copies of the API specs live in [`docs/openapi/`](./openapi/).
@@ -20,10 +19,8 @@ Central copies of the API specs live in [`docs/openapi/`](./openapi/).
 |------|---------|
 | Docker + Docker Compose | FinRisk (SQL Server + API container) |
 | JDK 21 + Maven 3.9+ | FinRisk (local JVM / tests) |
-| Python 3.11+ | Hybrid RAG |
 | Node.js 20+ | Sector valuation |
 | Redis | Sector valuation (peer-data cache) |
-| Ollama (optional) | Hybrid RAG when `LLM_PROVIDER=ollama` |
 
 ---
 
@@ -85,41 +82,6 @@ make e2e     # full e2e script (migrations, tests, Docker, happy-path)
 ```
 
 More detail: [`risk-management-ms/README.md`](../risk-management-ms/README.md)
-
----
-
-### Hybrid RAG (`hybrid-rag`)
-
-Document ingestion and question-answering with hybrid (BM25 + semantic), semantic-only, or lexical-only retrieval. Supports Ollama or Gemini as the LLM.
-
-**1. Configure environment**
-
-```bash
-cd hybrid-rag
-cp .env.example .env
-# Set LLM_PROVIDER=ollama or gemini; add GEMINI_API_KEY if using Gemini
-```
-
-**2. Install and run**
-
-```bash
-pip install -r requirements.txt
-
-# If using Ollama locally:
-# ollama pull qwen2.5:3b
-
-uvicorn src.api.app:app --reload --host 0.0.0.0 --port 8000
-```
-
-**3. Verify**
-
-```bash
-curl -sf http://localhost:8000/health
-```
-
-Interactive docs: **http://localhost:8000/docs**
-
-More detail: [`hybrid-rag/README.md`](../hybrid-rag/README.md)
 
 ---
 
@@ -192,27 +154,6 @@ The container listens on **8080** internally; map it with `ports` in `docker-com
 
 ---
 
-### Hybrid RAG
-
-**Build and run**
-
-```bash
-cd hybrid-rag
-docker build -t financekit-hybrid-rag .
-docker run -d \
-  --name hybrid-rag \
-  -p 8000:8000 \
-  --env-file .env \
-  -v hybrid-rag-cache:/app/cache \
-  financekit-hybrid-rag
-```
-
-Mount a volume on `CACHE_DIR` (default `cache/`) so FAISS and BM25 indexes survive restarts.
-
-For Gemini in production, set `LLM_PROVIDER=gemini` and `GEMINI_API_KEY`. For Ollama, point `OLLAMA_BASE_URL` at your Ollama host.
-
----
-
 ### Sector Valuation
 
 No Dockerfile is included. Deploy as a standard Node.js service:
@@ -267,35 +208,6 @@ curl -s "$BASE/accounts/1/diversification"
 After seeding (`bash db/scripts/seed.sh FinRiskDB`), account **1** has sample holdings you can query immediately.
 
 Postman collections: `risk-management-ms/postman/`
-
----
-
-### Hybrid RAG — ingest then query
-
-```bash
-BASE=http://localhost:8000
-
-# Ingest documents
-curl -s -X POST "$BASE/ingest" \
-  -H 'Content-Type: application/json' \
-  -d '{
-    "documents": [
-      {
-        "page_content": "Apple reported record revenue in Q4 driven by iPhone sales.",
-        "metadata": {"source": "earnings_call", "ticker": "AAPL"}
-      }
-    ]
-  }'
-
-# Ask a question
-curl -s -X POST "$BASE/query" \
-  -H 'Content-Type: application/json' \
-  -d '{"question": "What drove Apple revenue?"}'
-```
-
-Response includes `answer`, `sources` (retrieved chunks), and `trace` (pipeline steps).
-
-Configure retrieval via `.env`: `RAG_MODE` (`hybrid` | `semantic` | `lexical`), `TOP_K`, weights, and reranking.
 
 ---
 
