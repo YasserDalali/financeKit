@@ -35,17 +35,9 @@ FinRisk helps a private investor understand what they own. You enter your accoun
 
 There are three actors. The **investor** is a member of a tenant and owns portfolios. The **tenant admin** invites members and gives them roles. The **demo visitor** is not signed in. The visitor gets a demo on public-domain data. Two outside systems serve them. **Data sources** supply prices, filings and macro series through the waterfall. **hybrid-rag** answers questions about documents that the investor uploads.
 
-The landing page is live at [finance-kit-bay.vercel.app](https://finance-kit-bay.vercel.app/). These screenshots come from it.
+The landing page is live at [finance-kit-bay.vercel.app](https://finance-kit-bay.vercel.app/). This screenshot comes from it.
 
 <img alt="Landing page hero: the title Know what you own over a blue background with glass cubes." src="docs/images/screens/hero.png" width="100%">
-
-<img alt="The five lenses carousel: portfolio risk intelligence, fundamental analysis and intrinsic valuation cards." src="docs/images/screens/lenses.png" width="100%">
-
-<img alt="The black section Risk, from every side, with portfolio risk, stress testing, intrinsic value and fundamentals." src="docs/images/screens/risk.png" width="100%">
-
-<img alt="The blue call to action Prepare for uncertainty, with a request early access button and the footer." src="docs/images/screens/cta.png" width="100%">
-
-The landing copy is older than the current scope. It still names geopolitical and supply-chain shocks under stress testing. Those are out of scope now (see below).
 
 <img alt="UML use-case diagram. Demo visitor uses the public package. Investor uses portfolio, five lenses and documents. Tenant admin uses the admin package. Data sources serve the lenses. hybrid-rag serves the document use cases." src="docs/images/uml-usecases.png" width="100%">
 
