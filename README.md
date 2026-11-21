@@ -85,7 +85,7 @@ The constraints that still bind after caching are in the strip under the table. 
 
 ## The waterfall
 
-<img alt="Waterfall sheet. Top: for prices, valuation and risk call the waterfall, which tries Alpaca, Tiingo, Yahoo and Twelve Data in order, with block height equal to the score. Bottom: the scoring rule, reliability by grade, and the order and score for all nineteen resources." src="docs/images/ds-waterfall.png" width="100%">
+<img alt="Waterfall sheet. Top: a Sankey diagram from the five lenses to their nineteen resources to the sources that answer them, with band width equal to the expected share of answers. SEC EDGAR answers most, then Finnhub, Alpaca and US Treasury. Bottom: the scoring rule, reliability by grade, and the order and score for all nineteen resources." src="docs/images/ds-waterfall.png" width="100%">
 
 A waterfall tries the sources for one resource in order, until one answers. The order comes from Smith's rule for sequential search. Each try succeeds with chance *p* and costs *c*. Sorting by *p / c*, highest first, gives the lowest expected cost. Here *p* is the grade's reliability times the coverage, and *c* is one plus quota pressure plus a cache penalty. FRED gets a cache penalty of 2, because every FRED read must go live. [`waterfall.py`](docs/data-sources/waterfall.py) computes the order and writes [`waterfall.md`](docs/data-sources/waterfall.md). The order is configuration, so a new score does not need a Java change.
 
