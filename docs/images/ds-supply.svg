@@ -1,0 +1,830 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1290" width="1600" height="1290" font-family="Inter, Helvetica, Arial, sans-serif">
+<defs>
+<pattern id="minor" width="20" height="20" patternUnits="userSpaceOnUse"><path d="M20 0H0V20" fill="none" stroke="#ebebed" stroke-width="0.6"/></pattern>
+<pattern id="major" width="100" height="100" patternUnits="userSpaceOnUse"><rect width="100" height="100" fill="url(#minor)"/><path d="M100 0H0V100" fill="none" stroke="#d8d8db" stroke-width="0.9"/></pattern>
+<marker id="ae" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0 1L10 5L0 9z" fill="#0a0b1f"/></marker>
+<clipPath id="sheetclip"><rect width="1600" height="1290" rx="24"/></clipPath>
+</defs>
+<style>
+.ink{stroke:#0a0b1f;fill:none;stroke-width:1.5;stroke-linejoin:round}.thin{stroke:#0a0b1f;fill:none;stroke-width:1}
+.acc{stroke:#0014dc;fill:none;stroke-width:2}.dash{stroke:#0a0b1f;fill:none;stroke-width:1;stroke-dasharray:4 3}
+.t{fill:#0a0b1f;font-size:11px;letter-spacing:1.6px;font-weight:600}.h{fill:#0a0b1f;font-size:15px;font-weight:700;letter-spacing:.6px}
+.s{fill:#5b6270;font-size:12px}.n{fill:#0014dc;font-size:9.5px;font-weight:700;text-anchor:middle}
+</style>
+<g clip-path="url(#sheetclip)"><rect width="1600" height="1290" fill="#ffffff"/><rect width="1600" height="1290" fill="url(#major)"/>
+<rect x="20" y="20" width="1560" height="1250" rx="14" class="ink"/><rect x="30" y="30" width="1540" height="1230" rx="8" class="thin"/>
+<text x="60" y="108" fill="#0a0b1f" font-size="36" font-weight="600">Free data sources, graded</text>
+<line x1="60" y1="132" x2="1540" y2="132" class="thin"/>
+<defs>
+<marker id="tri" viewBox="0 0 14 14" refX="13" refY="7" markerWidth="14" markerHeight="14" orient="auto-start-reverse"><path d="M1 1L13 7L1 13z" fill="#fff" stroke="#0a0b1f" stroke-width="1.3"/></marker>
+<marker id="dia" viewBox="0 0 18 10" refX="17" refY="5" markerWidth="18" markerHeight="10" orient="auto-start-reverse"><path d="M1 5L9 1L17 5L9 9z" fill="#0a0b1f"/></marker>
+<marker id="open" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" orient="auto-start-reverse"><path d="M1 1L9 5L1 9" fill="none" stroke="#0a0b1f" stroke-width="1.4"/></marker>
+<marker id="one" viewBox="0 0 14 14" refX="13" refY="7" markerWidth="14" markerHeight="14" orient="auto-start-reverse"><path d="M6 1V13M10 1V13" stroke="#0a0b1f" stroke-width="1.3"/></marker>
+<marker id="many" viewBox="0 0 16 16" refX="15" refY="8" markerWidth="16" markerHeight="16" orient="auto-start-reverse"><path d="M15 1L3 8L15 15M3 8H15M1 2V14" fill="none" stroke="#0a0b1f" stroke-width="1.3"/></marker>
+</defs>
+<text x="60" y="178" class="t" text-anchor="start" style="">SUPPLY: WHICH SOURCE CAN FILL WHICH DEMAND, AND AT WHAT CONSTRAINT</text>
+<rect x="60" y="196" width="1447" height="880" style="fill:#fff;stroke:#0a0b1f;stroke-width:1.5"/>
+<rect x="60" y="320" width="1447" height="27" style="fill:#ebedff"/>
+<rect x="60" y="347" width="1447" height="27" style="fill:#ebedff"/>
+<rect x="60" y="374" width="1447" height="27" style="fill:#ebedff"/>
+<rect x="60" y="401" width="1447" height="27" style="fill:#ebedff"/>
+<rect x="1482" y="196" width="25" height="880" style="fill:#f3f3f4"/>
+<line x1="60" y1="320" x2="1507" y2="320" style="stroke:#0a0b1f;stroke-width:1.5"/>
+<line x1="1032" y1="196" x2="1032" y2="1076" style="stroke:#0a0b1f;stroke-width:1.2"/>
+<text x="70" y="306" class="t" text-anchor="start" style="font-size:10.5px;letter-spacing:1.2px">SOURCE</text>
+<text x="238" y="306" class="t" text-anchor="start" style="font-size:10.5px;letter-spacing:1.2px">GRADE</text>
+<text x="296" y="306" class="t" text-anchor="start" style="font-size:10.5px;letter-spacing:1.2px">COST</text>
+<text x="436" y="306" class="t" text-anchor="start" style="font-size:10.5px;letter-spacing:1.2px">RATE</text>
+<text x="578" y="306" class="t" text-anchor="start" style="font-size:10.5px;letter-spacing:1.2px">VOLUME</text>
+<text x="734" y="306" class="t" text-anchor="start" style="font-size:10.5px;letter-spacing:1.2px">HISTORY</text>
+<text x="884" y="306" class="t" text-anchor="start" style="font-size:10.5px;letter-spacing:1.2px">STORAGE / TERMS</text>
+<text x="1044.5" y="306" class="h" text-anchor="middle" style="font-size:13px;fill:#0a0b1f">P</text>
+<text transform="translate(1048.0,288) rotate(-90)" class="s" style="font-size:9.5px;fill:#0a0b1f">prices</text>
+<text x="1069.5" y="306" class="h" text-anchor="middle" style="font-size:13px;fill:#0a0b1f">S</text>
+<text transform="translate(1073.0,288) rotate(-90)" class="s" style="font-size:9.5px;fill:#0a0b1f">sector, type</text>
+<text x="1094.5" y="306" class="h" text-anchor="middle" style="font-size:13px;fill:#0a0b1f">E</text>
+<text transform="translate(1098.0,288) rotate(-90)" class="s" style="font-size:9.5px;fill:#0a0b1f">ETF holdings</text>
+<text x="1119.5" y="306" class="h" text-anchor="middle" style="font-size:13px;fill:#0a0b1f">R</text>
+<text transform="translate(1123.0,288) rotate(-90)" class="s" style="font-size:9.5px;fill:#0a0b1f">risk-free</text>
+<text x="1144.5" y="306" class="h" text-anchor="middle" style="font-size:13px;fill:#0a0b1f">F</text>
+<text transform="translate(1148.0,288) rotate(-90)" class="s" style="font-size:9.5px;fill:#0a0b1f">statements</text>
+<text x="1169.5" y="306" class="h" text-anchor="middle" style="font-size:13px;fill:#0a0b1f">Q</text>
+<text transform="translate(1173.0,288) rotate(-90)" class="s" style="font-size:9.5px;fill:#0a0b1f">ratios</text>
+<text x="1194.5" y="306" class="h" text-anchor="middle" style="font-size:13px;fill:#0a0b1f">V</text>
+<text transform="translate(1198.0,288) rotate(-90)" class="s" style="font-size:9.5px;fill:#0a0b1f">FCF, EPS, shares</text>
+<text x="1219.5" y="306" class="h" text-anchor="middle" style="font-size:13px;fill:#0a0b1f">D</text>
+<text transform="translate(1223.0,288) rotate(-90)" class="s" style="font-size:9.5px;fill:#0a0b1f">dividends</text>
+<text x="1244.5" y="306" class="h" text-anchor="middle" style="font-size:13px;fill:#0a0b1f">N</text>
+<text transform="translate(1248.0,288) rotate(-90)" class="s" style="font-size:9.5px;fill:#0a0b1f">peers</text>
+<text x="1269.5" y="306" class="h" text-anchor="middle" style="font-size:13px;fill:#0a0b1f">M</text>
+<text transform="translate(1273.0,288) rotate(-90)" class="s" style="font-size:9.5px;fill:#0a0b1f">macro</text>
+<text x="1294.5" y="306" class="h" text-anchor="middle" style="font-size:13px;fill:#0a0b1f">X</text>
+<text transform="translate(1298.0,288) rotate(-90)" class="s" style="font-size:9.5px;fill:#0a0b1f">recession flag</text>
+<text x="1319.5" y="306" class="h" text-anchor="middle" style="font-size:13px;fill:#0a0b1f">C</text>
+<text transform="translate(1323.0,288) rotate(-90)" class="s" style="font-size:9.5px;fill:#0a0b1f">commodities</text>
+<text x="1344.5" y="306" class="h" text-anchor="middle" style="font-size:13px;fill:#0a0b1f">T</text>
+<text transform="translate(1348.0,288) rotate(-90)" class="s" style="font-size:9.5px;fill:#0a0b1f">trade flows</text>
+<text x="1369.5" y="306" class="h" text-anchor="middle" style="font-size:13px;fill:#0a0b1f">I</text>
+<text transform="translate(1373.0,288) rotate(-90)" class="s" style="font-size:9.5px;fill:#0a0b1f">institutional</text>
+<text x="1394.5" y="306" class="h" text-anchor="middle" style="font-size:13px;fill:#0a0b1f">K</text>
+<text transform="translate(1398.0,288) rotate(-90)" class="s" style="font-size:9.5px;fill:#0a0b1f">insiders</text>
+<text x="1419.5" y="306" class="h" text-anchor="middle" style="font-size:13px;fill:#0a0b1f">G</text>
+<text transform="translate(1423.0,288) rotate(-90)" class="s" style="font-size:9.5px;fill:#0a0b1f">filings</text>
+<text x="1444.5" y="306" class="h" text-anchor="middle" style="font-size:13px;fill:#0a0b1f">A</text>
+<text transform="translate(1448.0,288) rotate(-90)" class="s" style="font-size:9.5px;fill:#0a0b1f">analyst ratings</text>
+<text x="1469.5" y="306" class="h" text-anchor="middle" style="font-size:13px;fill:#0a0b1f">Y</text>
+<text transform="translate(1473.0,288) rotate(-90)" class="s" style="font-size:9.5px;fill:#0a0b1f">earnings calendar</text>
+<text x="1494.5" y="306" class="h" text-anchor="middle" style="font-size:13px;fill:#9a9ca6">W</text>
+<text transform="translate(1498.0,288) rotate(-90)" class="s" style="font-size:9.5px;fill:#9a9ca6">news sentiment</text>
+<text x="70" y="338" class="s" text-anchor="start" style="font-size:12.5px;font-weight:600;fill:#0a0b1f">SEC EDGAR</text>
+<rect x="238" y="325" width="34" height="17" rx="8.5" style="fill:#fff;stroke:#0014dc;stroke-width:1.2"/><text x="255" y="337.5" class="h" text-anchor="middle" style="font-size:11px;fill:#0014dc">A</text>
+<text x="296" y="338" class="s" text-anchor="start" style="font-size:12px;fill:#0a0b1f">$0, no key</text>
+<text x="436" y="338" class="s" text-anchor="start" style="font-size:12px;fill:#0a0b1f">10/s, UA contact</text>
+<text x="578" y="338" class="s" text-anchor="start" style="font-size:12px;fill:#0a0b1f">none, nightly bulk</text>
+<text x="734" y="338" class="s" text-anchor="start" style="font-size:12px;fill:#0a0b1f">2009+ (XBRL)</text>
+<text x="884" y="338" class="s" text-anchor="start" style="font-size:12px;fill:#0a0b1f">public domain</text>
+<circle cx="1044.5" cy="333.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1069.5" cy="333.5" r="5.5" style="fill:#0014dc"/>
+<circle cx="1094.5" cy="333.5" r="5.5" style="fill:#0014dc"/>
+<circle cx="1119.5" cy="333.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1144.5" cy="333.5" r="5.5" style="fill:#0014dc"/>
+<circle cx="1169.5" cy="333.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1194.5" cy="333.5" r="5.5" style="fill:#0014dc"/>
+<circle cx="1219.5" cy="333.5" r="5.5" style="fill:#0014dc"/>
+<circle cx="1244.5" cy="333.5" r="5.5" style="fill:#0014dc"/>
+<circle cx="1269.5" cy="333.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1294.5" cy="333.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1319.5" cy="333.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1344.5" cy="333.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1369.5" cy="333.5" r="5.5" style="fill:#0014dc"/>
+<circle cx="1394.5" cy="333.5" r="5.5" style="fill:#0014dc"/>
+<circle cx="1419.5" cy="333.5" r="5.5" style="fill:#0014dc"/>
+<circle cx="1444.5" cy="333.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1469.5" cy="333.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1494.5" cy="333.5" r="1.3" style="fill:#bdbdc4"/>
+<line x1="60" y1="347" x2="1507" y2="347" style="stroke:#d8d8db;stroke-width:1"/>
+<text x="70" y="365" class="s" text-anchor="start" style="font-size:12.5px;font-weight:600;fill:#0a0b1f">US Treasury</text>
+<rect x="238" y="352" width="34" height="17" rx="8.5" style="fill:#fff;stroke:#0014dc;stroke-width:1.2"/><text x="255" y="364.5" class="h" text-anchor="middle" style="font-size:11px;fill:#0014dc">A</text>
+<text x="296" y="365" class="s" text-anchor="start" style="font-size:12px;fill:#0a0b1f">$0, no key</text>
+<text x="436" y="365" class="s" text-anchor="start" style="font-size:12px;fill:#0a0b1f">none stated</text>
+<text x="578" y="365" class="s" text-anchor="start" style="font-size:12px;fill:#0a0b1f">none</text>
+<text x="734" y="365" class="s" text-anchor="start" style="font-size:12px;fill:#0a0b1f">decades</text>
+<text x="884" y="365" class="s" text-anchor="start" style="font-size:12px;fill:#0a0b1f">no restriction</text>
+<circle cx="1044.5" cy="360.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1069.5" cy="360.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1094.5" cy="360.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1119.5" cy="360.5" r="5.5" style="fill:#0014dc"/>
+<circle cx="1144.5" cy="360.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1169.5" cy="360.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1194.5" cy="360.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1219.5" cy="360.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1244.5" cy="360.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1269.5" cy="360.5" r="5.5" style="fill:#0014dc"/>
+<circle cx="1294.5" cy="360.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1319.5" cy="360.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1344.5" cy="360.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1369.5" cy="360.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1394.5" cy="360.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1419.5" cy="360.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1444.5" cy="360.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1469.5" cy="360.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1494.5" cy="360.5" r="1.3" style="fill:#bdbdc4"/>
+<line x1="60" y1="374" x2="1507" y2="374" style="stroke:#d8d8db;stroke-width:1"/>
+<text x="70" y="392" class="s" text-anchor="start" style="font-size:12.5px;font-weight:600;fill:#0a0b1f">OpenFIGI</text>
+<rect x="238" y="379" width="34" height="17" rx="8.5" style="fill:#fff;stroke:#0014dc;stroke-width:1.2"/><text x="255" y="391.5" class="h" text-anchor="middle" style="font-size:11px;fill:#0014dc">A</text>
+<text x="296" y="392" class="s" text-anchor="start" style="font-size:12px;fill:#0a0b1f">$0, optional key</text>
+<text x="436" y="392" class="s" text-anchor="start" style="font-size:12px;fill:#0a0b1f">25/min (250 key)</text>
+<text x="578" y="392" class="s" text-anchor="start" style="font-size:12px;fill:#0a0b1f">10 jobs/request</text>
+<text x="734" y="392" class="s" text-anchor="start" style="font-size:12px;fill:#0a0b1f">n/a</text>
+<text x="884" y="392" class="s" text-anchor="start" style="font-size:12px;fill:#0a0b1f">free</text>
+<text x="1044" y="392" class="s" text-anchor="start" style="font-size:12px">identifier map only: CUSIP to ticker, for I and E</text>
+<line x1="60" y1="401" x2="1507" y2="401" style="stroke:#d8d8db;stroke-width:1"/>
+<text x="70" y="419" class="s" text-anchor="start" style="font-size:12.5px;font-weight:600;fill:#0a0b1f">Tiingo</text>
+<rect x="238" y="406" width="34" height="17" rx="8.5" style="fill:#fff;stroke:#0014dc;stroke-width:1.2"/><text x="255" y="418.5" class="h" text-anchor="middle" style="font-size:11px;fill:#0014dc">A-</text>
+<text x="296" y="419" class="s" text-anchor="start" style="font-size:12px;fill:#0a0b1f">$0, key</text>
+<text x="436" y="419" class="s" text-anchor="start" style="font-size:12px;fill:#0a0b1f">50/hour</text>
+<text x="578" y="419" class="s" text-anchor="start" style="font-size:12px;fill:#0a0b1f">1k/day, 500 sym/mo</text>
+<text x="734" y="419" class="s" text-anchor="start" style="font-size:12px;fill:#0a0b1f">decades (unverified)</text>
+<text x="884" y="419" class="s" text-anchor="start" style="font-size:12px;fill:#0a0b1f">personal use</text>
+<circle cx="1044.5" cy="414.5" r="5.5" style="fill:#0014dc"/>
+<circle cx="1069.5" cy="414.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1094.5" cy="414.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1119.5" cy="414.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1144.5" cy="414.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1169.5" cy="414.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1194.5" cy="414.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1219.5" cy="414.5" r="5.5" style="fill:#0014dc"/>
+<circle cx="1244.5" cy="414.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1269.5" cy="414.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1294.5" cy="414.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1319.5" cy="414.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1344.5" cy="414.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1369.5" cy="414.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1394.5" cy="414.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1419.5" cy="414.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1444.5" cy="414.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1469.5" cy="414.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1494.5" cy="414.5" r="1.3" style="fill:#bdbdc4"/>
+<line x1="60" y1="428" x2="1507" y2="428" style="stroke:#d8d8db;stroke-width:1"/>
+<text x="70" y="446" class="s" text-anchor="start" style="font-size:12.5px;font-weight:600;fill:#0a0b1f">EIA</text>
+<rect x="238" y="433" width="34" height="17" rx="8.5" style="fill:#fff;stroke:#0a0b1f;stroke-width:1.2"/><text x="255" y="445.5" class="h" text-anchor="middle" style="font-size:11px;fill:#0a0b1f">B+</text>
+<text x="296" y="446" class="s" text-anchor="start" style="font-size:12px;fill:#0a0b1f">$0, key</text>
+<text x="436" y="446" class="s" text-anchor="start" style="font-size:12px;fill:#0a0b1f">not stated</text>
+<text x="578" y="446" class="s" text-anchor="start" style="font-size:12px;fill:#0a0b1f">not stated</text>
+<text x="734" y="446" class="s" text-anchor="start" style="font-size:12px;fill:#0a0b1f">decades</text>
+<text x="884" y="446" class="s" text-anchor="start" style="font-size:12px;fill:#0a0b1f">free</text>
+<circle cx="1044.5" cy="441.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1069.5" cy="441.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1094.5" cy="441.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1119.5" cy="441.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1144.5" cy="441.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1169.5" cy="441.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1194.5" cy="441.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1219.5" cy="441.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1244.5" cy="441.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1269.5" cy="441.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1294.5" cy="441.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1319.5" cy="441.5" r="5.5" style="fill:#0a0b1f"/>
+<circle cx="1344.5" cy="441.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1369.5" cy="441.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1394.5" cy="441.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1419.5" cy="441.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1444.5" cy="441.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1469.5" cy="441.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1494.5" cy="441.5" r="1.3" style="fill:#bdbdc4"/>
+<line x1="60" y1="455" x2="1507" y2="455" style="stroke:#d8d8db;stroke-width:1"/>
+<text x="70" y="473" class="s" text-anchor="start" style="font-size:12.5px;font-weight:600;fill:#0a0b1f">Alpaca</text>
+<rect x="238" y="460" width="34" height="17" rx="8.5" style="fill:#fff;stroke:#0a0b1f;stroke-width:1.2"/><text x="255" y="472.5" class="h" text-anchor="middle" style="font-size:11px;fill:#0a0b1f">B+</text>
+<text x="296" y="473" class="s" text-anchor="start" style="font-size:12px;fill:#0a0b1f">$0, paper account</text>
+<text x="436" y="473" class="s" text-anchor="start" style="font-size:12px;fill:#0a0b1f">200/min</text>
+<text x="578" y="473" class="s" text-anchor="start" style="font-size:12px;fill:#0a0b1f">none</text>
+<text x="734" y="473" class="s" text-anchor="start" style="font-size:12px;fill:#0a0b1f">7+ years</text>
+<text x="884" y="473" class="s" text-anchor="start" style="font-size:12px;fill:#0a0b1f">personal, no redistr.</text>
+<circle cx="1044.5" cy="468.5" r="5.5" style="fill:#0a0b1f"/>
+<circle cx="1069.5" cy="468.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1094.5" cy="468.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1119.5" cy="468.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1144.5" cy="468.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1169.5" cy="468.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1194.5" cy="468.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1219.5" cy="468.5" r="5.5" style="fill:#0a0b1f"/>
+<circle cx="1244.5" cy="468.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1269.5" cy="468.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1294.5" cy="468.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1319.5" cy="468.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1344.5" cy="468.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1369.5" cy="468.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1394.5" cy="468.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1419.5" cy="468.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1444.5" cy="468.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1469.5" cy="468.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1494.5" cy="468.5" r="1.3" style="fill:#bdbdc4"/>
+<line x1="60" y1="482" x2="1507" y2="482" style="stroke:#d8d8db;stroke-width:1"/>
+<text x="70" y="500" class="s" text-anchor="start" style="font-size:12.5px;font-weight:600;fill:#0a0b1f">Finnhub</text>
+<rect x="238" y="487" width="34" height="17" rx="8.5" style="fill:#fff;stroke:#0a0b1f;stroke-width:1.2"/><text x="255" y="499.5" class="h" text-anchor="middle" style="font-size:11px;fill:#0a0b1f">B+</text>
+<text x="296" y="500" class="s" text-anchor="start" style="font-size:12px;fill:#0a0b1f">$0, key</text>
+<text x="436" y="500" class="s" text-anchor="start" style="font-size:12px;fill:#0a0b1f">60/min</text>
+<text x="578" y="500" class="s" text-anchor="start" style="font-size:12px;fill:#0a0b1f">none</text>
+<text x="734" y="500" class="s" text-anchor="start" style="font-size:12px;fill:#0a0b1f">varies</text>
+<text x="884" y="500" class="s" text-anchor="start" style="font-size:12px;fill:#0a0b1f">personal use</text>
+<circle cx="1044.5" cy="495.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1069.5" cy="495.5" r="4.8" style="fill:#fff;stroke:#0a0b1f;stroke-width:1.4"/>
+<circle cx="1094.5" cy="495.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1119.5" cy="495.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1144.5" cy="495.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1169.5" cy="495.5" r="5.5" style="fill:#0a0b1f"/>
+<circle cx="1194.5" cy="495.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1219.5" cy="495.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1244.5" cy="495.5" r="5.5" style="fill:#0a0b1f"/>
+<circle cx="1269.5" cy="495.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1294.5" cy="495.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1319.5" cy="495.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1344.5" cy="495.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1369.5" cy="495.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1394.5" cy="495.5" r="5.5" style="fill:#0a0b1f"/>
+<circle cx="1419.5" cy="495.5" r="5.5" style="fill:#0a0b1f"/>
+<circle cx="1444.5" cy="495.5" r="5.5" style="fill:#0a0b1f"/>
+<circle cx="1469.5" cy="495.5" r="4.8" style="fill:#fff;stroke:#0a0b1f;stroke-width:1.4"/>
+<circle cx="1494.5" cy="495.5" r="1.3" style="fill:#bdbdc4"/>
+<line x1="60" y1="509" x2="1507" y2="509" style="stroke:#d8d8db;stroke-width:1"/>
+<text x="70" y="527" class="s" text-anchor="start" style="font-size:12.5px;font-weight:600;fill:#0a0b1f">BLS / BEA</text>
+<rect x="238" y="514" width="34" height="17" rx="8.5" style="fill:#fff;stroke:#0a0b1f;stroke-width:1.2"/><text x="255" y="526.5" class="h" text-anchor="middle" style="font-size:11px;fill:#0a0b1f">B</text>
+<text x="296" y="527" class="s" text-anchor="start" style="font-size:12px;fill:#0a0b1f">$0, key</text>
+<text x="436" y="527" class="s" text-anchor="start" style="font-size:12px;fill:#0a0b1f">500/day (BLS)</text>
+<text x="578" y="527" class="s" text-anchor="start" style="font-size:12px;fill:#0a0b1f">20 years/call</text>
+<text x="734" y="527" class="s" text-anchor="start" style="font-size:12px;fill:#0a0b1f">decades</text>
+<text x="884" y="527" class="s" text-anchor="start" style="font-size:12px;fill:#0a0b1f">public</text>
+<circle cx="1044.5" cy="522.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1069.5" cy="522.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1094.5" cy="522.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1119.5" cy="522.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1144.5" cy="522.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1169.5" cy="522.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1194.5" cy="522.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1219.5" cy="522.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1244.5" cy="522.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1269.5" cy="522.5" r="5.5" style="fill:#0a0b1f"/>
+<circle cx="1294.5" cy="522.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1319.5" cy="522.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1344.5" cy="522.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1369.5" cy="522.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1394.5" cy="522.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1419.5" cy="522.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1444.5" cy="522.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1469.5" cy="522.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1494.5" cy="522.5" r="1.3" style="fill:#bdbdc4"/>
+<line x1="60" y1="536" x2="1507" y2="536" style="stroke:#d8d8db;stroke-width:1"/>
+<text x="70" y="554" class="s" text-anchor="start" style="font-size:12.5px;font-weight:600;fill:#0a0b1f">UN Comtrade</text>
+<rect x="238" y="541" width="34" height="17" rx="8.5" style="fill:#fff;stroke:#0a0b1f;stroke-width:1.2"/><text x="255" y="553.5" class="h" text-anchor="middle" style="font-size:11px;fill:#0a0b1f">B</text>
+<text x="296" y="554" class="s" text-anchor="start" style="font-size:12px;fill:#0a0b1f">$0, key</text>
+<text x="436" y="554" class="s" text-anchor="start" style="font-size:12px;fill:#0a0b1f">100-500/day</text>
+<text x="578" y="554" class="s" text-anchor="start" style="font-size:12px;fill:#0a0b1f">100k records/call</text>
+<text x="734" y="554" class="s" text-anchor="start" style="font-size:12px;fill:#0a0b1f">1962+</text>
+<text x="884" y="554" class="s" text-anchor="start" style="font-size:12px;fill:#0a0b1f">non-commercial</text>
+<circle cx="1044.5" cy="549.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1069.5" cy="549.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1094.5" cy="549.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1119.5" cy="549.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1144.5" cy="549.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1169.5" cy="549.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1194.5" cy="549.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1219.5" cy="549.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1244.5" cy="549.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1269.5" cy="549.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1294.5" cy="549.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1319.5" cy="549.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1344.5" cy="549.5" r="5.5" style="fill:#0a0b1f"/>
+<circle cx="1369.5" cy="549.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1394.5" cy="549.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1419.5" cy="549.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1444.5" cy="549.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1469.5" cy="549.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1494.5" cy="549.5" r="1.3" style="fill:#bdbdc4"/>
+<line x1="60" y1="563" x2="1507" y2="563" style="stroke:#d8d8db;stroke-width:1"/>
+<text x="70" y="581" class="s" text-anchor="start" style="font-size:12.5px;font-weight:600;fill:#0a0b1f">World Bank</text>
+<rect x="238" y="568" width="34" height="17" rx="8.5" style="fill:#fff;stroke:#0a0b1f;stroke-width:1.2"/><text x="255" y="580.5" class="h" text-anchor="middle" style="font-size:11px;fill:#0a0b1f">B</text>
+<text x="296" y="581" class="s" text-anchor="start" style="font-size:12px;fill:#0a0b1f">$0, no key</text>
+<text x="436" y="581" class="s" text-anchor="start" style="font-size:12px;fill:#0a0b1f">not stated</text>
+<text x="578" y="581" class="s" text-anchor="start" style="font-size:12px;fill:#0a0b1f">none</text>
+<text x="734" y="581" class="s" text-anchor="start" style="font-size:12px;fill:#0a0b1f">decades, annual</text>
+<text x="884" y="581" class="s" text-anchor="start" style="font-size:12px;fill:#0a0b1f">CC BY 4.0</text>
+<circle cx="1044.5" cy="576.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1069.5" cy="576.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1094.5" cy="576.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1119.5" cy="576.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1144.5" cy="576.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1169.5" cy="576.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1194.5" cy="576.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1219.5" cy="576.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1244.5" cy="576.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1269.5" cy="576.5" r="5.5" style="fill:#0a0b1f"/>
+<circle cx="1294.5" cy="576.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1319.5" cy="576.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1344.5" cy="576.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1369.5" cy="576.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1394.5" cy="576.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1419.5" cy="576.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1444.5" cy="576.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1469.5" cy="576.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1494.5" cy="576.5" r="1.3" style="fill:#bdbdc4"/>
+<line x1="60" y1="590" x2="1507" y2="590" style="stroke:#d8d8db;stroke-width:1"/>
+<text x="70" y="608" class="s" text-anchor="start" style="font-size:12.5px;font-weight:600;fill:#0a0b1f">French / Shiller</text>
+<rect x="238" y="595" width="34" height="17" rx="8.5" style="fill:#fff;stroke:#0a0b1f;stroke-width:1.2"/><text x="255" y="607.5" class="h" text-anchor="middle" style="font-size:11px;fill:#0a0b1f">B</text>
+<text x="296" y="608" class="s" text-anchor="start" style="font-size:12px;fill:#0a0b1f">$0, static files</text>
+<text x="436" y="608" class="s" text-anchor="start" style="font-size:12px;fill:#0a0b1f">n/a</text>
+<text x="578" y="608" class="s" text-anchor="start" style="font-size:12px;fill:#0a0b1f">n/a</text>
+<text x="734" y="608" class="s" text-anchor="start" style="font-size:12px;fill:#0a0b1f">1926+ / 1871+</text>
+<text x="884" y="608" class="s" text-anchor="start" style="font-size:12px;fill:#0a0b1f">academic, cite</text>
+<circle cx="1044.5" cy="603.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1069.5" cy="603.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1094.5" cy="603.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1119.5" cy="603.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1144.5" cy="603.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1169.5" cy="603.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1194.5" cy="603.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1219.5" cy="603.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1244.5" cy="603.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1269.5" cy="603.5" r="5.5" style="fill:#0a0b1f"/>
+<circle cx="1294.5" cy="603.5" r="4.8" style="fill:#fff;stroke:#0a0b1f;stroke-width:1.4"/>
+<circle cx="1319.5" cy="603.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1344.5" cy="603.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1369.5" cy="603.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1394.5" cy="603.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1419.5" cy="603.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1444.5" cy="603.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1469.5" cy="603.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1494.5" cy="603.5" r="1.3" style="fill:#bdbdc4"/>
+<line x1="60" y1="617" x2="1507" y2="617" style="stroke:#d8d8db;stroke-width:1"/>
+<text x="70" y="635" class="s" text-anchor="start" style="font-size:12.5px;font-weight:600;fill:#0a0b1f">Issuer CSVs</text>
+<rect x="238" y="622" width="34" height="17" rx="8.5" style="fill:#fff;stroke:#0a0b1f;stroke-width:1.2"/><text x="255" y="634.5" class="h" text-anchor="middle" style="font-size:11px;fill:#0a0b1f">B-</text>
+<text x="296" y="635" class="s" text-anchor="start" style="font-size:12px;fill:#0a0b1f">$0</text>
+<text x="436" y="635" class="s" text-anchor="start" style="font-size:12px;fill:#0a0b1f">none</text>
+<text x="578" y="635" class="s" text-anchor="start" style="font-size:12px;fill:#0a0b1f">one file/fund</text>
+<text x="734" y="635" class="s" text-anchor="start" style="font-size:12px;fill:#0a0b1f">current only</text>
+<text x="884" y="635" class="s" text-anchor="start" style="font-size:12px;fill:#0a0b1f">terms unknown</text>
+<circle cx="1044.5" cy="630.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1069.5" cy="630.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1094.5" cy="630.5" r="5.5" style="fill:#0a0b1f"/>
+<circle cx="1119.5" cy="630.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1144.5" cy="630.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1169.5" cy="630.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1194.5" cy="630.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1219.5" cy="630.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1244.5" cy="630.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1269.5" cy="630.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1294.5" cy="630.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1319.5" cy="630.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1344.5" cy="630.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1369.5" cy="630.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1394.5" cy="630.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1419.5" cy="630.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1444.5" cy="630.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1469.5" cy="630.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1494.5" cy="630.5" r="1.3" style="fill:#bdbdc4"/>
+<line x1="60" y1="644" x2="1507" y2="644" style="stroke:#d8d8db;stroke-width:1"/>
+<text x="70" y="662" class="s" text-anchor="start" style="font-size:12.5px;font-weight:600;fill:#0a0b1f">Yahoo</text>
+<rect x="238" y="649" width="34" height="17" rx="8.5" style="fill:#fff;stroke:#0a0b1f;stroke-width:1.2"/><text x="255" y="661.5" class="h" text-anchor="middle" style="font-size:11px;fill:#0a0b1f">C+</text>
+<text x="296" y="662" class="s" text-anchor="start" style="font-size:12px;fill:#0a0b1f">$0, no key</text>
+<text x="436" y="662" class="s" text-anchor="start" style="font-size:12px;fill:#0a0b1f">unpublished, 429s</text>
+<text x="578" y="662" class="s" text-anchor="start" style="font-size:12px;fill:#0a0b1f">none</text>
+<text x="734" y="662" class="s" text-anchor="start" style="font-size:12px;fill:#0a0b1f">decades / 4-5 yrs</text>
+<text x="884" y="662" class="s" text-anchor="start" style="font-size:12px;fill:#0a0b1f">personal, unofficial</text>
+<circle cx="1044.5" cy="657.5" r="5.5" style="fill:#0a0b1f"/>
+<circle cx="1069.5" cy="657.5" r="5.5" style="fill:#0a0b1f"/>
+<circle cx="1094.5" cy="657.5" r="4.8" style="fill:#fff;stroke:#0a0b1f;stroke-width:1.4"/>
+<circle cx="1119.5" cy="657.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1144.5" cy="657.5" r="5.5" style="fill:#0a0b1f"/>
+<circle cx="1169.5" cy="657.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1194.5" cy="657.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1219.5" cy="657.5" r="5.5" style="fill:#0a0b1f"/>
+<circle cx="1244.5" cy="657.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1269.5" cy="657.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1294.5" cy="657.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1319.5" cy="657.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1344.5" cy="657.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1369.5" cy="657.5" r="5.5" style="fill:#0a0b1f"/>
+<circle cx="1394.5" cy="657.5" r="5.5" style="fill:#0a0b1f"/>
+<circle cx="1419.5" cy="657.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1444.5" cy="657.5" r="5.5" style="fill:#0a0b1f"/>
+<circle cx="1469.5" cy="657.5" r="5.5" style="fill:#0a0b1f"/>
+<circle cx="1494.5" cy="657.5" r="1.3" style="fill:#bdbdc4"/>
+<line x1="60" y1="671" x2="1507" y2="671" style="stroke:#d8d8db;stroke-width:1"/>
+<text x="70" y="689" class="s" text-anchor="start" style="font-size:12.5px;font-weight:600;fill:#0a0b1f">FRED</text>
+<rect x="238" y="676" width="34" height="17" rx="8.5" style="fill:#fff;stroke:#0a0b1f;stroke-width:1.2"/><text x="255" y="688.5" class="h" text-anchor="middle" style="font-size:11px;fill:#0a0b1f">C</text>
+<text x="296" y="689" class="s" text-anchor="start" style="font-size:12px;fill:#0a0b1f">$0, key</text>
+<text x="436" y="689" class="s" text-anchor="start" style="font-size:12px;fill:#0a0b1f">120/min</text>
+<text x="578" y="689" class="s" text-anchor="start" style="font-size:12px;fill:#0a0b1f">none</text>
+<text x="734" y="689" class="s" text-anchor="start" style="font-size:12px;fill:#0a0b1f">decades</text>
+<text x="884" y="689" class="s" text-anchor="start" style="font-size:12px;fill:#0a0b1f">no storing</text>
+<circle cx="1044.5" cy="684.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1069.5" cy="684.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1094.5" cy="684.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1119.5" cy="684.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1144.5" cy="684.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1169.5" cy="684.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1194.5" cy="684.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1219.5" cy="684.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1244.5" cy="684.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1269.5" cy="684.5" r="5.5" style="fill:#0a0b1f"/>
+<circle cx="1294.5" cy="684.5" r="5.5" style="fill:#0a0b1f"/>
+<circle cx="1319.5" cy="684.5" r="5.5" style="fill:#0a0b1f"/>
+<circle cx="1344.5" cy="684.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1369.5" cy="684.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1394.5" cy="684.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1419.5" cy="684.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1444.5" cy="684.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1469.5" cy="684.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1494.5" cy="684.5" r="1.3" style="fill:#bdbdc4"/>
+<line x1="60" y1="698" x2="1507" y2="698" style="stroke:#d8d8db;stroke-width:1"/>
+<text x="70" y="716" class="s" text-anchor="start" style="font-size:12.5px;font-weight:600;fill:#0a0b1f">Alpha Vantage</text>
+<rect x="238" y="703" width="34" height="17" rx="8.5" style="fill:#fff;stroke:#0a0b1f;stroke-width:1.2"/><text x="255" y="715.5" class="h" text-anchor="middle" style="font-size:11px;fill:#0a0b1f">C</text>
+<text x="296" y="716" class="s" text-anchor="start" style="font-size:12px;fill:#0a0b1f">$0, key</text>
+<text x="436" y="716" class="s" text-anchor="start" style="font-size:12px;fill:#0a0b1f">not stated</text>
+<text x="578" y="716" class="s" text-anchor="start" style="font-size:12px;fill:#0a0b1f">25/day</text>
+<text x="734" y="716" class="s" text-anchor="start" style="font-size:12px;fill:#0a0b1f">compact only</text>
+<text x="884" y="716" class="s" text-anchor="start" style="font-size:12px;fill:#0a0b1f">not read</text>
+<circle cx="1044.5" cy="711.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1069.5" cy="711.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1094.5" cy="711.5" r="4.8" style="fill:#fff;stroke:#0a0b1f;stroke-width:1.4"/>
+<circle cx="1119.5" cy="711.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1144.5" cy="711.5" r="4.8" style="fill:#fff;stroke:#0a0b1f;stroke-width:1.4"/>
+<circle cx="1169.5" cy="711.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1194.5" cy="711.5" r="4.8" style="fill:#fff;stroke:#0a0b1f;stroke-width:1.4"/>
+<circle cx="1219.5" cy="711.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1244.5" cy="711.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1269.5" cy="711.5" r="4.8" style="fill:#fff;stroke:#0a0b1f;stroke-width:1.4"/>
+<circle cx="1294.5" cy="711.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1319.5" cy="711.5" r="4.8" style="fill:#fff;stroke:#0a0b1f;stroke-width:1.4"/>
+<circle cx="1344.5" cy="711.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1369.5" cy="711.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1394.5" cy="711.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1419.5" cy="711.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1444.5" cy="711.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1469.5" cy="711.5" r="5.5" style="fill:#0a0b1f"/>
+<circle cx="1494.5" cy="711.5" r="1.3" style="fill:#bdbdc4"/>
+<line x1="60" y1="725" x2="1507" y2="725" style="stroke:#d8d8db;stroke-width:1"/>
+<text x="70" y="743" class="s" text-anchor="start" style="font-size:12.5px;font-weight:600;fill:#0a0b1f">OECD</text>
+<rect x="238" y="730" width="34" height="17" rx="8.5" style="fill:#fff;stroke:#0a0b1f;stroke-width:1.2"/><text x="255" y="742.5" class="h" text-anchor="middle" style="font-size:11px;fill:#0a0b1f">C</text>
+<text x="296" y="743" class="s" text-anchor="start" style="font-size:12px;fill:#0a0b1f">$0, no key</text>
+<text x="436" y="743" class="s" text-anchor="start" style="font-size:12px;fill:#0a0b1f">20-60/hour</text>
+<text x="578" y="743" class="s" text-anchor="start" style="font-size:12px;fill:#0a0b1f">none</text>
+<text x="734" y="743" class="s" text-anchor="start" style="font-size:12px;fill:#0a0b1f">decades</text>
+<text x="884" y="743" class="s" text-anchor="start" style="font-size:12px;fill:#0a0b1f">not read</text>
+<circle cx="1044.5" cy="738.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1069.5" cy="738.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1094.5" cy="738.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1119.5" cy="738.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1144.5" cy="738.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1169.5" cy="738.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1194.5" cy="738.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1219.5" cy="738.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1244.5" cy="738.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1269.5" cy="738.5" r="5.5" style="fill:#0a0b1f"/>
+<circle cx="1294.5" cy="738.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1319.5" cy="738.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1344.5" cy="738.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1369.5" cy="738.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1394.5" cy="738.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1419.5" cy="738.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1444.5" cy="738.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1469.5" cy="738.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1494.5" cy="738.5" r="1.3" style="fill:#bdbdc4"/>
+<line x1="60" y1="752" x2="1507" y2="752" style="stroke:#d8d8db;stroke-width:1"/>
+<text x="70" y="770" class="s" text-anchor="start" style="font-size:12.5px;font-weight:600;fill:#0a0b1f">Stooq</text>
+<rect x="238" y="757" width="34" height="17" rx="8.5" style="fill:#fff;stroke:#0a0b1f;stroke-width:1.2"/><text x="255" y="769.5" class="h" text-anchor="middle" style="font-size:11px;fill:#0a0b1f">C</text>
+<text x="296" y="770" class="s" text-anchor="start" style="font-size:12px;fill:#0a0b1f">$0, CAPTCHA key</text>
+<text x="436" y="770" class="s" text-anchor="start" style="font-size:12px;fill:#0a0b1f">unpublished cap</text>
+<text x="578" y="770" class="s" text-anchor="start" style="font-size:12px;fill:#0a0b1f">none</text>
+<text x="734" y="770" class="s" text-anchor="start" style="font-size:12px;fill:#0a0b1f">decades</text>
+<text x="884" y="770" class="s" text-anchor="start" style="font-size:12px;fill:#0a0b1f">unofficial</text>
+<circle cx="1044.5" cy="765.5" r="4.8" style="fill:#fff;stroke:#0a0b1f;stroke-width:1.4"/>
+<circle cx="1069.5" cy="765.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1094.5" cy="765.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1119.5" cy="765.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1144.5" cy="765.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1169.5" cy="765.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1194.5" cy="765.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1219.5" cy="765.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1244.5" cy="765.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1269.5" cy="765.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1294.5" cy="765.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1319.5" cy="765.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1344.5" cy="765.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1369.5" cy="765.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1394.5" cy="765.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1419.5" cy="765.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1444.5" cy="765.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1469.5" cy="765.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1494.5" cy="765.5" r="1.3" style="fill:#bdbdc4"/>
+<line x1="60" y1="779" x2="1507" y2="779" style="stroke:#d8d8db;stroke-width:1"/>
+<text x="70" y="797" class="s" text-anchor="start" style="font-size:12.5px;font-weight:600;fill:#0a0b1f">IMF</text>
+<rect x="238" y="784" width="34" height="17" rx="8.5" style="fill:#fff;stroke:#0a0b1f;stroke-width:1.2"/><text x="255" y="796.5" class="h" text-anchor="middle" style="font-size:11px;fill:#0a0b1f">C-</text>
+<text x="296" y="797" class="s" text-anchor="start" style="font-size:12px;fill:#0a0b1f">$0, maybe account</text>
+<text x="436" y="797" class="s" text-anchor="start" style="font-size:12px;fill:#0a0b1f">not stated</text>
+<text x="578" y="797" class="s" text-anchor="start" style="font-size:12px;fill:#0a0b1f">not stated</text>
+<text x="734" y="797" class="s" text-anchor="start" style="font-size:12px;fill:#0a0b1f">decades</text>
+<text x="884" y="797" class="s" text-anchor="start" style="font-size:12px;fill:#0a0b1f">API migrating</text>
+<circle cx="1044.5" cy="792.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1069.5" cy="792.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1094.5" cy="792.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1119.5" cy="792.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1144.5" cy="792.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1169.5" cy="792.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1194.5" cy="792.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1219.5" cy="792.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1244.5" cy="792.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1269.5" cy="792.5" r="5.5" style="fill:#0a0b1f"/>
+<circle cx="1294.5" cy="792.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1319.5" cy="792.5" r="4.8" style="fill:#fff;stroke:#0a0b1f;stroke-width:1.4"/>
+<circle cx="1344.5" cy="792.5" r="4.8" style="fill:#fff;stroke:#0a0b1f;stroke-width:1.4"/>
+<circle cx="1369.5" cy="792.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1394.5" cy="792.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1419.5" cy="792.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1444.5" cy="792.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1469.5" cy="792.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1494.5" cy="792.5" r="1.3" style="fill:#bdbdc4"/>
+<line x1="60" y1="806" x2="1507" y2="806" style="stroke:#d8d8db;stroke-width:1"/>
+<text x="70" y="824" class="s" text-anchor="start" style="font-size:12.5px;font-weight:600;fill:#0a0b1f">GDELT</text>
+<rect x="238" y="811" width="34" height="17" rx="8.5" style="fill:#fff;stroke:#0a0b1f;stroke-width:1.2"/><text x="255" y="823.5" class="h" text-anchor="middle" style="font-size:11px;fill:#0a0b1f">D</text>
+<text x="296" y="824" class="s" text-anchor="start" style="font-size:12px;fill:#0a0b1f">$0, no key</text>
+<text x="436" y="824" class="s" text-anchor="start" style="font-size:12px;fill:#0a0b1f">informal</text>
+<text x="578" y="824" class="s" text-anchor="start" style="font-size:12px;fill:#0a0b1f">huge raw files</text>
+<text x="734" y="824" class="s" text-anchor="start" style="font-size:12px;fill:#0a0b1f">2013+</text>
+<text x="884" y="824" class="s" text-anchor="start" style="font-size:12px;fill:#0a0b1f">free, cite</text>
+<circle cx="1044.5" cy="819.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1069.5" cy="819.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1094.5" cy="819.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1119.5" cy="819.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1144.5" cy="819.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1169.5" cy="819.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1194.5" cy="819.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1219.5" cy="819.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1244.5" cy="819.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1269.5" cy="819.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1294.5" cy="819.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1319.5" cy="819.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1344.5" cy="819.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1369.5" cy="819.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1394.5" cy="819.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1419.5" cy="819.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1444.5" cy="819.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1469.5" cy="819.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1494.5" cy="819.5" r="4.8" style="fill:#fff;stroke:#0a0b1f;stroke-width:1.4"/>
+<line x1="60" y1="833" x2="1507" y2="833" style="stroke:#d8d8db;stroke-width:1"/>
+<text x="70" y="851" class="s" text-anchor="start" style="font-size:12.5px;font-weight:600;fill:#0a0b1f">Massive</text>
+<rect x="238" y="838" width="34" height="17" rx="8.5" style="fill:#fff;stroke:#0a0b1f;stroke-width:1.2"/><text x="255" y="850.5" class="h" text-anchor="middle" style="font-size:11px;fill:#0a0b1f">D</text>
+<text x="296" y="851" class="s" text-anchor="start" style="font-size:12px;fill:#0a0b1f">$0, key</text>
+<text x="436" y="851" class="s" text-anchor="start" style="font-size:12px;fill:#0a0b1f">5/min</text>
+<text x="578" y="851" class="s" text-anchor="start" style="font-size:12px;fill:#0a0b1f">none</text>
+<text x="734" y="851" class="s" text-anchor="start" style="font-size:12px;fill:#0a0b1f">2 years</text>
+<text x="884" y="851" class="s" text-anchor="start" style="font-size:12px;fill:#0a0b1f">not read</text>
+<circle cx="1044.5" cy="846.5" r="4.8" style="fill:#fff;stroke:#0a0b1f;stroke-width:1.4"/>
+<circle cx="1069.5" cy="846.5" r="4.8" style="fill:#fff;stroke:#0a0b1f;stroke-width:1.4"/>
+<circle cx="1094.5" cy="846.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1119.5" cy="846.5" r="5.5" style="fill:#0a0b1f"/>
+<circle cx="1144.5" cy="846.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1169.5" cy="846.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1194.5" cy="846.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1219.5" cy="846.5" r="4.8" style="fill:#fff;stroke:#0a0b1f;stroke-width:1.4"/>
+<circle cx="1244.5" cy="846.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1269.5" cy="846.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1294.5" cy="846.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1319.5" cy="846.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1344.5" cy="846.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1369.5" cy="846.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1394.5" cy="846.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1419.5" cy="846.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1444.5" cy="846.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1469.5" cy="846.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1494.5" cy="846.5" r="1.3" style="fill:#bdbdc4"/>
+<line x1="60" y1="860" x2="1507" y2="860" style="stroke:#d8d8db;stroke-width:1"/>
+<text x="70" y="878" class="s" text-anchor="start" style="font-size:12.5px;font-weight:600;fill:#0a0b1f">FMP</text>
+<rect x="238" y="865" width="34" height="17" rx="8.5" style="fill:#fff;stroke:#0a0b1f;stroke-width:1.2"/><text x="255" y="877.5" class="h" text-anchor="middle" style="font-size:11px;fill:#0a0b1f">D?</text>
+<text x="296" y="878" class="s" text-anchor="start" style="font-size:12px;fill:#0a0b1f">$0, key</text>
+<text x="436" y="878" class="s" text-anchor="start" style="font-size:12px;fill:#0a0b1f">not stated</text>
+<text x="578" y="878" class="s" text-anchor="start" style="font-size:12px;fill:#0a0b1f">250/day</text>
+<text x="734" y="878" class="s" text-anchor="start" style="font-size:12px;fill:#0a0b1f">unverified</text>
+<text x="884" y="878" class="s" text-anchor="start" style="font-size:12px;fill:#0a0b1f">not read</text>
+<circle cx="1044.5" cy="873.5" r="4.8" style="fill:#fff;stroke:#0a0b1f;stroke-width:1.4"/>
+<circle cx="1069.5" cy="873.5" r="4.8" style="fill:#fff;stroke:#0a0b1f;stroke-width:1.4"/>
+<circle cx="1094.5" cy="873.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1119.5" cy="873.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1144.5" cy="873.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1169.5" cy="873.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1194.5" cy="873.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1219.5" cy="873.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1244.5" cy="873.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1269.5" cy="873.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1294.5" cy="873.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1319.5" cy="873.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1344.5" cy="873.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1369.5" cy="873.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1394.5" cy="873.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1419.5" cy="873.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1444.5" cy="873.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1469.5" cy="873.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1494.5" cy="873.5" r="1.3" style="fill:#bdbdc4"/>
+<line x1="60" y1="887" x2="1507" y2="887" style="stroke:#d8d8db;stroke-width:1"/>
+<text x="70" y="905" class="s" text-anchor="start" style="font-size:12.5px;font-weight:600;fill:#0a0b1f">SimFin</text>
+<rect x="238" y="892" width="34" height="17" rx="8.5" style="fill:#fff;stroke:#0a0b1f;stroke-width:1.2"/><text x="255" y="904.5" class="h" text-anchor="middle" style="font-size:11px;fill:#0a0b1f">D</text>
+<text x="296" y="905" class="s" text-anchor="start" style="font-size:12px;fill:#0a0b1f">$0, key</text>
+<text x="436" y="905" class="s" text-anchor="start" style="font-size:12px;fill:#0a0b1f">2/s</text>
+<text x="578" y="905" class="s" text-anchor="start" style="font-size:12px;fill:#0a0b1f">500 credits/month</text>
+<text x="734" y="905" class="s" text-anchor="start" style="font-size:12px;fill:#0a0b1f">5-7 yrs, delayed</text>
+<text x="884" y="905" class="s" text-anchor="start" style="font-size:12px;fill:#0a0b1f">delete on expiry</text>
+<circle cx="1044.5" cy="900.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1069.5" cy="900.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1094.5" cy="900.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1119.5" cy="900.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1144.5" cy="900.5" r="4.8" style="fill:#fff;stroke:#0a0b1f;stroke-width:1.4"/>
+<circle cx="1169.5" cy="900.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1194.5" cy="900.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1219.5" cy="900.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1244.5" cy="900.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1269.5" cy="900.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1294.5" cy="900.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1319.5" cy="900.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1344.5" cy="900.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1369.5" cy="900.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1394.5" cy="900.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1419.5" cy="900.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1444.5" cy="900.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1469.5" cy="900.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1494.5" cy="900.5" r="1.3" style="fill:#bdbdc4"/>
+<line x1="60" y1="914" x2="1507" y2="914" style="stroke:#d8d8db;stroke-width:1"/>
+<text x="70" y="932" class="s" text-anchor="start" style="font-size:12.5px;font-weight:600;fill:#0a0b1f">Twelve Data</text>
+<rect x="238" y="919" width="34" height="17" rx="8.5" style="fill:#fff;stroke:#0a0b1f;stroke-width:1.2"/><text x="255" y="931.5" class="h" text-anchor="middle" style="font-size:11px;fill:#0a0b1f">D</text>
+<text x="296" y="932" class="s" text-anchor="start" style="font-size:12px;fill:#0a0b1f">$0, key</text>
+<text x="436" y="932" class="s" text-anchor="start" style="font-size:12px;fill:#0a0b1f">8/min</text>
+<text x="578" y="932" class="s" text-anchor="start" style="font-size:12px;fill:#0a0b1f">800/day</text>
+<text x="734" y="932" class="s" text-anchor="start" style="font-size:12px;fill:#0a0b1f">unverified</text>
+<text x="884" y="932" class="s" text-anchor="start" style="font-size:12px;fill:#0a0b1f">not read</text>
+<circle cx="1044.5" cy="927.5" r="4.8" style="fill:#fff;stroke:#0a0b1f;stroke-width:1.4"/>
+<circle cx="1069.5" cy="927.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1094.5" cy="927.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1119.5" cy="927.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1144.5" cy="927.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1169.5" cy="927.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1194.5" cy="927.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1219.5" cy="927.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1244.5" cy="927.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1269.5" cy="927.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1294.5" cy="927.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1319.5" cy="927.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1344.5" cy="927.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1369.5" cy="927.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1394.5" cy="927.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1419.5" cy="927.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1444.5" cy="927.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1469.5" cy="927.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1494.5" cy="927.5" r="1.3" style="fill:#bdbdc4"/>
+<line x1="60" y1="941" x2="1507" y2="941" style="stroke:#d8d8db;stroke-width:1"/>
+<text x="70" y="959" class="s" text-anchor="start" style="font-size:12.5px;font-weight:600;fill:#0a0b1f">Nasdaq Data Link</text>
+<rect x="238" y="946" width="34" height="17" rx="8.5" style="fill:#fff;stroke:#0a0b1f;stroke-width:1.2"/><text x="255" y="958.5" class="h" text-anchor="middle" style="font-size:11px;fill:#0a0b1f">D</text>
+<text x="296" y="959" class="s" text-anchor="start" style="font-size:12px;fill:#0a0b1f">$0, key</text>
+<text x="436" y="959" class="s" text-anchor="start" style="font-size:12px;fill:#0a0b1f">unverified</text>
+<text x="578" y="959" class="s" text-anchor="start" style="font-size:12px;fill:#0a0b1f">unverified</text>
+<text x="734" y="959" class="s" text-anchor="start" style="font-size:12px;fill:#0a0b1f">varies</text>
+<text x="884" y="959" class="s" text-anchor="start" style="font-size:12px;fill:#0a0b1f">varies</text>
+<circle cx="1044.5" cy="954.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1069.5" cy="954.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1094.5" cy="954.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1119.5" cy="954.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1144.5" cy="954.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1169.5" cy="954.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1194.5" cy="954.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1219.5" cy="954.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1244.5" cy="954.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1269.5" cy="954.5" r="4.8" style="fill:#fff;stroke:#0a0b1f;stroke-width:1.4"/>
+<circle cx="1294.5" cy="954.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1319.5" cy="954.5" r="4.8" style="fill:#fff;stroke:#0a0b1f;stroke-width:1.4"/>
+<circle cx="1344.5" cy="954.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1369.5" cy="954.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1394.5" cy="954.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1419.5" cy="954.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1444.5" cy="954.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1469.5" cy="954.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1494.5" cy="954.5" r="1.3" style="fill:#bdbdc4"/>
+<line x1="60" y1="968" x2="1507" y2="968" style="stroke:#d8d8db;stroke-width:1"/>
+<text x="70" y="986" class="s" text-anchor="start" style="font-size:12.5px;font-weight:600;fill:#0a0b1f">EODHD</text>
+<rect x="238" y="973" width="34" height="17" rx="8.5" style="fill:#fff;stroke:#0a0b1f;stroke-width:1.2"/><text x="255" y="985.5" class="h" text-anchor="middle" style="font-size:11px;fill:#0a0b1f">F</text>
+<text x="296" y="986" class="s" text-anchor="start" style="font-size:12px;fill:#0a0b1f">$0, key</text>
+<text x="436" y="986" class="s" text-anchor="start" style="font-size:12px;fill:#0a0b1f">20/min</text>
+<text x="578" y="986" class="s" text-anchor="start" style="font-size:12px;fill:#0a0b1f">20/day</text>
+<text x="734" y="986" class="s" text-anchor="start" style="font-size:12px;fill:#0a0b1f">1 year</text>
+<text x="884" y="986" class="s" text-anchor="start" style="font-size:12px;fill:#0a0b1f">not read</text>
+<circle cx="1044.5" cy="981.5" r="4.8" style="fill:#fff;stroke:#0a0b1f;stroke-width:1.4"/>
+<circle cx="1069.5" cy="981.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1094.5" cy="981.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1119.5" cy="981.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1144.5" cy="981.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1169.5" cy="981.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1194.5" cy="981.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1219.5" cy="981.5" r="4.8" style="fill:#fff;stroke:#0a0b1f;stroke-width:1.4"/>
+<circle cx="1244.5" cy="981.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1269.5" cy="981.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1294.5" cy="981.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1319.5" cy="981.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1344.5" cy="981.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1369.5" cy="981.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1394.5" cy="981.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1419.5" cy="981.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1444.5" cy="981.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1469.5" cy="981.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1494.5" cy="981.5" r="1.3" style="fill:#bdbdc4"/>
+<line x1="60" y1="995" x2="1507" y2="995" style="stroke:#d8d8db;stroke-width:1"/>
+<text x="70" y="1013" class="s" text-anchor="start" style="font-size:12.5px;font-weight:600;fill:#0a0b1f">Marketstack</text>
+<rect x="238" y="1000" width="34" height="17" rx="8.5" style="fill:#fff;stroke:#0a0b1f;stroke-width:1.2"/><text x="255" y="1012.5" class="h" text-anchor="middle" style="font-size:11px;fill:#0a0b1f">F</text>
+<text x="296" y="1013" class="s" text-anchor="start" style="font-size:12px;fill:#0a0b1f">$0, key</text>
+<text x="436" y="1013" class="s" text-anchor="start" style="font-size:12px;fill:#0a0b1f">n/a</text>
+<text x="578" y="1013" class="s" text-anchor="start" style="font-size:12px;fill:#0a0b1f">100/month</text>
+<text x="734" y="1013" class="s" text-anchor="start" style="font-size:12px;fill:#0a0b1f">1 year</text>
+<text x="884" y="1013" class="s" text-anchor="start" style="font-size:12px;fill:#0a0b1f">non-commercial</text>
+<circle cx="1044.5" cy="1008.5" r="4.8" style="fill:#fff;stroke:#0a0b1f;stroke-width:1.4"/>
+<circle cx="1069.5" cy="1008.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1094.5" cy="1008.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1119.5" cy="1008.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1144.5" cy="1008.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1169.5" cy="1008.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1194.5" cy="1008.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1219.5" cy="1008.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1244.5" cy="1008.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1269.5" cy="1008.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1294.5" cy="1008.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1319.5" cy="1008.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1344.5" cy="1008.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1369.5" cy="1008.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1394.5" cy="1008.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1419.5" cy="1008.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1444.5" cy="1008.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1469.5" cy="1008.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1494.5" cy="1008.5" r="1.3" style="fill:#bdbdc4"/>
+<line x1="60" y1="1022" x2="1507" y2="1022" style="stroke:#d8d8db;stroke-width:1"/>
+<text x="70" y="1040" class="s" text-anchor="start" style="font-size:12.5px;font-weight:600;fill:#0a0b1f">Intrinio</text>
+<rect x="238" y="1027" width="34" height="17" rx="8.5" style="fill:#fff;stroke:#0a0b1f;stroke-width:1.2"/><text x="255" y="1039.5" class="h" text-anchor="middle" style="font-size:11px;fill:#0a0b1f">F</text>
+<text x="296" y="1040" class="s" text-anchor="start" style="font-size:12px;fill:#0a0b1f">no free tier</text>
+<text x="436" y="1040" class="s" text-anchor="start" style="font-size:12px;fill:#0a0b1f">-</text>
+<text x="578" y="1040" class="s" text-anchor="start" style="font-size:12px;fill:#0a0b1f">-</text>
+<text x="734" y="1040" class="s" text-anchor="start" style="font-size:12px;fill:#0a0b1f">-</text>
+<text x="884" y="1040" class="s" text-anchor="start" style="font-size:12px;fill:#0a0b1f">-</text>
+<circle cx="1044.5" cy="1035.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1069.5" cy="1035.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1094.5" cy="1035.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1119.5" cy="1035.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1144.5" cy="1035.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1169.5" cy="1035.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1194.5" cy="1035.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1219.5" cy="1035.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1244.5" cy="1035.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1269.5" cy="1035.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1294.5" cy="1035.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1319.5" cy="1035.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1344.5" cy="1035.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1369.5" cy="1035.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1394.5" cy="1035.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1419.5" cy="1035.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1444.5" cy="1035.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1469.5" cy="1035.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1494.5" cy="1035.5" r="1.3" style="fill:#bdbdc4"/>
+<line x1="60" y1="1049" x2="1507" y2="1049" style="stroke:#d8d8db;stroke-width:1"/>
+<text x="70" y="1067" class="s" text-anchor="start" style="font-size:12.5px;font-weight:600;fill:#0a0b1f">IEX Cloud</text>
+<rect x="238" y="1054" width="34" height="17" rx="8.5" style="fill:#fff;stroke:#0a0b1f;stroke-width:1.2"/><text x="255" y="1066.5" class="h" text-anchor="middle" style="font-size:11px;fill:#0a0b1f">F</text>
+<text x="296" y="1067" class="s" text-anchor="start" style="font-size:12px;fill:#0a0b1f">shut down 2024</text>
+<text x="436" y="1067" class="s" text-anchor="start" style="font-size:12px;fill:#0a0b1f">-</text>
+<text x="578" y="1067" class="s" text-anchor="start" style="font-size:12px;fill:#0a0b1f">-</text>
+<text x="734" y="1067" class="s" text-anchor="start" style="font-size:12px;fill:#0a0b1f">-</text>
+<text x="884" y="1067" class="s" text-anchor="start" style="font-size:12px;fill:#0a0b1f">-</text>
+<circle cx="1044.5" cy="1062.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1069.5" cy="1062.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1094.5" cy="1062.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1119.5" cy="1062.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1144.5" cy="1062.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1169.5" cy="1062.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1194.5" cy="1062.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1219.5" cy="1062.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1244.5" cy="1062.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1269.5" cy="1062.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1294.5" cy="1062.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1319.5" cy="1062.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1344.5" cy="1062.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1369.5" cy="1062.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1394.5" cy="1062.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1419.5" cy="1062.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1444.5" cy="1062.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1469.5" cy="1062.5" r="1.3" style="fill:#bdbdc4"/>
+<circle cx="1494.5" cy="1062.5" r="1.3" style="fill:#bdbdc4"/>
+<text x="60" y="1116" class="t" text-anchor="start" style="">HOW TO READ IT</text>
+<circle cx="66" cy="1138" r="5.5" style="fill:#0a0b1f"/><text x="80" y="1142" class="s" text-anchor="start" style="">Full supply of that demand</text>
+<circle cx="66" cy="1160" r="4.8" style="fill:#fff;stroke:#0a0b1f;stroke-width:1.4"/><text x="80" y="1164" class="s" text-anchor="start" style="">Partial supply</text>
+<rect x="60" y="1174" width="14" height="14" style="fill:#ebedff;stroke:#0014dc"/><text x="80" y="1186" class="s" text-anchor="start" style="">Grade A: official, free, deep, cacheable</text>
+<rect x="60" y="1196" width="14" height="14" style="fill:#f3f3f4;stroke:#9a9ca6"/><text x="80" y="1208" class="s" text-anchor="start" style="">W: dropped from scope</text>
+<text x="420" y="1116" class="t" text-anchor="start" style="">BINDING CONSTRAINTS AFTER CACHING</text>
+<text x="420" y="1142" class="s" text-anchor="start" style="font-size:12.5px;fill:#0a0b1f">Tiingo: 500 symbols a month caps the price universe.</text>
+<text x="420" y="1164" class="s" text-anchor="start" style="font-size:12.5px;fill:#0a0b1f">Alpha Vantage: 25 calls a day makes it a slow backfill only.</text>
+<text x="420" y="1186" class="s" text-anchor="start" style="font-size:12.5px;fill:#0a0b1f">FRED: the terms forbid storing, so it is never a stored source.</text>
+<text x="420" y="1208" class="s" text-anchor="start" style="font-size:12.5px;fill:#0a0b1f">N-PORT: the 60-day lag limits how fresh ETF holdings are.</text>
+<text x="900" y="1116" class="t" text-anchor="start" style="">SOURCE OF THE GRADES</text>
+<text x="900" y="1142" class="s" text-anchor="start" style="font-size:12.5px;fill:#0a0b1f">docs/data-sources/inventory.md, researched 2026-11-21.</text>
+<text x="900" y="1164" class="s" text-anchor="start" style="font-size:12.5px;fill:#0a0b1f">Provider terms change. Read them again before you build on a row.</text>
+<text x="900" y="1186" class="s" text-anchor="start" style="font-size:12.5px;fill:#0a0b1f">Grade: A best, F not usable.</text>
+<rect x="1380" y="1170" width="160" height="70" class="ink"/><line x1="1380" y1="1205" x2="1540" y2="1205" class="thin"/><line x1="1460" y1="1205" x2="1460" y2="1240" class="thin"/><text x="1392" y="1192" class="t">DS-01 SUPPLY</text><text x="1392" y="1228" class="s">FLAT</text><text x="1472" y="1228" class="s">REV A</text></g></svg>

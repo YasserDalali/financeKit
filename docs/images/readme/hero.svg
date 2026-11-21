@@ -1,0 +1,93 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 560" width="1600" height="560" font-family="Inter, Helvetica, Arial, sans-serif">
+<defs>
+<pattern id="minor" width="20" height="20" patternUnits="userSpaceOnUse"><path d="M20 0H0V20" fill="none" stroke="#eceeed" stroke-width="0.6"/></pattern>
+<pattern id="major" width="100" height="100" patternUnits="userSpaceOnUse"><rect width="100" height="100" fill="url(#minor)"/><path d="M100 0H0V100" fill="none" stroke="#d9dcdb" stroke-width="0.9"/></pattern>
+</defs>
+<style>
+.ink{stroke:#0a0b1f;fill:none;stroke-width:1.5;stroke-linejoin:round}.thin{stroke:#0a0b1f;fill:none;stroke-width:1}
+.acc{stroke:#0014dc;fill:none;stroke-width:2}.dash{stroke:#0a0b1f;fill:none;stroke-width:1;stroke-dasharray:4 3}
+.t{fill:#0a0b1f;font-size:11px;letter-spacing:1.6px;font-weight:600}.s{fill:#5b6270;font-size:12px}
+</style>
+<clipPath id="heroclip"><rect width="1600" height="560" rx="24"/></clipPath><g clip-path="url(#heroclip)">
+<rect width="1600" height="560" fill="#fff"/><rect width="1600" height="560" fill="url(#major)"/>
+<rect x="10" y="10" width="1580" height="540" rx="16" class="ink"/>
+<text x="60" y="90" class="t">FINRISK · SHEET 00</text>
+<text x="56" y="190" fill="#0a0b1f" font-size="104" font-style="italic" font-family="'EB Garamond', Georgia, serif" letter-spacing="-2">FinRisk</text>
+<text x="60" y="246" fill="#0a0b1f" font-size="24">Portfolio risk and stock valuation</text>
+<text x="60" y="278" fill="#0a0b1f" font-size="24">on free market data, heavily cached.</text>
+<polygon points="1369.2,382.0 1282.6,432.0 1282.6,427.0 1369.2,377.0" class="ink" style="fill:#e4e4e6"/><polygon points="1083.4,317.0 1282.6,432.0 1282.6,427.0 1083.4,312.0" class="ink" style="fill:#f3f3f4"/><polygon points="1170.0,262.0 1369.2,377.0 1282.6,427.0 1083.4,312.0" class="ink" style="fill:#fff"/><g transform="matrix(0.433,0.25,-0.433,0.25,1170,262)"><rect width="460" height="200" fill="url(#minor)"/></g>
+<polygon points="1219.8,305.8 1159.2,340.8 1159.2,334.8 1219.8,299.8" class="ink" style="fill:#e4e4e6"/><polygon points="1102.9,308.2 1159.2,340.8 1159.2,334.8 1102.9,302.2" class="ink" style="fill:#f3f3f4"/><polygon points="1163.5,267.2 1219.8,299.8 1159.2,334.8 1102.9,302.2" class="ink" style="fill:#fff"/><g transform="matrix(0.433,0.25,-0.433,0.25,1170,256)"><g transform="translate(15,30)"><svg x="37" y="42" width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="#0a0b1f" stroke-width="0.943" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3" />
+  <path d="M3 5V19A9 3 0 0 0 21 19V5" />
+  <path d="M3 12A9 3 0 0 0 21 12" />
+</svg></g></g>
+<polygon points="1284.7,343.2 1224.1,378.2 1224.1,372.2 1284.7,337.2" class="ink" style="fill:#e4e4e6"/><polygon points="1167.8,345.8 1224.1,378.2 1224.1,372.2 1167.8,339.8" class="ink" style="fill:#f3f3f4"/><polygon points="1228.5,304.8 1284.7,337.2 1224.1,372.2 1167.8,339.8" class="ink" style="fill:#fff"/><g transform="matrix(0.433,0.25,-0.433,0.25,1170,256)"><g transform="translate(165,30)"><svg x="37" y="42" width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="#0a0b1f" stroke-width="0.943" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20v2" />
+  <path d="M12 2v2" />
+  <path d="M17 20v2" />
+  <path d="M17 2v2" />
+  <path d="M2 12h2" />
+  <path d="M2 17h2" />
+  <path d="M2 7h2" />
+  <path d="M20 12h2" />
+  <path d="M20 17h2" />
+  <path d="M20 7h2" />
+  <path d="M7 20v2" />
+  <path d="M7 2v2" />
+  <rect x="4" y="4" width="16" height="16" rx="2" />
+  <rect x="8" y="8" width="8" height="8" rx="1" />
+</svg></g></g>
+<polygon points="1349.7,380.8 1289.1,415.8 1289.1,409.8 1349.7,374.8" class="ink" style="fill:#e4e4e6"/><polygon points="1232.8,383.2 1289.1,415.8 1289.1,409.8 1232.8,377.2" class="ink" style="fill:#f3f3f4"/><polygon points="1293.4,342.2 1349.7,374.8 1289.1,409.8 1232.8,377.2" class="ink" style="fill:#fff"/><g transform="matrix(0.433,0.25,-0.433,0.25,1170,256)"><g transform="translate(315,30)"><svg x="37" y="42" width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="#0a0b1f" stroke-width="0.943" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10" />
+  <path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20" />
+  <path d="M2 12h20" />
+</svg></g></g>
+<line x1="1369.2" y1="284.5" x2="1369.2" y2="377.0" class="dash"/><line x1="1083.4" y1="219.5" x2="1083.4" y2="312.0" class="dash"/>
+<polygon points="1369.2,284.5 1282.6,334.5 1282.6,329.5 1369.2,279.5" class="ink" style="fill:#e4e4e6"/><polygon points="1083.4,219.5 1282.6,334.5 1282.6,329.5 1083.4,214.5" class="ink" style="fill:#f3f3f4"/><polygon points="1170.0,164.5 1369.2,279.5 1282.6,329.5 1083.4,214.5" class="ink" style="fill:#fff"/><g transform="matrix(0.433,0.25,-0.433,0.25,1170,164.5)"><rect width="460" height="200" fill="url(#minor)"/></g>
+<polygon points="1219.8,208.2 1159.2,243.2 1159.2,237.2 1219.8,202.2" class="ink" style="fill:#e4e4e6"/><polygon points="1102.9,210.8 1159.2,243.2 1159.2,237.2 1102.9,204.8" class="ink" style="fill:#f3f3f4"/><polygon points="1163.5,169.8 1219.8,202.2 1159.2,237.2 1102.9,204.8" class="ink" style="fill:#fff"/><g transform="matrix(0.433,0.25,-0.433,0.25,1170,158.5)"><g transform="translate(15,30)"><svg x="37" y="42" width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="#0a0b1f" stroke-width="0.943" stroke-linecap="round" stroke-linejoin="round"><path d="m12 14 4-4" />
+  <path d="M3.34 19a10 10 0 1 1 17.32 0" />
+</svg></g></g>
+<polygon points="1284.7,245.8 1224.1,280.8 1224.1,274.8 1284.7,239.8" class="ink" style="fill:#e4e4e6"/><polygon points="1167.8,248.2 1224.1,280.8 1224.1,274.8 1167.8,242.2" class="ink" style="fill:#f3f3f4"/><polygon points="1228.5,207.2 1284.7,239.8 1224.1,274.8 1167.8,242.2" class="ink" style="fill:#fff"/><g transform="matrix(0.433,0.25,-0.433,0.25,1170,158.5)"><g transform="translate(165,30)"><svg x="37" y="42" width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="#0a0b1f" stroke-width="0.943" stroke-linecap="round" stroke-linejoin="round"><rect width="16" height="20" x="4" y="2" rx="2" />
+  <line x1="8" x2="16" y1="6" y2="6" />
+  <line x1="16" x2="16" y1="14" y2="18" />
+  <path d="M16 10h.01" />
+  <path d="M12 10h.01" />
+  <path d="M8 10h.01" />
+  <path d="M12 14h.01" />
+  <path d="M8 14h.01" />
+  <path d="M12 18h.01" />
+  <path d="M8 18h.01" />
+</svg></g></g>
+<polygon points="1349.7,283.2 1289.1,318.2 1289.1,312.2 1349.7,277.2" class="ink" style="fill:#e4e4e6"/><polygon points="1232.8,285.8 1289.1,318.2 1289.1,312.2 1232.8,279.8" class="ink" style="fill:#f3f3f4"/><polygon points="1293.4,244.8 1349.7,277.2 1289.1,312.2 1232.8,279.8" class="acc" style="fill:#ebedff"/><g transform="matrix(0.433,0.25,-0.433,0.25,1170,158.5)"><g transform="translate(315,30)"><svg x="37" y="42" width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="#0014dc" stroke-width="0.943" stroke-linecap="round" stroke-linejoin="round"><rect x="16" y="16" width="6" height="6" rx="1" />
+  <rect x="2" y="16" width="6" height="6" rx="1" />
+  <rect x="9" y="2" width="6" height="6" rx="1" />
+  <path d="M5 16v-3a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v3" />
+  <path d="M12 12V8" />
+</svg></g></g>
+<line x1="1369.2" y1="187.0" x2="1369.2" y2="279.5" class="dash"/><line x1="1083.4" y1="122.0" x2="1083.4" y2="214.5" class="dash"/>
+<polygon points="1369.2,187.0 1282.6,237.0 1282.6,232.0 1369.2,182.0" class="ink" style="fill:#e4e4e6"/><polygon points="1083.4,122.0 1282.6,237.0 1282.6,232.0 1083.4,117.0" class="ink" style="fill:#f3f3f4"/><polygon points="1170.0,67.0 1369.2,182.0 1282.6,232.0 1083.4,117.0" class="ink" style="fill:#fff"/><g transform="matrix(0.433,0.25,-0.433,0.25,1170,67)"><rect width="460" height="200" fill="url(#minor)"/></g>
+<polygon points="1219.8,110.8 1159.2,145.8 1159.2,139.8 1219.8,104.8" class="ink" style="fill:#e4e4e6"/><polygon points="1102.9,113.2 1159.2,145.8 1159.2,139.8 1102.9,107.2" class="ink" style="fill:#f3f3f4"/><polygon points="1163.5,72.2 1219.8,104.8 1159.2,139.8 1102.9,107.2" class="ink" style="fill:#fff"/><g transform="matrix(0.433,0.25,-0.433,0.25,1170,61)"><g transform="translate(15,30)"><svg x="37" y="42" width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="#0a0b1f" stroke-width="0.943" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2" />
+  <path d="M10 4v4" />
+  <path d="M2 8h20" />
+  <path d="M6 4v4" />
+</svg></g></g>
+<polygon points="1284.7,148.2 1224.1,183.2 1224.1,177.2 1284.7,142.2" class="ink" style="fill:#e4e4e6"/><polygon points="1167.8,150.8 1224.1,183.2 1224.1,177.2 1167.8,144.8" class="ink" style="fill:#f3f3f4"/><polygon points="1228.5,109.8 1284.7,142.2 1224.1,177.2 1167.8,144.8" class="ink" style="fill:#fff"/><g transform="matrix(0.433,0.25,-0.433,0.25,1170,61)"><g transform="translate(165,30)"><svg x="37" y="42" width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="#0a0b1f" stroke-width="0.943" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v16a2 2 0 0 0 2 2h16" />
+  <path d="m19 9-5 5-4-4-3 3" />
+</svg></g></g>
+<polygon points="1349.7,185.8 1289.1,220.8 1289.1,214.8 1349.7,179.8" class="ink" style="fill:#e4e4e6"/><polygon points="1232.8,188.2 1289.1,220.8 1289.1,214.8 1232.8,182.2" class="ink" style="fill:#f3f3f4"/><polygon points="1293.4,147.2 1349.7,179.8 1289.1,214.8 1232.8,182.2" class="ink" style="fill:#fff"/><g transform="matrix(0.433,0.25,-0.433,0.25,1170,61)"><g transform="translate(315,30)"><svg x="37" y="42" width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="#0a0b1f" stroke-width="0.943" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18" />
+  <path d="m19 8 3 8a5 5 0 0 1-6 0zV7" />
+  <path d="M3 7h1a17 17 0 0 0 8-2 17 17 0 0 0 8 2h1" />
+  <path d="m5 8 3 8a5 5 0 0 1-6 0zV7" />
+  <path d="M7 21h10" />
+</svg></g></g>
+<line x1="760" y1="117.0" x2="1078.4" y2="117.0" class="thin"/><circle cx="1083.4" cy="117.0" r="2.5" fill="#0a0b1f"/><text x="760" y="139.0" fill="#0a0b1f" font-size="18">Frontend · Vercel</text>
+<line x1="760" y1="214.5" x2="1078.4" y2="214.5" class="thin"/><circle cx="1083.4" cy="214.5" r="2.5" fill="#0a0b1f"/><text x="760" y="236.5" fill="#0a0b1f" font-size="18">Backend · Render</text>
+<line x1="760" y1="312.0" x2="1078.4" y2="312.0" class="thin"/><circle cx="1083.4" cy="312.0" r="2.5" fill="#0a0b1f"/><text x="760" y="334.0" fill="#0a0b1f" font-size="18">Data · Prisma Postgres</text>
+<line x1="60" y1="470" x2="1540" y2="470" class="thin"/>
+<text x="60" y="500" class="t" style="font-size:12px;letter-spacing:2.4px">FIVE LENSES ON A PORTFOLIO,</text>
+<text x="60" y="517" class="t" style="font-size:12px;letter-spacing:2.4px">ONE JAVA MODULAR MONOLITH.</text>
+<text x="560" y="500" class="t" style="font-size:12px;letter-spacing:2.4px">BUILT ON:</text>
+<text x="680" y="500" class="t" style="font-size:12px;letter-spacing:2.4px">→ SPRING BOOT</text>
+<text x="680" y="517" class="t" style="font-size:12px;letter-spacing:2.4px">→ POSTGRES</text>
+<text x="680" y="534" class="t" style="font-size:12px;letter-spacing:2.4px">→ REACT</text>
+<text x="1000" y="500" class="t" style="font-size:12px;letter-spacing:2.4px">DATA  →</text>
+<text x="1090" y="500" class="t" style="font-size:12px;letter-spacing:2.4px">ONE WATERFALL PER RESOURCE,</text>
+<text x="1090" y="517" class="t" style="font-size:12px;letter-spacing:2.4px">FREE SOURCES, STORED ONCE.</text>
+</g></svg>

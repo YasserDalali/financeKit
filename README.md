@@ -1,360 +1,138 @@
-# FinanceKit
+<a href="docs/data-sources/caching.md"><img alt="FinRisk: portfolio risk and stock valuation on free market data, heavily cached. An exploded drawing of three layers: frontend on Vercel, backend on Render, data on Prisma Postgres." src="docs/images/readme/hero.png" width="100%"></a>
 
-A collection of financial microservices for portfolio risk, sector valuation, and document Q&A.
+<p align="center">
+  <img alt="Render" src="docs/images/readme/pill-render.png" height="26">
+  <img alt="Vercel" src="docs/images/readme/pill-vercel.png" height="26">
+  <img alt="Prisma Postgres" src="docs/images/readme/pill-prisma-postgres.png" height="26">
+  <img alt="Docker" src="docs/images/readme/pill-docker.png" height="26">
+</p>
+<p align="center">
+  <img alt="Java 21" src="docs/images/readme/pill-java-21.png" height="26">
+  <img alt="Spring Boot 3.3" src="docs/images/readme/pill-spring-boot-33.png" height="26">
+  <img alt="Maven" src="docs/images/readme/pill-maven.png" height="26">
+  <img alt="PostgreSQL" src="docs/images/readme/pill-postgresql.png" height="26">
+  <img alt="Flyway" src="docs/images/readme/pill-flyway.png" height="26">
+  <img alt="Caffeine" src="docs/images/readme/pill-caffeine.png" height="26">
+  <img alt="JUnit 5" src="docs/images/readme/pill-junit-5.png" height="26">
+</p>
+<p align="center">
+  <img alt="React 19" src="docs/images/readme/pill-react-19.png" height="26">
+  <img alt="Vite" src="docs/images/readme/pill-vite.png" height="26">
+  <img alt="Tailwind CSS 4" src="docs/images/readme/pill-tailwind-css-4.png" height="26">
+  <img alt="TypeScript" src="docs/images/readme/pill-typescript.png" height="26">
+</p>
+<p align="center">
+  <img alt="Python 3.11" src="docs/images/readme/pill-python-311.png" height="26">
+  <img alt="FastAPI" src="docs/images/readme/pill-fastapi.png" height="26">
+  <img alt="LangChain" src="docs/images/readme/pill-langchain.png" height="26">
+  <img alt="FAISS + BM25" src="docs/images/readme/pill-faiss-bm25.png" height="26">
+  <img alt="Free data sources" src="docs/images/readme/pill-free-data-sources.png" height="26">
+</p>
 
-| Service | Stack | Default port | OpenAPI |
-|---------|-------|--------------|---------|
-| [risk-management-ms](./risk-management-ms/) | Spring Boot 3, SQL Server | **8080** (host) / **18080** (Docker) | [`openapi.json`](./risk-management-ms/openapi.json) |
-| [hybrid-rag](./hybrid-rag/) | FastAPI, LangChain, FAISS | **8000** | [`openapi.json`](./hybrid-rag/openapi.json) |
-| [sector-valuation-ms](./sector-valuation-ms/) | Node.js, Express, Redis | **3000** | — |
+## About this project
 
-Central copies of the API specs live in [`docs/openapi/`](./docs/openapi/).
+FinRisk helps a private investor understand what they own. You enter your accounts and trades. FinRisk then looks at the portfolio through five lenses: portfolio risk, fundamentals, intrinsic valuation, stress testing and market intelligence. It answers plain questions. How concentrated am I? What do my ETFs really hold? What is this stock worth? What happens to my portfolio in a recession? It gives analysis, not investment advice.
 
----
+There are three actors. The **investor** is a member of a tenant and owns portfolios. The **tenant admin** invites members and gives them roles. The **demo visitor** is not signed in. Today the visitor sees the landing page. In the design, the visitor also gets a demo on public-domain data. Two outside systems serve them. **Data sources** supply prices, filings and macro series through the waterfall. **hybrid-rag** answers questions about documents that the investor uploads.
 
-## Prerequisites
+The landing page is live at [finance-kit-bay.vercel.app](https://finance-kit-bay.vercel.app/). These screenshots come from it.
 
-| Tool | Used by |
-|------|---------|
-| Docker + Docker Compose | FinRisk (SQL Server + API container) |
-| JDK 21 + Maven 3.9+ | FinRisk (local JVM / tests) |
-| Python 3.11+ | Hybrid RAG |
-| Node.js 20+ | Sector valuation |
-| Redis | Sector valuation (peer-data cache) |
-| Ollama (optional) | Hybrid RAG when `LLM_PROVIDER=ollama` |
+<img alt="Landing page hero: the title Know what you own over a blue background with glass cubes." src="docs/images/screens/hero.png" width="100%">
 
----
+<img alt="The five lenses carousel: portfolio risk intelligence, fundamental analysis and intrinsic valuation cards." src="docs/images/screens/lenses.png" width="100%">
 
-## Development
+<img alt="The black section Risk, from every side, with portfolio risk, stress testing, intrinsic value and fundamentals." src="docs/images/screens/risk.png" width="100%">
 
-### FinRisk API (`risk-management-ms`)
+<img alt="The blue call to action Prepare for uncertainty, with a request early access button and the footer." src="docs/images/screens/cta.png" width="100%">
 
-Investment portfolio API: users, accounts, assets, trades, holdings, P&L, risk score, beta, sector exposure, and diversification.
+The landing copy is older than the current scope. It still names geopolitical and supply-chain shocks under stress testing. Those are out of scope now (see below).
 
-**1. Configure environment**
+<img alt="UML use-case diagram. Demo visitor uses the public package. Investor uses portfolio, five lenses and documents. Tenant admin uses the planned admin package. Data sources serve the lenses. hybrid-rag serves the document use cases." src="docs/images/uml-usecases.png" width="100%">
 
-```bash
-cd risk-management-ms
-cp .env.example .env
-# Edit .env — set SA_PASSWORD (strong password) and optional FMP_API_KEY
-set -a && source .env && set +a
-```
+A line to a package means the actor can use every use case in it. The investor reaches three packages through one bus at the bottom. The status strip says what exists. Risk metrics and portfolio CRUD exist in `risk-management-ms`. The valuation API exists on the `refactor/java-monolith` branch. Fundamentals, stress tests and market intelligence are designed. Tenants, roles and sign-in are planned. Today the APIs have no login.
 
-**2. Start SQL Server + API (recommended)**
+## What this project focuses on
 
-```bash
-make up
-# Equivalent: docker compose up -d --build
-```
+This is a personal, non-commercial project. It shows how to build a useful finance tool with no budget for data or hosting. Each focus below is a skill the project exercises. Where a part is designed but not built, the text says so.
 
-The API is exposed on **http://localhost:18080** (host port mapped from container `:8080`).
+- **Multisource data aggregation.** Twenty-eight free sources were graded on depth, quota and terms. Each data resource gets its own ordered list of sources.
+- **Good decisions under budget and compute limits.** Free tiers set hard caps: 25 calls a day, 500 symbols a month, 200k database operations a month. The design treats each cap as a constraint, not as an afterthought.
+- **Cache, database and staleness design.** History is stored once and grows by delta fetches. Each resource has a fresh TTL, a revision window and a maximum stale age. This is designed, not built. Today the code has an in-memory Caffeine cache only.
+- **Shared market data, separate portfolios.** Market data is one shared store. Portfolios are private to a tenant, with role-based access. This is planned, not built.
+- **Decoupling through ports and the waterfall.** Valuation and risk see only the `marketdata-api` port. They cannot see a vendor at compile time. Today the adapters try FMP, then Yahoo. The per-resource waterfall is designed.
+- **Financial domain knowledge.** DCF, dividend discount and Peter Lynch fair value, peer multiples, beta, alpha, volatility, correlation, drawdown, downside risk, sector exposure and ETF look-through. These exist in code today.
+- **Front-end visualisation.** The landing app is React 19, Vite and Tailwind 4. The analysis screens are not built yet.
+- **Java OOP and CRUD practice.** Layered code, plain JDBC, request validation with `@Valid`, paged and sorted transaction lists, and clear error mapping. Rate limiting is planned, not built.
+- **Respect for data licences.** Each source has a rights tier. FRED is never stored, because its terms forbid it. Vendor data stays behind a login.
 
-**3. Run migrations and seed (first time or after wiping the DB volume)**
+These areas are **not** in scope. They were dropped on purpose, because no free source covers them well, or because other signals already answer the same question:
 
-```bash
-bash db/scripts/apply-migrations.sh FinRiskDB
-bash db/scripts/seed.sh FinRiskDB
-```
+- **Geopolitical event signals.** The only free feed (GDELT) is noisy and grade D.
+- **Analyst price targets and estimates.** Free tiers do not include them. Rating trends stay in scope.
+- **Growth estimates.** Same reason as estimates.
+- **Company supply-chain links.** No free source was found.
+- **News sentiment.** One D-grade source, and its fallback has no sentiment score.
 
-**4. Verify**
+## Data sources
 
-```bash
-curl -sf http://localhost:18080/actuator/health
-curl -sf "http://localhost:18080/api/v1/users?page=0&size=2"
-```
+<img alt="Graded supply table. Twenty-eight free sources as rows, with grade, cost, rate, volume, history and terms, and a matrix of nineteen demand codes with full and partial supply dots." src="docs/images/ds-supply.png" width="100%">
 
-**Alternative: SQL Server in Docker, API on the host**
+Read the table as a linear program. Each source is a choice: use it or not. Its cost is the free tier, so every row costs $0 or is out. Its constraints are the rate, volume, history and terms columns. Its supply is the dots on the right. A filled dot is full supply of that demand. A ring is partial supply. The goal is to cover every demand with one primary and one fallback, at $0, with the fewest calls and the least risk of breakage.
 
-```bash
-make dev          # starts sqlserver only
-mvn spring-boot:run   # API on http://localhost:8080
-```
+Heavy caching changes what matters. We pull the full history once and then fetch small daily deltas. So history depth and storage terms matter more than calls per day. The grade sums this up: **A** is official, free, deep and cacheable. **F** is not usable.
 
-Stop the `risk-management-api` container first if port 8080 is already taken.
+The constraints that still bind after caching are in the strip under the table. Tiingo caps the price universe at 500 symbols a month. Alpha Vantage is a slow backfill only. FRED cannot be stored. N-PORT holdings are about 60 days late. The full research, with a tag for how each fact was checked, is in [`docs/data-sources/inventory.md`](docs/data-sources/inventory.md).
 
-**Makefile shortcuts**
+## The waterfall
 
-```bash
-make dev     # SQL Server only
-make up      # SQL Server + API (:18080)
-make test    # mvn test
-make verify  # mvn test + integration tests
-make e2e     # full e2e script (migrations, tests, Docker, happy-path)
-```
+<img alt="Waterfall sheet. Top: for prices, valuation and risk call the waterfall, which tries Alpaca, Tiingo, Yahoo and Twelve Data in order, with block height equal to the score. Bottom: the scoring rule, reliability by grade, and the order and score for all nineteen resources." src="docs/images/ds-waterfall.png" width="100%">
 
-More detail: [`risk-management-ms/README.md`](./risk-management-ms/README.md)
+A waterfall tries the sources for one resource in order, until one answers. The order comes from Smith's rule for sequential search. Each try succeeds with chance *p* and costs *c*. Sorting by *p / c*, highest first, gives the lowest expected cost. Here *p* is the grade's reliability times the coverage, and *c* is one plus quota pressure plus a cache penalty. FRED gets a cache penalty of 2, because every FRED read must go live. [`waterfall.py`](docs/data-sources/waterfall.py) computes the order and writes [`waterfall.md`](docs/data-sources/waterfall.md). The order is configuration, so a new score does not need a Java change.
 
----
+An answer counts only if every required field is present. A required field is checked in the canonical record's constructor. When a layer returns rows without it, the waterfall moves on. One answer comes from one layer. Fields are never mixed across layers, because mixing breaks consistency. A missing optional field stays null, and the domain skips that metric and says so.
 
-### Hybrid RAG (`hybrid-rag`)
+<img alt="UML class diagram. marketdata-api holds five interface ports. marketdata holds CachingMarketData, WaterfallMarketData, Waterfall of F, the Feed interfaces, the Source interface, three example sources and four shared adapters. A strip says what is built and what is designed." src="docs/images/ds-contracts.png" width="100%">
 
-Document ingestion and question-answering with hybrid (BM25 + semantic), semantic-only, or lexical-only retrieval. Supports Ollama or Gemini as the LLM.
+The domain sees five ports: `PriceData`, `ReferenceData`, `FundamentalsData`, `MacroData` and `SignalsData`. Each source implements small `*Feed` interfaces, one per resource it can serve. A `Waterfall<F>` holds the ordered layers for one resource. It skips unavailable layers, logs each fall-through and never throws. `WaterfallMarketData` implements all five ports with one waterfall per resource. `CachingMarketData` wraps it.
 
-**1. Configure environment**
+Several sources speak the same vocabulary, so the overlap is handled once. `UsGaapConcepts` maps us-gaap concept names for SEC and Finnhub. `SectorTaxonomy` maps SIC, Finnhub and Yahoo sectors to one 11-sector list. `IdentifierResolver` maps ticker, CUSIP and CIK through OpenFIGI. `SeriesCatalog` maps a canonical macro ID to each source's own code. The full field mapping per resource is in [`docs/data-sources/contracts.md`](docs/data-sources/contracts.md).
 
-```bash
-cd hybrid-rag
-cp .env.example .env
-# Set LLM_PROVIDER=ollama or gemini; add GEMINI_API_KEY if using Gemini
-```
+This is a design. The built code on `refactor/java-monolith` has one `MarketData` port, `FmpSource` and `YahooSource`, a `FailoverMarketData` with one global order (FMP, then Yahoo) and a Caffeine `CachingMarketData`.
 
-**2. Install and run**
+## Caching and storage
 
-```bash
-pip install -r requirements.txt
+<img alt="Caching sheet. Top: a request goes to Caffeine, then Postgres, then the waterfall, with a stale fallback back to the request. Bottom: four storage classes, freshness per resource, rights tiers, and why one database and no Redis." src="docs/images/ds-caching.png" width="100%">
 
-# If using Ollama locally:
-# ollama pull qwen2.5:3b
+Most financial data does not expire. It grows. A closing price for a past day or a filed 10-K does not change. So we keep it and fetch only what is new. Four storage classes cover every resource. **Immutable** rows never change. **Revisable** series get a known trailing window refetched, for example GDP for three years. A **snapshot** is one current value that can change, such as a company profile. **Live only** data is never stored. That is FRED.
 
-uvicorn src.api.app:app --reload --host 0.0.0.0 --port 8000
-```
+Prices need one trick. An adjusted close changes after each later dividend or split. A raw close never changes. So we store the raw close plus the corporate actions, and compute the adjusted close on read. Past price rows then never need a rewrite. When a delta comes from a different layer, we refetch the last stored day. If the two closes differ by more than 0.5 %, the full window reloads from the new layer.
 
-**3. Verify**
+Each resource has three ages. Inside the **fresh TTL** the stored value is served with no call. On a refresh, the **revision window** is refetched. When every live layer fails, the stored value is still served with a warning, up to the **max stale** age. Every response carries `Freshness(asOf, source, stale)`, so the UI can show a small notice.
 
-```bash
-curl -sf http://localhost:8000/health
-```
+The rights tier decides what we may keep. Public-domain sources (SEC, Treasury, BLS, BEA, EIA) can be stored and shown. World Bank, OECD, IMF, French and Shiller need a citation. Alpaca, Tiingo, Finnhub, Yahoo and Alpha Vantage are for personal use only, so their data stays behind a login. Each stored row records its `source`, so we can purge one vendor's rows if its terms change.
 
-Interactive docs: **http://localhost:8000/docs**
+Postgres is the store of record, in its own `marketdata` schema. History is the asset, and it must survive restarts and redeploys. Delta fetch needs one indexed query for the last date held. Peers and look-through are joins. Caffeine stays in front for hot reads, so most reads never reach the database. We do not use Redis, because Postgres and Caffeine cover both jobs. The design is in [`docs/data-sources/caching.md`](docs/data-sources/caching.md). None of the Postgres store is built yet.
 
-More detail: [`hybrid-rag/README.md`](./hybrid-rag/README.md)
+## Pre-seed and refresh
 
----
+<img alt="Seed and refresh sheet. Top: a visit wakes the instance, a wake-up check reads fetch_log, a refresh pool of two threads takes an advisory lock, checks source budgets and runs the waterfall into Postgres. A request checks the stored row and queues a refresh when stale. Bottom: the seed universe of about 70 symbols, datasets per symbol, shared series and what is not seeded." src="docs/images/ds-seed.png" width="100%">
 
-### Sector Valuation (`sector-valuation-ms`)
+On the first boot, a background job stores a seed universe, so the first visitor already sees data. The universe is about 70 symbols in five groups: benchmarks, core funds, sector SPDRs, mega caps and popular large caps. It lives in a resource file, so you can change it without code. For each symbol we store 10 years of raw prices with dividends and splits, the profile and sector, all XBRL statements, peers, and for funds the latest holdings. A few series are stored once for all users: Treasury yields, CPI, unemployment, GDP, fed funds, NBER recessions, French and Shiller factors, and oil prices.
 
-Peer comparison, DCF valuation, and combined analyze/compare endpoints backed by FinancialModelingPrep (FMP) and Redis caching.
+Some data is not seeded. Institutional holders come from 13F bulk files, which are too heavy for a free instance. They are built when a user first opens that view. Insiders, filings and ratings are cheap, so they load on first view. Global macro and trade flows load only when a stress scenario needs them. The whole seed is about 180k price rows, under 100 MB.
 
-**1. Start Redis**
+There is no cron. Low traffic makes an always-on scheduler a waste, and the Render free instance sleeps when idle. So refresh work runs only while someone uses the app. A visit wakes the instance. One task reads `fetch_log` and refreshes what is past due. A request that finds stale data gets it at once, with the stale flag, and queues a refresh. A Postgres advisory lock stops two fetches of the same key. Each source has a token bucket and a monthly counter, and an empty budget skips that layer. Progress is saved per key, so a job that stops when the instance sleeps continues on the next visit. A fixed pool of two threads keeps refresh work away from request handling.
 
-```bash
-docker run -d --name sector-redis -p 6379:6379 redis:7-alpine
-```
+The price of this design is small. The first visitor after a long idle period may see stale-flagged data for about a minute. All of this is designed, not built.
 
-**2. Configure environment**
+## Infrastructure and stack
 
-```bash
-cd sector-valuation-ms
-cp .env.example .env
-# Set FMP_API_KEY (required for live market data)
-```
+<img alt="Infrastructure sheet. A browser calls the React frontend on Vercel, which calls the Spring Boot backend on Render. The backend is a stack of five Maven modules: marketdata-api, marketdata, risk, valuation and app. It calls Prisma Postgres over JDBC and Flyway, the data sources over HTTP, and hybrid-rag over Render's private network." src="docs/images/ds-infra.png" width="100%">
 
-**3. Install and run**
+The front end runs on **Vercel** as a static React build. The backend runs on **Render** as one Spring Boot jar. It is a Maven modular monolith with five modules. `marketdata-api` is the port and the canonical records. `marketdata` holds the vendor adapters and the cache. `risk` holds the portfolio and risk contexts. `valuation` holds DCF, DDM, Lynch and peer analysis. `app` is the Spring Boot entry point that wires them. Valuation and risk depend only on `marketdata-api`. **hybrid-rag** stays a separate Python FastAPI service, private on Render. It is the only extra service.
 
-```bash
-npm install
-npm run dev    # hot reload via node --watch
-# or: npm start
-```
+The database is **Prisma Postgres**. The backend does not use the Prisma ORM. It uses plain JDBC and Flyway over the direct connection string. The free plan allows 200k database operations a month and 2 GB of storage. Every query counts against that cap, so Caffeine sits in front of every read, inserts are batched and the seed is sized to fit. Prices and plans change, so check [prisma.io/pricing](https://www.prisma.io/pricing) for the current limits.
 
-**4. Verify**
+The refactor is in progress on the `refactor/java-monolith` branch, from the plan in [`docs/superpowers/plans/2026-11-19-java-modular-monolith.md`](docs/superpowers/plans/2026-11-19-java-modular-monolith.md). The `marketdata-api`, `marketdata` and `valuation` modules are built and tested. The `risk` module is in progress. The `app` module and the Render deploy are not built yet. Until then, `master` holds the three original services: `risk-management-ms` (Java, SQL Server), `sector-valuation-ms` (Node) and `hybrid-rag` (Python), plus the landing app.
 
-```bash
-curl -sf http://localhost:3000/health
-```
-
----
-
-## Production build and deploy
-
-### FinRisk API
-
-**Build the JAR and Docker image**
-
-```bash
-cd risk-management-ms
-set -a && source .env && set +a
-
-mvn -B -DskipTests package
-docker compose build risk-management-api
-```
-
-**Run the stack**
-
-```bash
-docker compose up -d
-```
-
-Set production values in `.env`:
-
-- `SA_PASSWORD` — SQL Server SA password
-- `FMP_API_KEY` — market data sync (optional but needed for price sync endpoints)
-
-Apply migrations against the production database before serving traffic:
-
-```bash
-bash db/scripts/apply-migrations.sh FinRiskDB
-```
-
-The container listens on **8080** internally; map it with `ports` in `docker-compose.yml` (default host mapping **18080**).
-
----
-
-### Hybrid RAG
-
-**Build and run**
-
-```bash
-cd hybrid-rag
-docker build -t financekit-hybrid-rag .
-docker run -d \
-  --name hybrid-rag \
-  -p 8000:8000 \
-  --env-file .env \
-  -v hybrid-rag-cache:/app/cache \
-  financekit-hybrid-rag
-```
-
-Mount a volume on `CACHE_DIR` (default `cache/`) so FAISS and BM25 indexes survive restarts.
-
-For Gemini in production, set `LLM_PROVIDER=gemini` and `GEMINI_API_KEY`. For Ollama, point `OLLAMA_BASE_URL` at your Ollama host.
-
----
-
-### Sector Valuation
-
-No Dockerfile is included. Deploy as a standard Node.js service:
-
-```bash
-cd sector-valuation-ms
-npm ci --omit=dev
-export FMP_API_KEY=...
-export REDIS_URL=redis://your-redis-host:6379
-export PORT=3000
-node src/server.js
-```
-
-Run behind a reverse proxy (nginx, ALB, etc.) and use a managed Redis instance for the peer cache.
-
----
-
-## How to use
-
-### FinRisk — typical workflow
-
-All endpoints are under `/api/v1`. Currency is always USD. No authentication is enforced in this project.
-
-```bash
-BASE=http://localhost:18080/api/v1
-
-# 1. Create a user
-curl -s -X POST "$BASE/users" \
-  -H 'Content-Type: application/json' \
-  -d '{"fullName":"Jane Doe","email":"jane@example.com"}'
-
-# 2. Create an investment account
-curl -s -X POST "$BASE/accounts" \
-  -H 'Content-Type: application/json' \
-  -d '{"userId":1,"accountName":"Growth","initialDeposit":10000}'
-
-# 3. List assets and buy
-curl -s "$BASE/assets?symbol=AAPL"
-curl -s -X POST "$BASE/transactions/buy" \
-  -H 'Content-Type: application/json' \
-  -d '{"accountId":1,"assetId":1,"quantity":10,"unitPrice":150}'
-
-# 4. Portfolio analytics
-curl -s "$BASE/accounts/1/portfolio"
-curl -s "$BASE/accounts/1/profit-loss"
-curl -s "$BASE/accounts/1/risk"
-curl -s "$BASE/accounts/1/beta"
-curl -s "$BASE/accounts/1/sector-exposure"
-curl -s "$BASE/accounts/1/diversification"
-```
-
-After seeding (`bash db/scripts/seed.sh FinRiskDB`), account **1** has sample holdings you can query immediately.
-
-Postman collections: `risk-management-ms/postman/`
-
----
-
-### Hybrid RAG — ingest then query
-
-```bash
-BASE=http://localhost:8000
-
-# Ingest documents
-curl -s -X POST "$BASE/ingest" \
-  -H 'Content-Type: application/json' \
-  -d '{
-    "documents": [
-      {
-        "page_content": "Apple reported record revenue in Q4 driven by iPhone sales.",
-        "metadata": {"source": "earnings_call", "ticker": "AAPL"}
-      }
-    ]
-  }'
-
-# Ask a question
-curl -s -X POST "$BASE/query" \
-  -H 'Content-Type: application/json' \
-  -d '{"question": "What drove Apple revenue?"}'
-```
-
-Response includes `answer`, `sources` (retrieved chunks), and `trace` (pipeline steps).
-
-Configure retrieval via `.env`: `RAG_MODE` (`hybrid` | `semantic` | `lexical`), `TOP_K`, weights, and reranking.
-
----
-
-### Sector Valuation — analyze a metric vs peers
-
-```bash
-BASE=http://localhost:3000
-
-# Compare a ticker's P/E to sector peers
-curl -s -X POST "$BASE/api/analyze" \
-  -H 'Content-Type: application/json' \
-  -d '{"ticker":"AAPL","metric":"PE"}'
-
-# DCF valuation (fcf/shares optional — fetched from FMP when omitted)
-curl -s -X POST "$BASE/api/dcf" \
-  -H 'Content-Type: application/json' \
-  -d '{
-    "ticker": "AAPL",
-    "discountRate": 0.10,
-    "terminalGrowthRate": 0.03,
-    "projectionYears": 10
-  }'
-
-# Combined peer + DCF comparison
-curl -s -X POST "$BASE/api/compare" \
-  -H 'Content-Type: application/json' \
-  -d '{
-    "ticker": "AAPL",
-    "metric": "PE",
-    "discountRate": 0.10,
-    "terminalGrowthRate": 0.03
-  }'
-```
-
-Supported metrics: `PE`, `PB`, `EV_EBITDA`, `PS`.
-
----
-
-## Testing
-
-```bash
-# FinRisk
-cd risk-management-ms && mvn test
-
-# Hybrid RAG
-cd hybrid-rag && pytest
-
-# Sector valuation
-cd sector-valuation-ms && npm test
-```
-
----
-
-## Project layout
-
-```
-financeKit/
-├── docs/openapi/           # OpenAPI JSON exports
-├── risk-management-ms/     # FinRisk portfolio API
-├── hybrid-rag/             # RAG microservice
-└── sector-valuation-ms/    # Sector peer / DCF API
-```
-
-Each service is independently deployable. They share the FMP API key pattern but do not call each other at runtime.
+To set up, run, deploy and call the services on `master`, read the [developer guide](docs/developer-guide.md).

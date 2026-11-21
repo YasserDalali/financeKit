@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 203 40" width="203" height="40" font-family="Inter, Helvetica, Arial, sans-serif">
+<defs>
+<pattern id="minor" width="20" height="20" patternUnits="userSpaceOnUse"><path d="M20 0H0V20" fill="none" stroke="#eceeed" stroke-width="0.6"/></pattern>
+<pattern id="major" width="100" height="100" patternUnits="userSpaceOnUse"><rect width="100" height="100" fill="url(#minor)"/><path d="M100 0H0V100" fill="none" stroke="#d9dcdb" stroke-width="0.9"/></pattern>
+</defs>
+<style>
+.ink{stroke:#0a0b1f;fill:none;stroke-width:1.5;stroke-linejoin:round}.thin{stroke:#0a0b1f;fill:none;stroke-width:1}
+.acc{stroke:#0014dc;fill:none;stroke-width:2}.dash{stroke:#0a0b1f;fill:none;stroke-width:1;stroke-dasharray:4 3}
+.t{fill:#0a0b1f;font-size:11px;letter-spacing:1.6px;font-weight:600}.s{fill:#5b6270;font-size:12px}
+</style><rect x="1" y="1" width="201" height="38" rx="19" class="ink" style="fill:#fff"/><svg x="16" y="11" width="18" height="18" viewBox="0 0 24 24"><path fill="#0a0b1f" d="M21.8068 18.2848L13.5528.7565c-.207-.4382-.639-.7273-1.1286-.7541-.5023-.0293-.9523.213-1.2062.6253L2.266 15.1271c-.2773.4518-.2718 1.0091.0158 1.4555l4.3759 6.7786c.2608.4046.7127.6388 1.1823.6388.1332 0 .267-.0188.3987-.0577l12.7019-3.7568c.3891-.1151.7072-.3904.8737-.7553s.1633-.7828-.0075-1.1454zm-1.8481.7519L9.1814 22.2242c-.3292.0975-.6448-.1873-.5756-.5194l3.8501-18.4386c.072-.3448.5486-.3996.699-.0803l7.1288 15.138c.1344.2856-.019.6224-.325.7128z"/></svg><text x="44" y="24.5" class="t" style="font-size:12px;letter-spacing:1.8px">PRISMA POSTGRES</text></svg>
