@@ -25,7 +25,9 @@
 
 ## What this is
 
-I built FinRisk because I wanted one place that tells me what I actually own and whether it is worth what I paid. You enter your accounts and trades. It then looks at the portfolio in five ways: risk, fundamentals, valuation, stress tests and market intelligence. So you can ask things like how concentrated you are, what your ETFs really hold, what a stock is worth, and what a recession would do to you. It gives analysis, not investment advice.
+I built FinRisk for people with a low risk tolerance, and for myself. If a big drop would hurt you, you cannot afford a portfolio where everything falls together, so overlapping holdings and correlated assets are the problem I care about most. Many people think they are diversified because they own ten funds, when three of them hold the same stocks. I wanted to see how much risk my portfolio really carries, and to compare that with how much I am comfortable taking.
+
+You enter your accounts and trades. It then looks at the portfolio in five ways: risk, fundamentals, valuation, stress tests and market intelligence. So you can ask how concentrated you are, how much your holdings overlap and move together, what your ETFs really hold, what a stock is worth, and what a recession would do to you. It gives analysis, not investment advice.
 
 There is only one kind of user, the investor. Your accounts, trades and holdings are private to you. Market data is shared by everyone and stored once, because there is no reason to fetch the same closing price twice. The landing page is live at [finance-kit-bay.vercel.app](https://finance-kit-bay.vercel.app/).
 
@@ -35,7 +37,7 @@ There is only one kind of user, the investor. Your accounts, trades and holdings
 
 ## What I wanted to practice
 
-This is a personal project with no money behind it, so almost every decision here is a way of working inside a limit. Free data tiers cap how much I can fetch, and a free database caps how much I can store. I treated those caps as the design problem instead of a nuisance.
+The risk questions come first, but this is also a personal project with no money behind it, so almost every decision here is a way of working inside a limit. Free data tiers cap how much I can fetch, and a free database caps how much I can store. I treated those caps as the design problem instead of a nuisance.
 
 - Pulling data from many free sources and deciding, per kind of data, which one to ask first.
 - Spending little: 25 calls a day on one source, 500 symbols a month on another, 200k database operations a month.
