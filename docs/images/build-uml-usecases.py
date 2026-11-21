@@ -1,54 +1,37 @@
-# UML-01: use cases, flat 2D. Lenses come from the landing copy (landing/src/components/Features.tsx). Built endpoints:
-# risk-management-ms PortfolioController (risk, beta, alpha, drawdown, correlation, look-through, ...), the valuation
-# REST API on refactor/java-monolith, hybrid-rag POST /ingest and /query. Tenants, roles and the demo mode are designed.
+# UML-01: use cases, flat 2D. One actor, the investor. Portfolio data is private to each investor;
+# market data is shared by all investors and stored once. Lenses come from the landing copy.
 import blueprint as bp
-bp.H = 1080
-from blueprint import ACC, lu
+bp.H = 980
+from blueprint import lu
 import uml
 from uml import actor, line, note, package, system_box, text, usecase
 
 o = uml.sheet('What FinRisk does, and for whom')
-o.append('<rect x="280" y="180" width="900" height="720" style="fill:none;stroke:#0a0b1f;stroke-width:2"/>')
-o.append(text(296, 203, 'FINRISK', 't'))
-W = 260
-PK = {  # name: (x, y, h, cases)
-    'PUBLIC': (300, 220, 230, ['View the landing page', 'Request access', 'Try the demo (public data)']),
-    'TENANT ADMIN': (900, 220, 230, ['Invite members', 'Assign roles', 'Manage the tenant']),
-    'PORTFOLIO': (300, 480, 400, ['Manage accounts', 'Record trades', 'View holdings and P&amp;L']),
-    'FIVE LENSES': (600, 480, 400, ['Analyse portfolio risk', 'Read fundamentals', 'Value a stock',
-                                     'Run a stress test', 'See market intelligence']),
-    'DOCUMENTS': (900, 480, 400, ['Ingest documents', 'Ask documents']),
+o.append('<rect x="300" y="180" width="840" height="560" style="fill:none;stroke:#0a0b1f;stroke-width:2"/>')
+o.append(text(316, 203, 'FINRISK', 't'))
+W, H = 360, 480
+PK = {  # name: (x, cases)
+    'PORTFOLIO · PRIVATE TO EACH INVESTOR': (330, ['Sign in', 'Manage accounts', 'Record trades',
+                                                  'View holdings and P&amp;L']),
+    'FIVE LENSES · SHARED MARKET DATA': (750, ['Analyse portfolio risk', 'Read fundamentals', 'Value a stock',
+                                               'Run a stress test', 'See market intelligence']),
 }
-pos = {}
-for name, (x, y, h, cases) in PK.items():
-    o.append(package(x, y, W, h, name))
-    gap = 66 if len(cases) > 3 else 54
+for name, (x, cases) in PK.items():
+    o.append(package(x, 230, W, H, name))
     for i, c in enumerate(cases):
-        cy = y + 64 + i * gap
-        pos[c] = (x + W / 2, cy)
-        o.append(usecase(x + W / 2, cy, c, rx=112))
+        o.append(usecase(x + W / 2, 300 + i * 82, c, rx=130))
 
-o.append(note(600, 236, 260, ['A line to a package means', 'the actor can use every', 'use case inside it.']))
+# actor: one line into each package (the second runs under the system box)
+o.append(actor(160, 470, 'INVESTOR', 'signed in'))
+o.append(line('M190 432 H328'))
+o.append(line('M160 560 V780 H930 V712'))
 
-# actors
-o.append(actor(160, 360, 'DEMO VISITOR', 'not signed in'))
-o.append(line('M190 322 H298'))
-o.append(actor(1330, 360, 'TENANT ADMIN', 'admin role'))
-o.append(line('M1300 322 H1162'))
-o.append(actor(730, 1010, '', ''))
-o.append(text(757, 980, 'INVESTOR', 'h', style='font-size:14px') + text(757, 997, 'member of a tenant'))
-o.append(line('M730 958 V924 H1030') + line('M430 924 H730'))
-for x in (430, 730, 1030):
-    o.append(line(f'M{x} 924 V882'))
+# external system
+o.append(system_box(1200, 410, 240, 48, 'DATA SOURCES', lu('globe', 1212, 422, 24)))
+o.append(text(1244, 476, 'through the waterfall', style='font-size:11.5px'))
+o.append(line('M1200 432 H1112'))
 
-# external systems
-o.append(system_box(1220, 446, 230, 48, 'DATA SOURCES', lu('globe', 1232, 458, 24)))
-o.append(text(1264, 512, 'through the waterfall', style='font-size:11.5px'))
-o.append(line('M1220 466 H730 V478'))
-o.append(system_box(1220, 600, 230, 48, 'HYBRID-RAG', lu('bot', 1232, 612, 24)))
-ax, ay = pos['Ask documents']
-o.append(line(f'M1220 624 L{ax + 112} {ay}'))
-ix, iy = pos['Ingest documents']
-o.append(line(f'M1220 616 L{ix + 112} {iy}'))
-
+o.append(note(300, 820, 840, ['Each investor sees only their own accounts, trades and holdings.',
+                              'Market data (prices, filings, macro series) is shared by all investors and stored once.'],
+              accent=True))
 uml.finish(o, 'uml-usecases', 'UML-01 USE CASES')

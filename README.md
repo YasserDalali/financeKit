@@ -5,6 +5,7 @@
   <img alt="Vercel" src="docs/images/readme/pill-vercel.png" height="26">
   <img alt="Prisma Postgres" src="docs/images/readme/pill-prisma-postgres.png" height="26">
   <img alt="Docker" src="docs/images/readme/pill-docker.png" height="26">
+  <img alt="Free data sources" src="docs/images/readme/pill-free-data-sources.png" height="26">
 </p>
 <p align="center">
   <img alt="Java 21" src="docs/images/readme/pill-java-21.png" height="26">
@@ -21,27 +22,20 @@
   <img alt="Tailwind CSS 4" src="docs/images/readme/pill-tailwind-css-4.png" height="26">
   <img alt="TypeScript" src="docs/images/readme/pill-typescript.png" height="26">
 </p>
-<p align="center">
-  <img alt="Python 3.11" src="docs/images/readme/pill-python-311.png" height="26">
-  <img alt="FastAPI" src="docs/images/readme/pill-fastapi.png" height="26">
-  <img alt="LangChain" src="docs/images/readme/pill-langchain.png" height="26">
-  <img alt="FAISS + BM25" src="docs/images/readme/pill-faiss-bm25.png" height="26">
-  <img alt="Free data sources" src="docs/images/readme/pill-free-data-sources.png" height="26">
-</p>
 
 ## About this project
 
 FinRisk helps a private investor understand what they own. You enter your accounts and trades. FinRisk then looks at the portfolio through five lenses: portfolio risk, fundamentals, intrinsic valuation, stress testing and market intelligence. It answers plain questions. How concentrated am I? What do my ETFs really hold? What is this stock worth? What happens to my portfolio in a recession? It gives analysis, not investment advice.
 
-There are three actors. The **investor** is a member of a tenant and owns portfolios. The **tenant admin** invites members and gives them roles. The **demo visitor** is not signed in. The visitor gets a demo on public-domain data. Two outside systems serve them. **Data sources** supply prices, filings and macro series through the waterfall. **hybrid-rag** answers questions about documents that the investor uploads.
+There is one actor, the **investor**. The investor signs in, manages accounts, records trades and follows holdings and P&amp;L. The investor also uses the five lenses on any stock or fund. Each investor sees only their own portfolio data. Market data is global: all investors share it, and it is stored once. **Data sources** supply that market data through the waterfall.
 
 The landing page is live at [finance-kit-bay.vercel.app](https://finance-kit-bay.vercel.app/). This screenshot comes from it.
 
 <img alt="Landing page hero: the title Know what you own over a blue background with glass cubes." src="docs/images/screens/hero.png" width="100%">
 
-<img alt="UML use-case diagram. Demo visitor uses the public package. Investor uses portfolio, five lenses and documents. Tenant admin uses the admin package. Data sources serve the lenses. hybrid-rag serves the document use cases." src="docs/images/uml-usecases.png" width="100%">
+<img alt="UML use-case diagram. The investor uses two packages: portfolio, private to each investor, and the five lenses on shared market data. Data sources serve the lenses." src="docs/images/uml-usecases.png" width="100%">
 
-A line to a package means the actor can use every use case in it. The investor reaches three packages through one bus at the bottom.
+A line to a package means the actor can use every use case in it.
 
 ## What this project focuses on
 
@@ -50,7 +44,7 @@ This is a personal, non-commercial project. It shows how to build a useful finan
 - **Multisource data aggregation.** Twenty-eight free sources were graded on depth, quota and terms. Each data resource gets its own ordered list of sources.
 - **Good decisions under budget and compute limits.** Free tiers set hard caps: 25 calls a day, 500 symbols a month, 200k database operations a month. The design treats each cap as a constraint, not as an afterthought.
 - **Cache, database and staleness design.** History is stored once and grows by delta fetches. Each resource has a fresh TTL, a revision window and a maximum stale age. Caffeine sits in front of Postgres for hot reads.
-- **Shared market data, separate portfolios.** Market data is one shared store. Portfolios are private to a tenant, with role-based access.
+- **Shared market data, private portfolios.** Market data is one global store that all users share, so nothing is fetched or stored twice. Each user's accounts, trades and holdings are private, enforced by role-based access.
 - **Decoupling through ports and the waterfall.** Valuation and risk see only the `marketdata-api` port. They cannot see a vendor at compile time. Each resource has its own ordered waterfall of sources.
 - **Financial domain knowledge.** DCF, dividend discount and Peter Lynch fair value, peer multiples, beta, alpha, volatility, correlation, drawdown, downside risk, sector exposure and ETF look-through.
 - **Front-end visualisation.** The landing app is React 19, Vite and Tailwind 4.
@@ -117,9 +111,9 @@ The price of this design is small. The first visitor after a long idle period ma
 
 ## Infrastructure and stack
 
-<img alt="Infrastructure sheet. A browser calls the React frontend on Vercel, which calls the Spring Boot backend on Render. The backend is a stack of five Maven modules: marketdata-api, marketdata, risk, valuation and app. It calls Prisma Postgres over JDBC and Flyway, the data sources over HTTP, and hybrid-rag over Render's private network." src="docs/images/ds-infra.png" width="100%">
+<img alt="Infrastructure sheet. A browser calls the React frontend on Vercel, which calls the Spring Boot backend on Render. The backend is a stack of five Maven modules: marketdata-api, marketdata, risk, valuation and app. It calls Prisma Postgres over JDBC and Flyway, and the data sources over HTTP." src="docs/images/ds-infra.png" width="100%">
 
-The front end runs on **Vercel** as a static React build. The backend runs on **Render** as one Spring Boot jar. It is a Maven modular monolith with five modules. `marketdata-api` is the port and the canonical records. `marketdata` holds the vendor adapters and the cache. `risk` holds the portfolio and risk contexts. `valuation` holds DCF, DDM, Lynch and peer analysis. `app` is the Spring Boot entry point that wires them. Valuation and risk depend only on `marketdata-api`. **hybrid-rag** stays a separate Python FastAPI service, private on Render. It is the only extra service.
+The front end runs on **Vercel** as a static React build. The backend runs on **Render** as one Spring Boot jar. It is a Maven modular monolith with five modules. `marketdata-api` is the port and the canonical records. `marketdata` holds the vendor adapters and the cache. `risk` holds the portfolio and risk contexts. `valuation` holds DCF, DDM, Lynch and peer analysis. `app` is the Spring Boot entry point that wires them. Valuation and risk depend only on `marketdata-api`.
 
 The database is **Prisma Postgres**. The backend does not use the Prisma ORM. It uses plain JDBC and Flyway over the direct connection string. The free plan allows 200k database operations a month and 2 GB of storage. Every query counts against that cap, so Caffeine sits in front of every read, inserts are batched and the seed is sized to fit. Prices and plans change, so check [prisma.io/pricing](https://www.prisma.io/pricing) for the current limits.
 

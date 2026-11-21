@@ -70,12 +70,11 @@ render('hero', W, H)
 # (label, icon kind, icon name). Brand marks come from Simple Icons, the rest from Lucide. All drawn in ink.
 # Four rows: platform, backend, frontend, services. Brand marks from Simple Icons, the rest from Lucide.
 PILL_ROWS = [
-    [('Render', 'si', 'render'), ('Vercel', 'si', 'vercel'), ('Prisma Postgres', 'si', 'prisma'), ('Docker', 'si', 'docker')],
+    [('Render', 'si', 'render'), ('Vercel', 'si', 'vercel'), ('Prisma Postgres', 'si', 'prisma'), ('Docker', 'si', 'docker'),
+     ('Free data sources', 'lu', 'globe')],
     [('Java 21', 'si', 'openjdk'), ('Spring Boot 3.3', 'si', 'springboot'), ('Maven', 'si', 'apachemaven'),
      ('PostgreSQL', 'si', 'postgresql'), ('Flyway', 'si', 'flyway'), ('Caffeine', 'lu', 'cpu'), ('JUnit 5', 'si', 'junit5')],
     [('React 19', 'si', 'react'), ('Vite', 'si', 'vite'), ('Tailwind CSS 4', 'si', 'tailwindcss'), ('TypeScript', 'si', 'typescript')],
-    [('Python 3.11', 'si', 'python'), ('FastAPI', 'si', 'fastapi'), ('LangChain', 'si', 'langchain'),
-     ('FAISS + BM25', 'lu', 'search'), ('Free data sources', 'lu', 'globe')],
 ]
 PILLS = [p for row in PILL_ROWS for p in row]
 for f in os.listdir(OUT):  # drop pills that are no longer in the list

@@ -1,6 +1,6 @@
 # DS-06: infrastructure and stack. 3D at a free camera: icons lie on the roofs, every label is a flat billboard.
 # Facts: user decisions (Vercel, Render, Prisma Postgres), caching.md section 5, and the modular-monolith plan
-# (docs/superpowers/plans/2026-11-19-java-modular-monolith.md: modules, render.yaml with a private RAG service).
+# (docs/superpowers/plans/2026-11-19-java-modular-monolith.md: modules).
 import blueprint as bp
 bp.H = 1180
 bp.VIEW = (32, 40)
@@ -25,7 +25,7 @@ def label(x, y, z, title, sub='', dx=0, dy=0, anchor='middle', acc=False):
     return (text(X + dx, Y + dy, title, 'h', anchor, f'{col}font-size:14px;{uml.HALO}') +
             (text(X + dx, Y + dy + 17, sub, anchor=anchor, style=f'font-size:12px;{uml.HALO}') if sub else ''))
 
-ZONES = [(0, 170, 140, 180, 'CLIENT'), (200, 140, 220, 240, 'VERCEL'), (480, 0, 520, 520, 'RENDER'),
+ZONES = [(0, 170, 140, 180, 'CLIENT'), (200, 140, 220, 240, 'VERCEL'), (480, 0, 520, 320, 'RENDER'),
          (1060, 0, 260, 520, 'DATA')]
 for z in ZONES:
     o.append(floor(*z))
@@ -36,8 +36,7 @@ for x0, y0, w, d, name in ZONES:
 
 # wires on the floor (drawn last, they lie in front)
 o.append(face(0) + wire('M120 260 H218') + wire('M400 220 H528') +
-         wire('M790 140 H1098') + wire('M790 220 H940 V390 H1098') +
-         wire('M660 270 V358', 'stroke-dasharray:6 4') + '</g>')
+         wire('M790 140 H1098') + wire('M790 220 H940 V390 H1098') + '</g>')
 
 # blocks, back to front
 o.append(box(1100, 40, 180, 180, 0, 40, si('prisma', 0, 0, 48), acc=True))
@@ -59,19 +58,16 @@ for i, (name, sub) in enumerate(MODS):
              + text(LX, LY - 2, name, 'h', style=f'font-size:13.5px;{"fill:" + ACC if name == "app" else ""}')
              + text(LX, LY + 14, sub, style='font-size:11.5px'))
 o.append(face(4 * 42 + 12) + f'<g transform="translate({mx + 20},{my + 20})">{si("springboot", 0, 0, 40)}</g></g>')
-o.append(box(530, 360, 260, 120, 0, 30, si('fastapi', 0, 0, 48)))
 o.append(box(220, 190, 180, 140, 0, 30, si('vercel', 0, 0, 48)))
 o.append(box(20, 210, 100, 100, 0, 30, lu('app-window', 0, 0, 48)))
 
 # billboards
-o.append(label(70, 210, 30, 'BROWSER', 'investor, visitor', dy=-60))
+o.append(label(70, 210, 30, 'BROWSER', 'investor', dy=-60))
 o.append(label(310, 190, 30, 'FRONTEND', 'React 19, Vite, Tailwind 4', dy=-70))
 o.append(text(1330, 220, 'BACKEND MODULES', 'h', style='font-size:14px') + text(1330, 237, 'Java 21, Spring Boot 3.3,') + text(1330, 253, 'one Maven modular monolith'))
-o.append(label(790, 420, 30, 'HYBRID-RAG', 'Python 3.11, FastAPI', dx=20, dy=-4, anchor='start'))
 o.append(label(1190, 40, 40, 'PRISMA POSTGRES', 'store of record', dy=-40, acc=True))
 o.append(label(1280, 390, 26, 'DATA SOURCES', 'via the waterfall', dx=18, dy=10, anchor='start'))
-for x, y, s in ((170, 260, 'HTTPS'), (465, 220, 'JSON API'), (945, 140, 'JDBC + Flyway'), (1030, 390, 'HTTP, per source'),
-                (600, 315, 'private network')):
+for x, y, s in ((170, 260, 'HTTPS'), (465, 220, 'JSON API'), (945, 140, 'JDBC + Flyway'), (1030, 390, 'HTTP, per source')):
     X, Y = iso(x, y, 0)
     o.append(text(X, Y + 20, s, anchor='middle', style=f'font-size:11.5px;{uml.HALO}'))
 
@@ -80,7 +76,6 @@ ys = 830
 o.append(text(60, ys, 'WHAT RUNS WHERE', 't'))
 for i, s in enumerate(['Vercel serves the React front end as a static build.',
                        'Render runs the backend: one Spring Boot jar from five Maven modules.',
-                       'Render runs hybrid-rag as a separate, private Python service.',
                        'Prisma Postgres holds portfolios and the market-data store.',
                        'The backend uses plain JDBC and Flyway on the direct connection string.',
                        'It does not use the Prisma ORM.']):
