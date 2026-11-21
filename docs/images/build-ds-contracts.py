@@ -87,11 +87,7 @@ o.append(line(f'M1415 {src_bottom + 56} V{sh[1]-2}', 'dashed', end='open'))
 o.append(text(1425, src_bottom + 76 if src_bottom + 76 < sh[1] - 4 else sh[1] - 6, 'use', style='font-size:11px'))
 
 # --- strip ---------------------------------------------------------------------------
-o.append(text(60, 980, 'BUILT TODAY VS DESIGNED', 't'))
-o.append(note(60, 996, 640, ['Built (branch refactor/java-monolith): one MarketData port,',
-                             'FmpSource and YahooSource, FailoverMarketData (one global order:',
-                             'FMP, then Yahoo), CachingMarketData on Caffeine.'], accent=True))
-o.append(note(730, 996, 620, ['Designed (contracts.md): five *Data ports, one *Feed per resource,',
-                              'Waterfall&lt;F&gt; per resource, WaterfallMarketData. Layer order is',
-                              'configuration, for example finrisk.data.waterfall.prices.']))
+o.append(note(60, 996, 640, ['Five *Data ports, one *Feed per resource, Waterfall&lt;F&gt; per resource,',
+                             'WaterfallMarketData. Layer order is configuration,',
+                             'for example finrisk.data.waterfall.prices.'], accent=True))
 uml.finish(o, 'ds-contracts', 'DS-03 CONTRACTS', view='UML')

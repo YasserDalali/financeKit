@@ -13,7 +13,7 @@ o.append(text(296, 203, 'FINRISK', 't'))
 W = 260
 PK = {  # name: (x, y, h, cases)
     'PUBLIC': (300, 220, 230, ['View the landing page', 'Request access', 'Try the demo (public data)']),
-    'TENANT ADMIN (PLANNED)': (900, 220, 230, ['Invite members', 'Assign roles', 'Manage the tenant']),
+    'TENANT ADMIN': (900, 220, 230, ['Invite members', 'Assign roles', 'Manage the tenant']),
     'PORTFOLIO': (300, 480, 400, ['Manage accounts', 'Record trades', 'View holdings and P&amp;L']),
     'FIVE LENSES': (600, 480, 400, ['Analyse portfolio risk', 'Read fundamentals', 'Value a stock',
                                      'Run a stress test', 'See market intelligence']),
@@ -51,9 +51,4 @@ o.append(line(f'M1220 624 L{ax + 112} {ay}'))
 ix, iy = pos['Ingest documents']
 o.append(line(f'M1220 616 L{ix + 112} {iy}'))
 
-o.append(text(60, 940, 'STATUS', 't'))
-for i, s in enumerate(['Built: risk metrics and portfolio CRUD (risk-management-ms), valuation API, hybrid-rag.',
-                       'Designed: fundamentals, stress tests, market intelligence, the demo on public data.',
-                       'Planned: tenants, roles and sign-in. Today the APIs have no login.']):
-    o.append(text(60, 964 + i * 20, s, style='font-size:12.5px;fill:#0a0b1f'))
 uml.finish(o, 'uml-usecases', 'UML-01 USE CASES')

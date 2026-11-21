@@ -92,7 +92,4 @@ for i, s in enumerate(['Prisma Postgres: 200k operations a month, 2 GB storage.'
                        'a seed sized to the storage cap, refresh on visit.',
                        'Prices change. See each vendor’s pricing page.']):
     o.append(text(640, ys + 26 + i * 21, s, style='font-size:12.5px;fill:#0a0b1f'))
-o.append(note(1130, ys - 10, 420, ['Status: the backend modules marketdata-api,', 'marketdata and valuation are built.',
-                                   'risk is in progress, app is not built.', 'The Render deploy is planned (plan Task 13).',
-                                   'The backend-to-RAG call is not written.'], accent=True))
 uml.finish(o, 'ds-infra', 'DS-06 INFRA', view='AXO 32/40')

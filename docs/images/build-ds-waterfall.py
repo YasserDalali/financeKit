@@ -156,7 +156,6 @@ o.append(svg)
 
 # --- rules (flat strip) -------------------------------------------------------------
 yb = yr + 14 + th + 40
-o.append(note(60, yb - 10, 440, ['Designed, not built. The code today has one', 'global order: FMP, then Yahoo (FailoverMarketData).'], accent=True))
 o.append(text(xt, yb, 'RULES', 't'))
 for i, s in enumerate(['A layer counts only if every required field is present. Otherwise the next layer runs.',
                        'One answer comes from one layer. Fields are never mixed across layers.',
