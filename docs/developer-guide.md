@@ -252,9 +252,6 @@ Supported metrics: `PE`, `PB`, `EV_EBITDA`, `PS`.
 # FinRisk
 cd risk-management-ms && mvn test
 
-# Hybrid RAG
-cd hybrid-rag && pytest
-
 # Sector valuation
 cd sector-valuation-ms && npm test
 ```
@@ -267,7 +264,6 @@ cd sector-valuation-ms && npm test
 financeKit/
 ├── docs/openapi/           # OpenAPI JSON exports
 ├── risk-management-ms/     # FinRisk portfolio API
-├── hybrid-rag/             # RAG microservice
 └── sector-valuation-ms/    # Sector peer / DCF API
 ```
 
