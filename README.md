@@ -23,98 +23,133 @@
   <img alt="TypeScript" src="docs/images/readme/pill-typescript.png" height="26">
 </p>
 
-## About this project
+## What this is
 
-FinRisk helps a private investor understand what they own. You enter your accounts and trades. FinRisk then looks at the portfolio through five lenses: portfolio risk, fundamentals, intrinsic valuation, stress testing and market intelligence. It answers plain questions. How concentrated am I? What do my ETFs really hold? What is this stock worth? What happens to my portfolio in a recession? It gives analysis, not investment advice.
+I built FinRisk because I wanted one place that tells me what I actually own and whether it is worth what I paid. You enter your accounts and trades. It then looks at the portfolio in five ways: risk, fundamentals, valuation, stress tests and market intelligence. So you can ask things like how concentrated you are, what your ETFs really hold, what a stock is worth, and what a recession would do to you. It gives analysis, not investment advice.
 
-There is one actor, the **investor**. The investor signs in, manages accounts, records trades and follows holdings and P&amp;L. The investor also uses the five lenses on any stock or fund. Each investor sees only their own portfolio data. Market data is global: all investors share it, and it is stored once. **Data sources** supply that market data through the waterfall.
-
-The landing page is live at [finance-kit-bay.vercel.app](https://finance-kit-bay.vercel.app/). This screenshot comes from it.
+There is only one kind of user, the investor. Your accounts, trades and holdings are private to you. Market data is shared by everyone and stored once, because there is no reason to fetch the same closing price twice. The landing page is live at [finance-kit-bay.vercel.app](https://finance-kit-bay.vercel.app/).
 
 <img alt="Landing page hero: the title Know what you own over a blue background with glass cubes." src="docs/images/screens/hero.png" width="100%">
 
-<img alt="UML use-case diagram. The investor uses two packages: portfolio, private to each investor, and the five lenses on shared market data. Data sources serve the lenses." src="docs/images/uml-usecases.png" width="100%">
+<img alt="Use-case diagram. The investor uses two packages: portfolio, private to each investor, and the five lenses on shared market data. Data sources serve the lenses." src="docs/images/uml-usecases.png" width="100%">
 
-A line to a package means the actor can use every use case in it.
+## What I wanted to practice
 
-## What this project focuses on
+This is a personal project with no money behind it, so almost every decision here is a way of working inside a limit. Free data tiers cap how much I can fetch, and a free database caps how much I can store. I treated those caps as the design problem instead of a nuisance.
 
-This is a personal, non-commercial project. It shows how to build a useful finance tool with no budget for data or hosting. Each focus below is a skill the project exercises.
+- Pulling data from many free sources and deciding, per kind of data, which one to ask first.
+- Spending little: 25 calls a day on one source, 500 symbols a month on another, 200k database operations a month.
+- Deciding what to cache, what to store, and how stale something may get before I stop trusting it.
+- Keeping each user's portfolio private while sharing market data across everyone, with role-based access.
+- Keeping the finance code from knowing which vendor supplied a number.
+- Using real finance: DCF, dividend discount, Peter Lynch fair value, peer multiples, beta, alpha, drawdown, ETF look-through.
+- Clean Java: layers, plain JDBC, validation, paging and rate limiting.
+- Reading each source's terms and keeping to them. FRED forbids storing its data, so I never store it.
 
-- **Multisource data aggregation.** Twenty-eight free sources were graded on depth, quota and terms. Each data resource gets its own ordered list of sources.
-- **Good decisions under budget and compute limits.** Free tiers set hard caps: 25 calls a day, 500 symbols a month, 200k database operations a month. The design treats each cap as a constraint, not as an afterthought.
-- **Cache, database and staleness design.** History is stored once and grows by delta fetches. Each resource has a fresh TTL, a revision window and a maximum stale age. Caffeine sits in front of Postgres for hot reads.
-- **Shared market data, private portfolios.** Market data is one global store that all users share, so nothing is fetched or stored twice. Each user's accounts, trades and holdings are private, enforced by role-based access.
-- **Decoupling through ports and the waterfall.** Valuation and risk see only the `marketdata-api` port. They cannot see a vendor at compile time. Each resource has its own ordered waterfall of sources.
-- **Financial domain knowledge.** DCF, dividend discount and Peter Lynch fair value, peer multiples, beta, alpha, volatility, correlation, drawdown, downside risk, sector exposure and ETF look-through.
-- **Front-end visualisation.** The landing app is React 19, Vite and Tailwind 4.
-- **Java OOP and CRUD practice.** Layered code, plain JDBC, request validation with `@Valid`, paged and sorted transaction lists, and clear error mapping. Rate limiting per source and per client.
-- **Respect for data licences.** Each source has a rights tier. FRED is never stored, because its terms forbid it. Vendor data stays behind a login.
+I left some ideas out on purpose. Geopolitical signals, analyst price targets, growth estimates, supply-chain links and news sentiment all lacked a decent free source, or another signal already answered the question. I would rather ship five lenses that work than eight that lean on shaky data.
 
-These areas are **not** in scope. They were dropped on purpose, because no free source covers them well, or because other signals already answer the same question:
+## Picking data sources
 
-- **Geopolitical event signals.** The only free feed (GDELT) is noisy and grade D.
-- **Analyst price targets and estimates.** Free tiers do not include them. Rating trends stay in scope.
-- **Growth estimates.** Same reason as estimates.
-- **Company supply-chain links.** No free source was found.
-- **News sentiment.** One D-grade source, and its fallback has no sentiment score.
+I started from a list of candidates and graded each one on how deep its history goes, how much it lets me fetch, what it costs and what its terms allow. Then I asked what each source can supply, and where.
 
-## Data sources
+<img alt="Table of thirty free data sources with grade, cost, rate, volume, history and terms, and a matrix of nineteen kinds of data. Filled dots are full supply, rings are partial. Dark blue marks the source chosen as first choice, lighter blue the second, lightest blue the third." src="docs/images/ds-supply.png" width="100%">
 
-<img alt="Graded supply table. Thirty free sources as rows, with grade, cost, rate, volume, history and terms, and a matrix of nineteen demand codes. Filled dots are full supply, rings are partial. Dark blue marks the first waterfall layer, lighter blue the second, lightest blue the third." src="docs/images/ds-supply.png" width="100%">
+Think of it as a small linear program. Each source is a yes or no. Its cost is the free tier, so every row costs nothing or is out. Its limits are the rate, volume, history and terms columns, and its supply is the dots on the right. I wanted every kind of data covered by a first choice and a backup, for no money, with the fewest calls and the least risk of a source breaking. The blue dots are my answer: dark blue is first choice, lighter blue is second, lightest is third.
 
-Read the table as a linear program. Each source is a choice: use it or not. Its cost is the free tier, so every row costs $0 or is out. Its constraints are the rate, volume, history and terms columns. Its supply is the dots on the right. A filled dot is full supply of that demand. A ring is partial supply. The colour shows the solution: dark blue is the source picked as the first waterfall layer for that demand, lighter blue the second, lightest blue the third. Ink means the source can supply it but sits outside the first three layers. The goal is to cover every demand with one primary and one fallback, at $0, with the fewest calls and the least risk of breakage.
+Caching changed how I judged things. I pull the full history once and then only fetch what is new, so a tight daily quota matters less than how deep the history goes and whether the terms let me keep the data. An A grade means official, free, deep and cacheable. An F means I cannot use it.
 
-Heavy caching changes what matters. We pull the full history once and then fetch small daily deltas. So history depth and storage terms matter more than calls per day. The grade sums this up: **A** is official, free, deep and cacheable. **F** is not usable.
-
-The constraints that still bind after caching are in the strip under the table. Tiingo caps the price universe at 500 symbols a month. Alpha Vantage is a slow backfill only. FRED cannot be stored. N-PORT holdings are about 60 days late. The full research, with a tag for how each fact was checked, is in [`docs/data-sources/inventory.md`](docs/data-sources/inventory.md).
+A few limits still bite. Tiingo's 500 symbols a month caps my price universe. Alpha Vantage's 25 calls a day makes it a slow backfill at best. FRED cannot be stored at all. And SEC's ETF holdings arrive about 60 days late. The full research, with a note on how I checked each fact, is in [`docs/data-sources/inventory.md`](docs/data-sources/inventory.md).
 
 ## The waterfall
 
-<img alt="Waterfall sheet. Top: a Sankey diagram from the five lenses to their nineteen resources to the sources that answer them, with band width equal to the expected share of answers. SEC EDGAR answers most, then Finnhub, Alpaca and US Treasury. Bottom: the scoring rule, reliability by grade, and the order and score for all nineteen resources." src="docs/images/ds-waterfall.png" width="100%">
+For each kind of data I try the sources in order until one answers. The diagram shows who ends up answering what. A wider band means that source answers more often. SEC EDGAR does the most work because it covers fundamentals, filings, insiders, institutions and ETF holdings. Everything the other sources do is smaller.
 
-A waterfall tries the sources for one resource in order, until one answers. The order comes from Smith's rule for sequential search. Each try succeeds with chance *p* and costs *c*. Sorting by *p / c*, highest first, gives the lowest expected cost. Here *p* is the grade's reliability times the coverage, and *c* is one plus quota pressure plus a cache penalty. FRED gets a cache penalty of 2, because every FRED read must go live. [`waterfall.py`](docs/data-sources/waterfall.py) computes the order and writes [`waterfall.md`](docs/data-sources/waterfall.md). The order is configuration, so a new score does not need a Java change.
+<img alt="Sankey diagram from the five lenses to their nineteen kinds of data to the sources that answer them. Band width is each source's expected share of answers. SEC EDGAR answers most, then Finnhub, Alpaca and US Treasury." src="docs/images/ds-waterfall.png" width="100%">
 
-An answer counts only if every required field is present. A required field is checked in the canonical record's constructor. When a layer returns rows without it, the waterfall moves on. One answer comes from one layer. Fields are never mixed across layers, because mixing breaks consistency. A missing optional field stays null, and the domain skips that metric and says so.
+I did not order the sources by gut feeling. If you must try sources one after another, the cheapest order is highest chance of success divided by cost first (Smith's rule). I estimate the chance from the source's grade and how fully it covers that data, and the cost from its quota pressure, plus a penalty for FRED because every FRED read has to go live. A small script, [`waterfall.py`](docs/data-sources/waterfall.py), computes the order and writes it to [`waterfall.md`](docs/data-sources/waterfall.md). The order lives in configuration, so changing a score never needs a Java change.
 
-<img alt="UML class diagram. marketdata-api holds five interface ports. marketdata holds CachingMarketData, WaterfallMarketData, Waterfall of F, the Feed interfaces, the Source interface, three example sources and four shared adapters." src="docs/images/ds-contracts.png" width="100%">
+Two rules keep the answers consistent. A source's answer only counts if every required field is present, and if it is not, the next source runs. And one answer always comes from one source. I never stitch fields from two vendors together, because that is how you end up with a price and a date that disagree.
 
-The domain sees five ports: `PriceData`, `ReferenceData`, `FundamentalsData`, `MacroData` and `SignalsData`. Each source implements small `*Feed` interfaces, one per resource it can serve. A `Waterfall<F>` holds the ordered layers for one resource. It skips unavailable layers, logs each fall-through and never throws. `WaterfallMarketData` implements all five ports with one waterfall per resource. `CachingMarketData` wraps it.
+<img alt="Class diagram. marketdata-api holds five interface ports. marketdata holds CachingMarketData, WaterfallMarketData, Waterfall of F, the Feed interfaces, the Source interface, three example sources and four shared adapters." src="docs/images/ds-contracts.png" width="100%">
 
-Several sources speak the same vocabulary, so the overlap is handled once. `UsGaapConcepts` maps us-gaap concept names for SEC and Finnhub. `SectorTaxonomy` maps SIC, Finnhub and Yahoo sectors to one 11-sector list. `IdentifierResolver` maps ticker, CUSIP and CIK through OpenFIGI. `SeriesCatalog` maps a canonical macro ID to each source's own code. The full field mapping per resource is in [`docs/data-sources/contracts.md`](docs/data-sources/contracts.md).
+The finance code only sees five ports: prices, reference data, fundamentals, macro and signals. Each source implements small feed interfaces for what it can serve, and a `Waterfall` holds the ordered sources for one kind of data. It skips any source that is down, logs the fall-through and never throws.
+
+Several sources describe the same thing in their own words, so I wrote the translation once. One adapter maps us-gaap concept names for SEC and Finnhub. Another maps three sector schemes onto a single list of eleven sectors. A third maps tickers to CUSIPs and CIKs, and a fourth maps a macro series to each source's own code. The field-by-field mapping is in [`docs/data-sources/contracts.md`](docs/data-sources/contracts.md).
 
 ## Caching and storage
 
-<img alt="Caching sheet. Top: a request goes to Caffeine, then Postgres, then the waterfall, with a stale fallback back to the request. Bottom: four storage classes, freshness per resource, rights tiers, and why one database and no Redis." src="docs/images/ds-caching.png" width="100%">
+Most financial data never expires. It only grows. The close for a past day, or a filed 10-K, will not change, so I keep it and ask only for what is new.
 
-Most financial data does not expire. It grows. A closing price for a past day or a filed 10-K does not change. So we keep it and fetch only what is new. Four storage classes cover every resource. **Immutable** rows never change. **Revisable** series get a known trailing window refetched, for example GDP for three years. A **snapshot** is one current value that can change, such as a company profile. **Live only** data is never stored. That is FRED.
+<img alt="A request goes to Caffeine, then to Postgres, then to the waterfall. If every source fails, the stored value is served with a warning." src="docs/images/ds-caching.png" width="100%">
 
-Prices need one trick. An adjusted close changes after each later dividend or split. A raw close never changes. So we store the raw close plus the corporate actions, and compute the adjusted close on read. Past price rows then never need a rewrite. When a delta comes from a different layer, we refetch the last stored day. If the two closes differ by more than 0.5 %, the full window reloads from the new layer.
+Reading goes in a fixed order. Caffeine, an in-memory cache, holds the hot answers for a few minutes. Postgres serves anything still fresh. When a value is too old, the waterfall runs and the first complete answer gets stored. If every source fails, I serve the stored value anyway, with a warning, as long as it is not too old. Every response says when it was fetched, where it came from and whether it is stale.
 
-Each resource has three ages. Inside the **fresh TTL** the stored value is served with no call. On a refresh, the **revision window** is refetched. When every live layer fails, the stored value is still served with a warning, up to the **max stale** age. Every response carries `Freshness(asOf, source, stale)`, so the UI can show a small notice.
+Not all data ages the same way, so I sorted it into four kinds:
 
-The rights tier decides what we may keep. Public-domain sources (SEC, Treasury, BLS, BEA, EIA) can be stored and shown. World Bank, OECD, IMF, French and Shiller need a citation. Alpaca, Tiingo, Finnhub, Yahoo and Alpha Vantage are for personal use only, so their data stays behind a login. Each stored row records its `source`, so we can purge one vendor's rows if its terms change.
+| Kind | What it means | How I keep it fresh | Examples |
+|---|---|---|---|
+| Immutable | Rows never change once written | fetch only what is after the last row | raw closes, dividends, splits, Form 4, filings, 13F |
+| Revisable | New rows arrive and a recent window gets revised | fetch new rows and refetch the window | GDP, payrolls, adjusted CPI, trade flows |
+| Snapshot | One current value that can change | refetch after a time limit, keep old versions | company profile, peers, next earnings date |
+| Live only | The terms forbid storing it | fetch on every request | anything from FRED |
 
-Postgres is the store of record, in its own `marketdata` schema. History is the asset, and it must survive restarts and redeploys. Delta fetch needs one indexed query for the last date held. Peers and look-through are joins. Caffeine stays in front for hot reads, so most reads never reach the database. We do not use Redis, because Postgres and Caffeine cover both jobs. The details are in [`docs/data-sources/caching.md`](docs/data-sources/caching.md).
+Every resource gets three ages. The fresh limit is how long I serve it without asking anyone. The revision window is the recent slice I refetch because the source may have corrected it. The max stale age is how old a value can get before I stop serving it even as a fallback. A few examples:
 
-## Pre-seed and refresh
+| Data | Kind | Fresh for | Refetch window | Max stale |
+|---|---|---|---|---|
+| Raw close | immutable | until the next close | none | 10 trading days |
+| Profile and sector | snapshot | 90 days | none | 1 year |
+| Statements | immutable | 1 to 7 days | none, restatements append | 1 year |
+| US macro | revisable | until the next release | GDP 3 years, payrolls 2 months | 3 months |
+| 13F holders | immutable | until the next filing window | amendments in the quarter | 1 quarter |
+| Ratings | immutable | 7 days | current month | 3 months |
 
-<img alt="Seed and refresh sheet. Top: a visit wakes the instance, a wake-up check reads fetch_log, a refresh pool of two threads takes an advisory lock, checks source budgets and runs the waterfall into Postgres. A request checks the stored row and queues a refresh when stale. Bottom: the seed universe of about 70 symbols, datasets per symbol, shared series and what is not seeded." src="docs/images/ds-seed.png" width="100%">
+Prices need one trick. An adjusted close changes every time a later dividend or split happens, which would force me to rewrite history. A raw close never changes. So I store the raw close plus the dividends and splits, and work out the adjusted close when I read. When new rows come from a different source than the old ones, I compare the last day we both have. If the closes differ by more than half a percent, I reload that whole window from the new source instead of mixing them.
 
-On the first boot, a background job stores a seed universe, so the first visitor already sees data. The universe is about 70 symbols in five groups: benchmarks, core funds, sector SPDRs, mega caps and popular large caps. It lives in a resource file, so you can change it without code. For each symbol we store 10 years of raw prices with dividends and splits, the profile and sector, all XBRL statements, peers, and for funds the latest holdings. A few series are stored once for all users: Treasury yields, CPI, unemployment, GDP, fed funds, NBER recessions, French and Shiller factors, and oil prices.
+What I am allowed to keep depends on each source's terms:
 
-Some data is not seeded. Institutional holders come from 13F bulk files, which are too heavy for a free instance. They are built when a user first opens that view. Insiders, filings and ratings are cheap, so they load on first view. Global macro and trade flows load only when a stress scenario needs them. The whole seed is about 180k price rows, under 100 MB.
+| Rights | Sources | Rule |
+|---|---|---|
+| Store and show freely | SEC EDGAR, US Treasury, BLS, BEA, EIA, NY Fed, NBER, OpenFIGI | SEC wants a User-Agent and at most 10 requests a second |
+| Store and show, with credit | World Bank, OECD, IMF, Kenneth French, Shiller | cite the source where it is shown |
+| Store for personal use | Alpaca, Tiingo, Finnhub, Yahoo, Alpha Vantage, UN Comtrade | keep behind a login |
+| Terms unknown | iShares, SPDR and Vanguard holdings files | do not scrape yet |
+| Do not store | FRED | live only, no stale fallback |
 
-There is no cron. Low traffic makes an always-on scheduler a waste, and the Render free instance sleeps when idle. So refresh work runs only while someone uses the app. A visit wakes the instance. One task reads `fetch_log` and refreshes what is past due. A request that finds stale data gets it at once, with the stale flag, and queues a refresh. A Postgres advisory lock stops two fetches of the same key. Each source has a token bucket and a monthly counter, and an empty budget skips that layer. Progress is saved per key, so a job that stops when the instance sleeps continues on the next visit. A fixed pool of two threads keeps refresh work away from request handling.
+Every stored row records its source. If a vendor changes its terms, I can delete just its rows.
 
-The price of this design is small. The first visitor after a long idle period may see stale-flagged data for about a minute.
+I chose Postgres as the store of record, in its own `marketdata` schema. The history is the expensive part to rebuild, and it has to survive restarts and redeploys. Fetching only what is new needs one indexed query for the last date I hold. Peers and ETF look-through are joins, which a database does well. Caffeine in front means most reads never touch the database. I did not add Redis because Postgres and Caffeine already cover both jobs. The details are in [`docs/data-sources/caching.md`](docs/data-sources/caching.md).
 
-## Infrastructure and stack
+## Seeding and refreshing
 
-<img alt="Infrastructure sheet. A browser calls the React frontend on Vercel, which calls the Spring Boot backend on Render. The backend is a stack of five Maven modules: marketdata-api, marketdata, risk, valuation and app. It calls Prisma Postgres over JDBC and Flyway, and the data sources over HTTP." src="docs/images/ds-infra.png" width="100%">
+The first visitor should not stare at an empty app. So on first boot a background job stores a starter set of about 70 symbols, kept in a file you can edit:
 
-The front end runs on **Vercel** as a static React build. The backend runs on **Render** as one Spring Boot jar. It is a Maven modular monolith with five modules. `marketdata-api` is the port and the canonical records. `marketdata` holds the vendor adapters and the cache. `risk` holds the portfolio and risk contexts. `valuation` holds DCF, DDM, Lynch and peer analysis. `app` is the Spring Boot entry point that wires them. Valuation and risk depend only on `marketdata-api`.
+| Group | Symbols |
+|---|---|
+| Benchmarks | SPY, QQQ, DIA, IWM, VTI |
+| Core funds | VOO, IVV, VEA, VWO, AGG, BND, TLT, GLD, VNQ, SCHD |
+| Sector funds | XLK, XLF, XLV, XLE, XLY, XLP, XLI, XLU, XLB, XLRE, XLC |
+| Mega caps | AAPL, MSFT, NVDA, AMZN, GOOGL, META, TSLA, AVGO, BRK.B, LLY |
+| Popular large caps | about 35 more, such as JPM, V, UNH, NFLX, AMD, PLTR and COIN (my own picks, change them freely) |
 
-The database is **Prisma Postgres**. The backend does not use the Prisma ORM. It uses plain JDBC and Flyway over the direct connection string. The free plan allows 200k database operations a month and 2 GB of storage. Every query counts against that cap, so Caffeine sits in front of every read, inserts are batched and the seed is sized to fit. Prices and plans change, so check [prisma.io/pricing](https://www.prisma.io/pricing) for the current limits.
+For each one I store ten years of raw prices with dividends and splits, the profile and sector, every SEC statement, its peers, and for funds the latest holdings. A few series are stored once for everyone: Treasury yields, CPI, unemployment, GDP, fed funds, recession dates, the French and Shiller factors, and oil prices. The whole seed is about 180k price rows and well under 100 MB. It costs about 70 of Tiingo's 500 monthly symbols and a minute or so of Finnhub calls.
+
+Some things I deliberately do not seed. 13F holdings come as huge bulk files, too heavy for a free instance, so they are built the first time someone opens that view. Insiders, filings and ratings are cheap per symbol, so they load when first viewed. Global macro and trade flows load only when a stress test asks for them.
+
+There is no cron job. This demo will not have many visitors, and Render's free instance sleeps when idle, so a scheduler would mostly run for nobody. Instead, work happens while someone is using the app.
+
+<img alt="A visit wakes the instance. A startup check reads the fetch log, a pool of two threads takes a database lock, checks each source's budget and runs the waterfall into Postgres. A request checks the stored row and queues a refresh if it is stale." src="docs/images/ds-seed.png" width="100%">
+
+A visit wakes the instance. One task reads the fetch log and refreshes anything that is overdue. A request that finds stale data gets it immediately, marked stale, and a refresh is queued behind it. A database lock stops two fetches of the same thing, and each source has its own budget, so an empty one just gets skipped. Progress is saved per item, which means a job that dies when the instance goes back to sleep carries on at the next visit. A small fixed pool of two threads keeps refresh work from crowding out real requests.
+
+The price of all this is small. After a long idle stretch, the first visitor may see data flagged as stale for about a minute.
+
+## Where it runs
+
+<img alt="A browser calls the React frontend on Vercel, which calls the Spring Boot backend on Render. The backend is a stack of five Maven modules. It talks to Prisma Postgres over JDBC and to the data sources over HTTP." src="docs/images/ds-infra.png" width="100%">
+
+The frontend is a static React build on Vercel. The backend is one Spring Boot jar on Render, built from five Maven modules. The `marketdata-api` module holds the ports and the shared records. `marketdata` holds the vendor adapters and the cache. `risk` holds portfolios and risk metrics, and `valuation` holds DCF, DDM, Lynch and peer analysis. `app` starts everything. Valuation and risk depend only on `marketdata-api`, so they cannot see a vendor.
+
+The database is Prisma Postgres. I do not use the Prisma ORM. The backend talks to it with plain JDBC and Flyway over the direct connection string. The free plan gives 200k database operations a month and 2 GB of storage, and every query counts against that. That is why Caffeine sits in front of reads, inserts are batched and the seed is sized to fit. Plans change, so check [prisma.io/pricing](https://www.prisma.io/pricing) for current limits. Render's free web service also sleeps after a while with no traffic, which is the reason refreshing happens on visits.
 
 To set up, run, deploy and call the services on `master`, read the [developer guide](docs/developer-guide.md).

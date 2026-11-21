@@ -1,7 +1,7 @@
 # DS-05: pre-seed and refresh on visit. Top (3D): what a visit starts. Bottom (flat): the seed universe and datasets.
 # Facts come from docs/data-sources/caching.md, sections 6 and 7. Status: designed, not built.
 import blueprint as bp
-bp.H = 1400
+bp.H = 780
 bp.VIEW, bp.TILE_H = (4, 70), 24
 from blueprint import ACC, INK, badge, card, face, platform, tile, wire
 import uml
@@ -44,40 +44,4 @@ for i, s in enumerate(steps):
     col, row = divmod(i, 4)
     x, y = 60 + col * 560, ky + 26 + row * 22
     o.append(text(x, y, f'{i+1}', style=f'font-size:12.5px;font-weight:700;fill:{ACC}') + text(x + 22, y, s, style='font-size:12.5px;fill:#0a0b1f'))
-o.append(note(1180, ky - 8, 360, ['Price of the design: the first visitor', 'after a long idle may see data with', 'a stale flag for about a minute.']))
-
-# --- seed universe ------------------------------------------------------------------------
-y = 790
-o.append(text(60, y, 'SEED UNIVERSE: ABOUT 70 SYMBOLS, KEPT IN A RESOURCE FILE', 't'))
-rows = [['Benchmarks', 'SPY, QQQ, DIA, IWM, VTI', 'beta and alpha baselines'],
-        ['Core funds', 'VOO, IVV, VEA, VWO, AGG, BND, TLT, GLD, VNQ, SCHD', 'common retail funds, bonds, gold, REITs'],
-        ['Sector SPDRs', 'XLK, XLF, XLV, XLE, XLY, XLP, XLI, XLU, XLB, XLRE, XLC', 'sector exposure, peer baselines'],
-        ['Mega caps', 'AAPL, MSFT, NVDA, AMZN, GOOGL, META, TSLA, AVGO, BRK.B, LLY', 'largest SPY and QQQ weights'],
-        ['Popular large caps', 'JPM, V, MA, UNH, XOM, JNJ, WMT, PG, HD, COST, NFLX, AMD, KO, PEP, BAC, ORCL, CRM, PLTR', 'high retail interest'],
-        ['', 'INTC, DIS, ABBV, MRK, CVX, ADBE, CSCO, MCD, T, PFE, NKE, BA, SBUX, PYPL, UBER, COIN, SOFI', '(a judgement call)']]
-svg, h = uml.grid(60, y + 14, [190, 860, 430], ['GROUP', 'SYMBOLS', 'WHY'], rows, rh=26, size=12, mono_cols=(1,))
-o.append(svg)
-
-y2 = y + 14 + h + 44
-o.append(text(60, y2, 'DATASETS PER SEED SYMBOL', 't'))
-rows = [['Raw prices, dividends, splits', '10 years', '1 per symbol (Tiingo)'],
-        ['Profile and sector', 'current', '1 per symbol (SEC submissions)'],
-        ['Statements', 'all XBRL, about 2009+', '1 per stock (SEC companyfacts)'],
-        ['Peers', 'current', '1 per stock (Finnhub)'],
-        ['ETF holdings', 'latest quarter', '1 per fund (its own NPORT-P filing)']]
-svg, h2 = uml.grid(60, y2 + 14, [240, 190, 300], ['DATA', 'DEPTH', 'CALLS'], rows, rh=26, size=12)
-o.append(svg)
-xr = 850
-o.append(text(xr, y2, 'SHARED SERIES, ONCE', 't'))
-for i, s in enumerate(['3-month bill and 10-year yields (20 years)', 'CPI, unemployment, real GDP, fed funds',
-                       'NBER recession dates', 'French factors and Shiller (full history)', 'WTI and Brent (20 years)']):
-    o.append(text(xr, y2 + 26 + i * 21, s, style='font-size:12.5px;fill:#0a0b1f'))
-o.append(text(1200, y2, 'NOT SEEDED', 't'))
-for i, s in enumerate(['Institutional holders: 13F is bulk only.', 'Built on first view of that page.',
-                       'Insiders, filings, ratings: cheap,', 'so they load on first view.',
-                       'Global macro, trade flows: only', 'when a stress scenario needs them.']):
-    o.append(text(1200, y2 + 26 + i * 21, s, style='font-size:12.5px;fill:#0a0b1f'))
-yb = y2 + 14 + h2 + 34
-o.append(text(60, yb, 'BUDGET: about 70 Tiingo symbols of 500 a month, about 120 SEC calls, about 55 Finnhub calls. '
-                     'About 180k price rows, under 100 MB.', style=f'font-size:13px;fill:{INK}'))
 uml.finish(o, 'ds-seed', 'DS-05 SEED', view='AXO 4/70')

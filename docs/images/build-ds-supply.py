@@ -2,7 +2,7 @@
 # Upper case = full supply (filled dot), lower case = partial (ring). Dot colour = the waterfall layer the source
 # holds for that demand (docs/data-sources/waterfall.py): 1st dark blue, 2nd lighter, 3rd lightest, else ink.
 import blueprint as bp
-bp.H = 1420
+bp.H = 1330
 from blueprint import ACC, INK
 import os, sys
 import uml
@@ -113,15 +113,4 @@ for i, (k, lab) in enumerate([(0, 'Chosen: 1st waterfall layer'), (1, 'Chosen: 2
     o.append(f'<circle cx="66" cy="{yk+66+i*22}" r="5.5" style="fill:{LAYER_COL[k]}"/>' + text(80, yk + 70 + i * 22, lab))
 o.append(f'<circle cx="66" cy="{yk+132}" r="5.5" style="fill:{INK}"/>' + text(80, yk + 136, 'Ink: supplies it, not in the first three layers'))
 o.append(f'<rect x="60" y="{yk+146}" width="14" height="14" style="fill:#f3f3f4;stroke:#9a9ca6"/>' + text(80, yk + 158, 'W: dropped from scope'))
-o.append(text(420, yk, 'BINDING CONSTRAINTS AFTER CACHING', 't'))
-for i, s in enumerate(['Tiingo: 500 symbols a month caps the price universe.',
-                       'Alpha Vantage: 25 calls a day makes it a slow backfill only.',
-                       'FRED: the terms forbid storing, so it is never a stored source.',
-                       'N-PORT: the 60-day lag limits how fresh ETF holdings are.']):
-    o.append(text(420, yk + 26 + i * 22, s, style=f'font-size:12.5px;fill:{INK}'))
-o.append(text(900, yk, 'SOURCE OF THE GRADES', 't'))
-for i, s in enumerate(['docs/data-sources/inventory.md, researched 2026-11-21.',
-                       'Provider terms change. Read them again before you build on a row.',
-                       'Grade: A best, F not usable.']):
-    o.append(text(900, yk + 26 + i * 22, s, style=f'font-size:12.5px;fill:{INK}'))
 uml.finish(o, 'ds-supply', 'DS-01 SUPPLY', view='FLAT')

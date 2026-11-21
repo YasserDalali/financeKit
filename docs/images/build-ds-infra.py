@@ -2,7 +2,7 @@
 # Facts: user decisions (Vercel, Render, Prisma Postgres), caching.md section 5, and the modular-monolith plan
 # (docs/superpowers/plans/2026-11-19-java-modular-monolith.md: modules).
 import blueprint as bp
-bp.H = 1180
+bp.H = 880
 bp.VIEW = (32, 40)
 from blueprint import ACC, INK, T, block, face, lu, si, wire, iso
 import uml
@@ -71,20 +71,4 @@ for x, y, s in ((170, 260, 'HTTPS'), (465, 220, 'JSON API'), (945, 140, 'JDBC + 
     X, Y = iso(x, y, 0)
     o.append(text(X, Y + 20, s, anchor='middle', style=f'font-size:11.5px;{uml.HALO}'))
 
-# notes strip
-ys = 830
-o.append(text(60, ys, 'WHAT RUNS WHERE', 't'))
-for i, s in enumerate(['Vercel serves the React front end as a static build.',
-                       'Render runs the backend: one Spring Boot jar from five Maven modules.',
-                       'Prisma Postgres holds portfolios and the market-data store.',
-                       'The backend uses plain JDBC and Flyway on the direct connection string.',
-                       'It does not use the Prisma ORM.']):
-    o.append(text(60, ys + 26 + i * 21, s, style='font-size:12.5px;fill:#0a0b1f'))
-o.append(text(640, ys, 'FREE-TIER LIMITS THAT SHAPE THE DESIGN', 't'))
-for i, s in enumerate(['Prisma Postgres: 200k operations a month, 2 GB storage.',
-                       'Render free web service: sleeps after about 15 minutes idle.',
-                       'So: Caffeine in front of every read, batched inserts,',
-                       'a seed sized to the storage cap, refresh on visit.',
-                       'Prices change. See each vendor’s pricing page.']):
-    o.append(text(640, ys + 26 + i * 21, s, style='font-size:12.5px;fill:#0a0b1f'))
 uml.finish(o, 'ds-infra', 'DS-06 INFRA', view='AXO 32/40')

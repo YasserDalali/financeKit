@@ -1,9 +1,9 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 980" width="1600" height="980" font-family="Inter, Helvetica, Arial, sans-serif">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 860" width="1600" height="860" font-family="Inter, Helvetica, Arial, sans-serif">
 <defs>
 <pattern id="minor" width="20" height="20" patternUnits="userSpaceOnUse"><path d="M20 0H0V20" fill="none" stroke="#ebebed" stroke-width="0.6"/></pattern>
 <pattern id="major" width="100" height="100" patternUnits="userSpaceOnUse"><rect width="100" height="100" fill="url(#minor)"/><path d="M100 0H0V100" fill="none" stroke="#d8d8db" stroke-width="0.9"/></pattern>
 <marker id="ae" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0 1L10 5L0 9z" fill="#0a0b1f"/></marker>
-<clipPath id="sheetclip"><rect width="1600" height="980" rx="24"/></clipPath>
+<clipPath id="sheetclip"><rect width="1600" height="860" rx="24"/></clipPath>
 </defs>
 <style>
 .ink{stroke:#0a0b1f;fill:none;stroke-width:1.5;stroke-linejoin:round}.thin{stroke:#0a0b1f;fill:none;stroke-width:1}
@@ -11,8 +11,8 @@
 .t{fill:#0a0b1f;font-size:11px;letter-spacing:1.6px;font-weight:600}.h{fill:#0a0b1f;font-size:15px;font-weight:700;letter-spacing:.6px}
 .s{fill:#5b6270;font-size:12px}.n{fill:#0014dc;font-size:9.5px;font-weight:700;text-anchor:middle}
 </style>
-<g clip-path="url(#sheetclip)"><rect width="1600" height="980" fill="#ffffff"/><rect width="1600" height="980" fill="url(#major)"/>
-<rect x="20" y="20" width="1560" height="940" rx="14" class="ink"/><rect x="30" y="30" width="1540" height="920" rx="8" class="thin"/>
+<g clip-path="url(#sheetclip)"><rect width="1600" height="860" fill="#ffffff"/><rect width="1600" height="860" fill="url(#major)"/>
+<rect x="20" y="20" width="1560" height="820" rx="14" class="ink"/><rect x="30" y="30" width="1540" height="800" rx="8" class="thin"/>
 <text x="60" y="108" fill="#0a0b1f" font-size="36" font-weight="600">What FinRisk does, and for whom</text>
 <line x1="60" y1="132" x2="1540" y2="132" class="thin"/>
 <defs>
@@ -44,5 +44,4 @@
 </svg><text x="1244" y="430" class="s" text-anchor="start" style="font-size:10px">«system»</text><text x="1244" y="447" class="h" text-anchor="start" style="font-size:13px">DATA SOURCES</text>
 <text x="1244" y="476" class="s" text-anchor="start" style="font-size:11.5px">through the waterfall</text>
 <path d="M1200 432 H1112" class="ink" style=""/>
-<path d="M300 820 H1128 L1140 832 V872 H300 Z" style="fill:#f5f6fa;stroke:#0014dc;stroke-width:1.2"/><path d="M1128 820 V832 H1140" style="fill:none;stroke:#0014dc;stroke-width:1.2"/><text x="312" y="842" class="s" text-anchor="start" style="font-size:12px;fill:#0a0b1f">Each investor sees only their own accounts, trades and holdings.</text><text x="312" y="860" class="s" text-anchor="start" style="font-size:12px;fill:#0a0b1f">Market data (prices, filings, macro series) is shared by all investors and stored once.</text>
-<rect x="1380" y="860" width="160" height="70" class="ink"/><line x1="1380" y1="895" x2="1540" y2="895" class="thin"/><line x1="1460" y1="895" x2="1460" y2="930" class="thin"/><text x="1392" y="882" class="t">UML-01 USE CASES</text><text x="1392" y="918" class="s">UML</text><text x="1472" y="918" class="s">REV A</text></g></svg>
+<rect x="1380" y="740" width="160" height="70" class="ink"/><line x1="1380" y1="775" x2="1540" y2="775" class="thin"/><line x1="1460" y1="775" x2="1460" y2="810" class="thin"/><text x="1392" y="762" class="t">UML-01 USE CASES</text><text x="1392" y="798" class="s">UML</text><text x="1472" y="798" class="s">REV A</text></g></svg>

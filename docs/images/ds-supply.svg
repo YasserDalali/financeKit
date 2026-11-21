@@ -1,9 +1,9 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1420" width="1600" height="1420" font-family="Inter, Helvetica, Arial, sans-serif">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1330" width="1600" height="1330" font-family="Inter, Helvetica, Arial, sans-serif">
 <defs>
 <pattern id="minor" width="20" height="20" patternUnits="userSpaceOnUse"><path d="M20 0H0V20" fill="none" stroke="#ebebed" stroke-width="0.6"/></pattern>
 <pattern id="major" width="100" height="100" patternUnits="userSpaceOnUse"><rect width="100" height="100" fill="url(#minor)"/><path d="M100 0H0V100" fill="none" stroke="#d8d8db" stroke-width="0.9"/></pattern>
 <marker id="ae" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0 1L10 5L0 9z" fill="#0a0b1f"/></marker>
-<clipPath id="sheetclip"><rect width="1600" height="1420" rx="24"/></clipPath>
+<clipPath id="sheetclip"><rect width="1600" height="1330" rx="24"/></clipPath>
 </defs>
 <style>
 .ink{stroke:#0a0b1f;fill:none;stroke-width:1.5;stroke-linejoin:round}.thin{stroke:#0a0b1f;fill:none;stroke-width:1}
@@ -11,8 +11,8 @@
 .t{fill:#0a0b1f;font-size:11px;letter-spacing:1.6px;font-weight:600}.h{fill:#0a0b1f;font-size:15px;font-weight:700;letter-spacing:.6px}
 .s{fill:#5b6270;font-size:12px}.n{fill:#0014dc;font-size:9.5px;font-weight:700;text-anchor:middle}
 </style>
-<g clip-path="url(#sheetclip)"><rect width="1600" height="1420" fill="#ffffff"/><rect width="1600" height="1420" fill="url(#major)"/>
-<rect x="20" y="20" width="1560" height="1380" rx="14" class="ink"/><rect x="30" y="30" width="1540" height="1360" rx="8" class="thin"/>
+<g clip-path="url(#sheetclip)"><rect width="1600" height="1330" fill="#ffffff"/><rect width="1600" height="1330" fill="url(#major)"/>
+<rect x="20" y="20" width="1560" height="1290" rx="14" class="ink"/><rect x="30" y="30" width="1540" height="1270" rx="8" class="thin"/>
 <text x="60" y="108" fill="#0a0b1f" font-size="36" font-weight="600">Free data sources, graded</text>
 <line x1="60" y1="132" x2="1540" y2="132" class="thin"/>
 <defs>
@@ -871,13 +871,4 @@
 <circle cx="66" cy="1280" r="5.5" style="fill:#b3baf7"/><text x="80" y="1284" class="s" text-anchor="start" style="">Chosen: 3rd layer</text>
 <circle cx="66" cy="1302" r="5.5" style="fill:#0a0b1f"/><text x="80" y="1306" class="s" text-anchor="start" style="">Ink: supplies it, not in the first three layers</text>
 <rect x="60" y="1316" width="14" height="14" style="fill:#f3f3f4;stroke:#9a9ca6"/><text x="80" y="1328" class="s" text-anchor="start" style="">W: dropped from scope</text>
-<text x="420" y="1170" class="t" text-anchor="start" style="">BINDING CONSTRAINTS AFTER CACHING</text>
-<text x="420" y="1196" class="s" text-anchor="start" style="font-size:12.5px;fill:#0a0b1f">Tiingo: 500 symbols a month caps the price universe.</text>
-<text x="420" y="1218" class="s" text-anchor="start" style="font-size:12.5px;fill:#0a0b1f">Alpha Vantage: 25 calls a day makes it a slow backfill only.</text>
-<text x="420" y="1240" class="s" text-anchor="start" style="font-size:12.5px;fill:#0a0b1f">FRED: the terms forbid storing, so it is never a stored source.</text>
-<text x="420" y="1262" class="s" text-anchor="start" style="font-size:12.5px;fill:#0a0b1f">N-PORT: the 60-day lag limits how fresh ETF holdings are.</text>
-<text x="900" y="1170" class="t" text-anchor="start" style="">SOURCE OF THE GRADES</text>
-<text x="900" y="1196" class="s" text-anchor="start" style="font-size:12.5px;fill:#0a0b1f">docs/data-sources/inventory.md, researched 2026-11-21.</text>
-<text x="900" y="1218" class="s" text-anchor="start" style="font-size:12.5px;fill:#0a0b1f">Provider terms change. Read them again before you build on a row.</text>
-<text x="900" y="1240" class="s" text-anchor="start" style="font-size:12.5px;fill:#0a0b1f">Grade: A best, F not usable.</text>
-<rect x="1380" y="1300" width="160" height="70" class="ink"/><line x1="1380" y1="1335" x2="1540" y2="1335" class="thin"/><line x1="1460" y1="1335" x2="1460" y2="1370" class="thin"/><text x="1392" y="1322" class="t">DS-01 SUPPLY</text><text x="1392" y="1358" class="s">FLAT</text><text x="1472" y="1358" class="s">REV A</text></g></svg>
+<rect x="1380" y="1210" width="160" height="70" class="ink"/><line x1="1380" y1="1245" x2="1540" y2="1245" class="thin"/><line x1="1460" y1="1245" x2="1460" y2="1280" class="thin"/><text x="1392" y="1232" class="t">DS-01 SUPPLY</text><text x="1392" y="1268" class="s">FLAT</text><text x="1472" y="1268" class="s">REV A</text></g></svg>

@@ -2,7 +2,7 @@
 # sections 3 and 4. Status: designed. The built code (branch refactor/java-monolith) has MarketData, FailoverMarketData
 # and CachingMarketData only.
 import blueprint as bp
-bp.H = 1180
+bp.H = 980
 from blueprint import ACC, INK
 import uml
 from uml import klass, line, note, package, text
@@ -86,8 +86,4 @@ o.append(svg.replace('font-size:11px;fill:#0a0b1f', 'font-size:10.5px;fill:#0a0b
 o.append(line(f'M1415 {src_bottom + 56} V{sh[1]-2}', 'dashed', end='open'))
 o.append(text(1425, src_bottom + 76 if src_bottom + 76 < sh[1] - 4 else sh[1] - 6, 'use', style='font-size:11px'))
 
-# --- strip ---------------------------------------------------------------------------
-o.append(note(60, 996, 640, ['Five *Data ports, one *Feed per resource, Waterfall&lt;F&gt; per resource,',
-                             'WaterfallMarketData. Layer order is configuration,',
-                             'for example finrisk.data.waterfall.prices.'], accent=True))
 uml.finish(o, 'ds-contracts', 'DS-03 CONTRACTS', view='UML')
