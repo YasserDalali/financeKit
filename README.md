@@ -61,9 +61,9 @@ These areas are **not** in scope. They were dropped on purpose, because no free 
 
 ## Data sources
 
-<img alt="Graded supply table. Twenty-eight free sources as rows, with grade, cost, rate, volume, history and terms, and a matrix of nineteen demand codes with full and partial supply dots." src="docs/images/ds-supply.png" width="100%">
+<img alt="Graded supply table. Thirty free sources as rows, with grade, cost, rate, volume, history and terms, and a matrix of nineteen demand codes. Filled dots are full supply, rings are partial. Dark blue marks the first waterfall layer, lighter blue the second, lightest blue the third." src="docs/images/ds-supply.png" width="100%">
 
-Read the table as a linear program. Each source is a choice: use it or not. Its cost is the free tier, so every row costs $0 or is out. Its constraints are the rate, volume, history and terms columns. Its supply is the dots on the right. A filled dot is full supply of that demand. A ring is partial supply. The goal is to cover every demand with one primary and one fallback, at $0, with the fewest calls and the least risk of breakage.
+Read the table as a linear program. Each source is a choice: use it or not. Its cost is the free tier, so every row costs $0 or is out. Its constraints are the rate, volume, history and terms columns. Its supply is the dots on the right. A filled dot is full supply of that demand. A ring is partial supply. The colour shows the solution: dark blue is the source picked as the first waterfall layer for that demand, lighter blue the second, lightest blue the third. Ink means the source can supply it but sits outside the first three layers. The goal is to cover every demand with one primary and one fallback, at $0, with the fewest calls and the least risk of breakage.
 
 Heavy caching changes what matters. We pull the full history once and then fetch small daily deltas. So history depth and storage terms matter more than calls per day. The grade sums this up: **A** is official, free, deep and cacheable. **F** is not usable.
 
